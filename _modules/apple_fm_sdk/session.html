@@ -1,0 +1,1049 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apple_fm_sdk.session &#8212; Foundation Models SDK for Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=01c0d4c0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/apple_fm_sdk/session';</script>
+    <link rel="icon" href="../../_static/foundation-models-framework-logo.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/foundation-models-framework-logo.png" class="logo__image only-light" alt="Foundation Models SDK for Python - Home"/>
+    <script>document.write(`<img src="../../_static/foundation-models-framework-logo.png" class="logo__image only-dark" alt="Foundation Models SDK for Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basic_usage.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streaming.html">Streaming Responses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guided_generation.html">Guided Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools and function calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../evaluation.html">Evaluation workflows</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api/systemmodel.html">SystemLanguageModel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/generable.html">Generable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/transcript.html">Transcript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/errors.html">Errors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/apple/python-apple-fm-sdk" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for apple_fm_sdk.session</h1><div class="highlight"><pre>
+<span></span><span class="c1"># For licensing see accompanying LICENSE file.</span>
+<span class="c1"># Copyright (C) 2026 Apple Inc. All Rights Reserved.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">apple_fm_sdk.transcript</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transcript</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.c_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_ManagedObject</span><span class="p">,</span>
+    <span class="n">_register_handle</span><span class="p">,</span>
+    <span class="n">_session_callback</span><span class="p">,</span>
+    <span class="n">_session_structured_callback</span><span class="p">,</span>
+    <span class="n">_unregister_handle</span><span class="p">,</span>
+    <span class="n">StreamingCallback</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemLanguageModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.tool</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.generable</span><span class="w"> </span><span class="kn">import</span> <span class="n">Generable</span><span class="p">,</span> <span class="n">GeneratedContent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.generation_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">GenerationSchema</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">queue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">AsyncIterator</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">overload</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">FoundationModelsError</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ctypes_bindings</span> <span class="k">as</span> <span class="n">lib</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+        <span class="s2">&quot;Foundation Models C bindings not found. Please ensure _foundationmodels_ctypes.py is available.&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">Prompt</span> <span class="o">=</span> <span class="nb">str</span>  <span class="c1"># Alias for prompt type</span>
+
+
+<div class="viewcode-block" id="LanguageModelSession">
+<a class="viewcode-back" href="../../api/session.html#apple_fm_sdk.LanguageModelSession">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LanguageModelSession</span><span class="p">(</span><span class="n">_ManagedObject</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a language model session for foundation model interactions.</span>
+
+<span class="sd">    A ``LanguageModelSession`` manages the lifecycle of a session with a foundation model,</span>
+<span class="sd">    maintaining session history (transcript), handling tool calls, and providing both</span>
+<span class="sd">    synchronous and streaming response capabilities.</span>
+
+<span class="sd">    The session is thread-safe for sequential requests but does not support concurrent</span>
+<span class="sd">    requests. If a request is in progress, attempting another request will wait for the</span>
+<span class="sd">    first to complete.</span>
+
+<span class="sd">    **Session Lifecycle:**</span>
+
+<span class="sd">    1. **Creation**: Initialize with optional instructions, model configuration, and tools</span>
+<span class="sd">    2. **Active Use**: Make requests via ``respond()`` or ``stream_response()``</span>
+<span class="sd">    3. **Cleanup**: Automatically handled via context manager or explicit cleanup</span>
+
+<span class="sd">    **Concurrent Request Handling:**</span>
+
+<span class="sd">    Sessions use an internal lock to prevent concurrent requests. If you need to handle</span>
+<span class="sd">    multiple requests simultaneously, create multiple session instances.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Basic session creation and usage::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+
+<span class="sd">            # Create a simple session</span>
+<span class="sd">            session = fm.LanguageModelSession()</span>
+<span class="sd">            response = await session.respond(&quot;Hello, how are you?&quot;)</span>
+<span class="sd">            print(response)</span>
+
+<span class="sd">        Session with instructions::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+
+<span class="sd">            # Guide the model&#39;s behavior with instructions</span>
+<span class="sd">            session = fm.LanguageModelSession(</span>
+<span class="sd">                instructions=&quot;You are a helpful bird expert. Provide concise, &quot;</span>
+<span class="sd">                            &quot;accurate information about birds.&quot;</span>
+<span class="sd">            )</span>
+<span class="sd">            response = await session.respond(&quot;What is a Swift?&quot;)</span>
+
+<span class="sd">        Session with custom model and tools::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+<span class="sd">            from my_tools import CalculatorTool, WeatherTool</span>
+
+<span class="sd">            model = fm.SystemLanguageModel(</span>
+<span class="sd">                temperature=0.7,</span>
+<span class="sd">                top_p=0.9</span>
+<span class="sd">            )</span>
+
+<span class="sd">            session = fm.LanguageModelSession(</span>
+<span class="sd">                instructions=&quot;You are a helpful assistant with access to tools.&quot;,</span>
+<span class="sd">                model=model,</span>
+<span class="sd">                tools=[CalculatorTool(), WeatherTool()]</span>
+<span class="sd">            )</span>
+
+<span class="sd">            response = await session.respond(&quot;What&#39;s the weather like in Cupertino?&quot;)</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        - :class:`~apple_fm_sdk.core.SystemLanguageModel`: For model configuration</span>
+<span class="sd">        - :class:`~apple_fm_sdk.tool.Tool`: For creating custom tools</span>
+<span class="sd">        - :class:`~apple_fm_sdk.transcript.Transcript`: For accessing session history</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LanguageModelSession.__init__">
+<a class="viewcode-back" href="../../api/session.html#apple_fm_sdk.LanguageModelSession.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">instructions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SystemLanguageModel</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tools</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Tool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">_ptr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a language model session.</span>
+
+<span class="sd">        :param instructions: Optional system instructions to guide the model&#39;s behavior throughout</span>
+<span class="sd">            the session. These instructions persist across all requests in the session.</span>
+<span class="sd">            Example: &quot;You are a helpful coding assistant.&quot;</span>
+<span class="sd">        :type instructions: Optional[str]</span>
+<span class="sd">        :param model: Optional specialized system model configuration. If not provided, uses default</span>
+<span class="sd">            SystemLanguageModel() with standard settings. Use this to customize temperature,</span>
+<span class="sd">            top_p, and other generation parameters.</span>
+<span class="sd">        :type model: Optional[SystemLanguageModel]</span>
+<span class="sd">        :param tools: Optional list of Tool instances that the model can invoke during generation.</span>
+<span class="sd">            Tools enable the model to perform actions like calculations, API calls, or</span>
+<span class="sd">            database queries. The model will automatically decide when to use tools based</span>
+<span class="sd">            on the session context.</span>
+<span class="sd">        :type tools: Optional[list[Tool]]</span>
+<span class="sd">        :raises FoundationModelsError: If session creation fails</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            The session maintains a transcript of all interactions, which can be accessed</span>
+<span class="sd">            via the ``transcript`` property. This transcript is automatically updated after</span>
+<span class="sd">            each request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize request lock for preventing concurrent requests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_request_lock</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">_ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Internal constructor for specific ptr</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">_ptr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Create model pointer</span>
+            <span class="n">model_ptr</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">_ptr</span> <span class="k">if</span> <span class="n">model</span> <span class="k">else</span> <span class="kc">None</span>
+
+            <span class="c1"># Encode instructions if provided</span>
+            <span class="n">instructions_cstr</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">instructions</span><span class="p">:</span>
+                <span class="n">instructions_cstr</span> <span class="o">=</span> <span class="n">instructions</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create array of tool pointers</span>
+            <span class="n">tool_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tools</span><span class="p">)</span> <span class="k">if</span> <span class="n">tools</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">tool_refs</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span> <span class="o">*</span> <span class="n">tool_count</span><span class="p">)()</span>
+            <span class="k">if</span> <span class="n">tools</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tool</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tools</span><span class="p">):</span>
+                    <span class="n">tool_refs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">_ptr</span>
+
+            <span class="c1"># Create the session via C binding</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionCreateFromSystemLanguageModel</span><span class="p">(</span>
+                <span class="n">model_ptr</span><span class="p">,</span> <span class="n">instructions_cstr</span><span class="p">,</span> <span class="n">tool_refs</span><span class="p">,</span> <span class="n">tool_count</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Create transcript</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transcript</span> <span class="o">=</span> <span class="n">Transcript</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+
+            <span class="c1"># model object will be retained by LanguageModelSession in Swift</span>
+            <span class="c1"># so here we don&#39;t need to retain model</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span></div>
+
+        <span class="c1"># This opaque pointer already has 1 ref count by `passRetained`</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_responding</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the session is currently responding to a request.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the session is currently processing a request, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionIsResponding</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reset_task_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the task memory management state after a cancelled or failed request.</span>
+
+<span class="sd">        This is an internal function that cleans up task-related state to ensure the</span>
+<span class="sd">        session is ready to accept new requests. It does NOT create a new session or</span>
+<span class="sd">        clear the session transcript - it only resets the internal task handling</span>
+<span class="sd">        state.</span>
+
+<span class="sd">        This function is automatically called after cancellations and errors, so client</span>
+<span class="sd">        code should not need to call it directly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionReset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">)</span>
+
+    <span class="nd">@overload</span>  <span class="c1"># This overload helps the type checker understand the return type</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">respond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="n">Prompt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="nd">@overload</span>  <span class="c1"># This overload helps the type checker understand the return type</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">respond</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="n">Prompt</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">generating</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Generable</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span> <span class="o">...</span>
+
+    <span class="nd">@overload</span>  <span class="c1"># This overload helps the type checker understand the return type</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">respond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="n">Prompt</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">generating</span><span class="p">:</span> <span class="n">Generable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span> <span class="o">...</span>
+
+    <span class="nd">@overload</span>  <span class="c1"># This overload helps the type checker understand the return type</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">respond</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="n">Prompt</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">GenerationSchema</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeneratedContent</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="nd">@overload</span>  <span class="c1"># This overload helps the type checker understand the return type</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">respond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">json_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeneratedContent</span><span class="p">:</span> <span class="o">...</span>
+
+<div class="viewcode-block" id="LanguageModelSession.respond">
+<a class="viewcode-back" href="../../api/session.html#apple_fm_sdk.LanguageModelSession.respond">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">respond</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">generating</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">Generable</span><span class="p">],</span> <span class="n">Generable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GenerationSchema</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">json_schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">GeneratedContent</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a response to a prompt with optional guided generation.</span>
+
+<span class="sd">        This function supports multiple response modes:</span>
+
+<span class="sd">        1. **Basic text response**: Returns a plain string</span>
+<span class="sd">        2. **Guided generation with Generable**: Returns a typed Python object</span>
+<span class="sd">        3. **Guided generation with schema**: Returns structured GeneratedContent</span>
+<span class="sd">        4. **Guided generation with JSON schema**: Returns structured GeneratedContent</span>
+
+<span class="sd">        The session automatically updates its transcript after each response, maintaining</span>
+<span class="sd">        the full session history.</span>
+
+<span class="sd">        :param prompt: The input prompt string to send to the model</span>
+<span class="sd">        :type prompt: str</span>
+<span class="sd">        :param generating: Optional Generable type or instance for type-safe guided generation.</span>
+<span class="sd">            When provided, the response will be constrained to match the structure of</span>
+<span class="sd">            the Generable type and automatically converted to an instance of that type.</span>
+<span class="sd">        :type generating: Optional[Union[Type[Generable], Generable]]</span>
+<span class="sd">        :param schema: Optional GenerationSchema for explicit schema-based guided generation.</span>
+<span class="sd">            Use this for custom schemas that don&#39;t map to a Generable type.</span>
+<span class="sd">        :type schema: Optional[GenerationSchema]</span>
+<span class="sd">        :param json_schema: Optional JSON schema dictionary for guided generation. The schema</span>
+<span class="sd">            should follow JSON Schema specification.</span>
+<span class="sd">        :type json_schema: Optional[dict]</span>
+<span class="sd">        :return: Plain text response if no generation constraints are specified, or</span>
+<span class="sd">            instance of generating type if ``generating`` parameter is provided, or</span>
+<span class="sd">            structured content if ``schema`` or ``json_schema`` is provided</span>
+<span class="sd">        :rtype: Union[str, Any, GeneratedContent]</span>
+<span class="sd">        :raises FoundationModelsError: If the response fails or times out</span>
+<span class="sd">        :raises ValueError: If both ``generating`` and ``schema`` are provided, or if the</span>
+<span class="sd">            generating type is not a valid Generable</span>
+<span class="sd">        :raises asyncio.CancelledError: If the request is cancelled</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            Basic text response::</span>
+<span class="sd">                import apple_fm_sdk as fm</span>
+<span class="sd">                session = fm.LanguageModelSession()</span>
+<span class="sd">                response = await session.respond(&quot;What is the capital of France?&quot;)</span>
+<span class="sd">                print(response)  # Plain string response</span>
+
+<span class="sd">            Guided generation with Generable type::</span>
+
+<span class="sd">                import apple_fm_sdk as fm</span>
+
+<span class="sd">                @fm.generable()</span>
+<span class="sd">                class Cat:</span>
+<span class="sd">                    name: str</span>
+<span class="sd">                    age: int</span>
+<span class="sd">                    profile: str</span>
+
+<span class="sd">                session = fm.LanguageModelSession()</span>
+<span class="sd">                cat = await session.respond(</span>
+<span class="sd">                    &quot;Generate a cat named Maomao&quot;,</span>
+<span class="sd">                    generating=Cat</span>
+<span class="sd">                )</span>
+<span class="sd">                print(f&quot;{cat.name} is {cat.age} years old&quot;)</span>
+
+<span class="sd">            Multi-turn session::</span>
+
+<span class="sd">                import apple_fm_sdk as fm</span>
+
+<span class="sd">                session = fm.LanguageModelSession(</span>
+<span class="sd">                    instructions=&quot;You are a helpful expert on architecture.&quot;</span>
+<span class="sd">                )</span>
+
+<span class="sd">                # First turn</span>
+<span class="sd">                response1 = await session.respond(&quot;What is the tallest building in the world?&quot;)</span>
+<span class="sd">                print(response1)</span>
+
+<span class="sd">                # Second turn - context is maintained</span>
+<span class="sd">                response2 = await session.respond(</span>
+<span class="sd">                    &quot;What&#39;s the architectural style of that building?&quot;</span>
+<span class="sd">                )</span>
+<span class="sd">                print(response2)</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Only one of ``generating``, ``schema``, or ``json_schema`` can be specified</span>
+<span class="sd">            - The session maintains session context across multiple ``respond()`` calls</span>
+<span class="sd">            - Concurrent calls to ``respond()`` on the same session will be serialized</span>
+<span class="sd">            - For streaming responses, use :meth:`stream_response` instead</span>
+
+<span class="sd">        See Also:</span>
+<span class="sd">            - :meth:`stream_response`: For streaming text responses</span>
+<span class="sd">            - :class:`~apple_fm_sdk.generable.Generable`: For creating typed response structures</span>
+<span class="sd">            - :class:`~apple_fm_sdk.generation_schema.GenerationSchema`: For custom schemas</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Validate arguments</span>
+        <span class="k">if</span> <span class="n">generating</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">schema</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot specify both &#39;generating&#39; and &#39;schema&#39; arguments&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Handle guided generation with generable type</span>
+        <span class="k">if</span> <span class="n">generating</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">generating</span><span class="p">,</span> <span class="n">Generable</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">generating</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is not a Generable type. Use @generable decorator.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Get the generation schema for the type</span>
+            <span class="n">gen_schema</span> <span class="o">=</span> <span class="n">generating</span><span class="o">.</span><span class="n">generation_schema</span><span class="p">()</span>
+
+            <span class="c1"># Use the schema-based respond method</span>
+            <span class="n">generated_content</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_respond_with_schema</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">gen_schema</span><span class="p">)</span>
+
+            <span class="c1"># Convert GeneratedContent to the target type</span>
+            <span class="k">return</span> <span class="n">generating</span><span class="o">.</span><span class="n">_from_generated_content</span><span class="p">(</span><span class="n">generated_content</span><span class="p">)</span>
+
+        <span class="c1"># Handle guided generation with explicit schema</span>
+        <span class="k">if</span> <span class="n">schema</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_respond_with_schema</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+
+        <span class="c1"># Handle guided generation from raw JSON schema string</span>
+        <span class="k">if</span> <span class="n">json_schema</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_respond_with_schema_from_json</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">json_schema</span><span class="p">)</span>
+
+        <span class="c1"># Handle basic text response</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_respond_basic</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span></div>
+
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_respond_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a complete basic text response to a prompt.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prompt: The input prompt</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The complete response text</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            GenerationError: If the response fails with specific error type</span>
+<span class="sd">            FoundationModelsError: For other errors like timeout</span>
+<span class="sd">            ConcurrentRequestsError: If another request is already in progress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Acquire lock to prevent concurrent requests</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_lock</span><span class="p">:</span>
+            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_future</span><span class="p">()</span>
+
+            <span class="n">prompt_bytes</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+            <span class="n">future_handle</span> <span class="o">=</span> <span class="n">_register_handle</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+
+            <span class="n">task</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionRespond</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">,</span> <span class="n">prompt_bytes</span><span class="p">,</span> <span class="n">future_handle</span><span class="p">,</span> <span class="n">_session_callback</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Store active task reference</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="n">task</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">future</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Cancel the native task</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMTaskCancel</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="n">future</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+                <span class="c1"># Wait for the task to actually complete cancellation</span>
+                <span class="c1"># Poll is_responding until it becomes False, with timeout</span>
+                <span class="n">max_wait_time</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Maximum 1 second wait</span>
+                <span class="n">poll_interval</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># Poll every 10ms</span>
+                <span class="n">elapsed</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+                <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_responding</span> <span class="ow">and</span> <span class="n">elapsed</span> <span class="o">&lt;</span> <span class="n">max_wait_time</span><span class="p">:</span>
+                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+                    <span class="n">elapsed</span> <span class="o">+=</span> <span class="n">poll_interval</span>
+
+                <span class="c1"># Reset task state to ensure the session is ready for new requests</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_reset_task_state</span><span class="p">()</span>
+
+                <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="c1"># Clean up handle to prevent memory leaks</span>
+                <span class="n">_unregister_handle</span><span class="p">(</span><span class="n">future_handle</span><span class="p">)</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMRelease</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_respond_with_schema</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">GenerationSchema</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeneratedContent</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal method for guided generation using a GenerationSchema.&quot;&quot;&quot;</span>
+        <span class="c1"># Acquire lock to prevent concurrent requests</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_lock</span><span class="p">:</span>
+            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_future</span><span class="p">()</span>
+
+            <span class="n">prompt_bytes</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+            <span class="n">future_handle</span> <span class="o">=</span> <span class="n">_register_handle</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+
+            <span class="c1"># Always use the proper C binding for guided generation</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionRespondWithSchema</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">,</span>
+                <span class="n">prompt_bytes</span><span class="p">,</span>
+                <span class="n">schema</span><span class="o">.</span><span class="n">_ptr</span><span class="p">,</span>
+                <span class="n">future_handle</span><span class="p">,</span>
+                <span class="n">_session_structured_callback</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Store active task reference</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="n">task</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">future</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Cancel the native task</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMTaskCancel</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="n">future</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+                <span class="c1"># Wait for the task to actually complete cancellation</span>
+                <span class="c1"># Poll is_responding until it becomes False, with timeout</span>
+                <span class="n">max_wait_time</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Maximum 1 second wait</span>
+                <span class="n">poll_interval</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># Poll every 10ms</span>
+                <span class="n">elapsed</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+                <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_responding</span> <span class="ow">and</span> <span class="n">elapsed</span> <span class="o">&lt;</span> <span class="n">max_wait_time</span><span class="p">:</span>
+                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+                    <span class="n">elapsed</span> <span class="o">+=</span> <span class="n">poll_interval</span>
+
+                <span class="c1"># Reset task state to ensure the session is ready for new requests</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_reset_task_state</span><span class="p">()</span>
+
+                <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># On any error, reset task state to ensure clean state</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_reset_task_state</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="c1"># Clean up handle to prevent memory leaks</span>
+                <span class="n">_unregister_handle</span><span class="p">(</span><span class="n">future_handle</span><span class="p">)</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMRelease</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_respond_with_schema_from_json</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">json_schema</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeneratedContent</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal method for guided generation using a JSON schema string.&quot;&quot;&quot;</span>
+        <span class="c1"># Acquire lock to prevent concurrent requests</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_lock</span><span class="p">:</span>
+            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_future</span><span class="p">()</span>
+
+            <span class="n">prompt_bytes</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">json_schema_bytes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_schema</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+            <span class="n">future_handle</span> <span class="o">=</span> <span class="n">_register_handle</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+
+            <span class="c1"># Use the C binding for guided generation with JSON schema</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionRespondWithSchemaFromJSON</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">,</span>
+                <span class="n">prompt_bytes</span><span class="p">,</span>
+                <span class="n">json_schema_bytes</span><span class="p">,</span>
+                <span class="n">future_handle</span><span class="p">,</span>
+                <span class="n">_session_structured_callback</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Store active task reference</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="n">task</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">future</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Cancel the native task</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMTaskCancel</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="n">future</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+                <span class="c1"># Wait for the task to actually complete cancellation</span>
+                <span class="c1"># Poll is_responding until it becomes False, with timeout</span>
+                <span class="n">max_wait_time</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Maximum 1 second wait</span>
+                <span class="n">poll_interval</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># Poll every 10ms</span>
+                <span class="n">elapsed</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+                <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_responding</span> <span class="ow">and</span> <span class="n">elapsed</span> <span class="o">&lt;</span> <span class="n">max_wait_time</span><span class="p">:</span>
+                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+                    <span class="n">elapsed</span> <span class="o">+=</span> <span class="n">poll_interval</span>
+
+                <span class="c1"># Reset task state to ensure the session is ready for new requests</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_reset_task_state</span><span class="p">()</span>
+
+                <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># On any error, reset task state to ensure clean state</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_reset_task_state</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="c1"># Clean up handle to prevent memory leaks</span>
+                <span class="n">_unregister_handle</span><span class="p">(</span><span class="n">future_handle</span><span class="p">)</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMRelease</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_active_task</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<div class="viewcode-block" id="LanguageModelSession.stream_response">
+<a class="viewcode-back" href="../../api/session.html#apple_fm_sdk.LanguageModelSession.stream_response">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stream_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="n">Prompt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncIterator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stream response chunks for a prompt (text only).</span>
+
+<span class="sd">        This function provides real-time streaming of the model&#39;s response, yielding text</span>
+<span class="sd">        snapshots as they become available. Each yielded value represents the complete</span>
+<span class="sd">        response text generated so far, rather than the delta from the previous chunk.</span>
+
+<span class="sd">        **Streaming Behavior:**</span>
+
+<span class="sd">        - Yields complete text snapshots (not deltas) as generation progresses</span>
+<span class="sd">        - The final yield contains the complete response</span>
+<span class="sd">        - Automatically updates the session transcript after completion</span>
+<span class="sd">        - Does not support guided generation (text responses only)</span>
+<span class="sd">        - Can be cancelled mid-stream using asyncio cancellation</span>
+
+<span class="sd">        :param prompt: The input prompt string to send to the model</span>
+<span class="sd">        :type prompt: str</span>
+<span class="sd">        :yields: Progressive snapshots of the response text. Each snapshot contains</span>
+<span class="sd">            the full text generated so far, rather than only the new tokens.</span>
+<span class="sd">        :ytype: str</span>
+<span class="sd">        :raises FoundationModelsError: If streaming fails or encounters an error</span>
+<span class="sd">        :raises asyncio.CancelledError: If the stream is cancelled</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            Basic streaming::</span>
+
+<span class="sd">                import apple_fm_sdk as fm</span>
+
+<span class="sd">                session = fm.LanguageModelSession()</span>
+
+<span class="sd">                async for chunk in session.stream_response(&quot;Tell me a story&quot;):</span>
+<span class="sd">                    print(chunk, end=&quot;&quot;, flush=True)</span>
+
+<span class="sd">            Cancelling a stream::</span>
+
+<span class="sd">                import asyncio</span>
+<span class="sd">                import apple_fm_sdk as fm</span>
+
+<span class="sd">                session = fm.LanguageModelSession()</span>
+
+<span class="sd">                async def stream_with_timeout():</span>
+<span class="sd">                    try:</span>
+<span class="sd">                        async for chunk in session.stream_response(&quot;Write a long essay&quot;):</span>
+<span class="sd">                            print(chunk)</span>
+<span class="sd">                            # Simulate some processing</span>
+<span class="sd">                            await asyncio.sleep(0.1)</span>
+<span class="sd">                    except asyncio.CancelledError:</span>
+<span class="sd">                        print(&quot;Stream cancelled&quot;)</span>
+<span class="sd">                        raise</span>
+
+<span class="sd">                # Cancel after 5 seconds</span>
+<span class="sd">                task = asyncio.create_task(stream_with_timeout())</span>
+<span class="sd">                await asyncio.sleep(5)</span>
+<span class="sd">                task.cancel()</span>
+
+<span class="sd">            Streaming with error handling::</span>
+<span class="sd">                import apple_fm_sdk as fm</span>
+<span class="sd">                session = fm.LanguageModelSession()</span>
+
+<span class="sd">                try:</span>
+<span class="sd">                    async for chunk in session.stream_response(&quot;Hello&quot;):</span>
+<span class="sd">                        print(chunk)</span>
+<span class="sd">                except fm.FoundationModelsError as e:</span>
+<span class="sd">                    print(f&quot;Streaming error: {e}&quot;)</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Streaming currently only supports basic text responses</span>
+<span class="sd">            - For guided generation, use :meth:`respond` instead</span>
+<span class="sd">            - Each snapshot contains the full text, rather than only new tokens</span>
+<span class="sd">            - The session transcript is updated only after streaming completes</span>
+<span class="sd">            - Breaking out of the async for loop early will properly clean up resources</span>
+
+<span class="sd">        See Also:</span>
+<span class="sd">            - :meth:`respond`: For non-streaming responses with guided generation support</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Handle basic text streaming only</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream_response_basic</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">chunk</span></div>
+
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_stream_response_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="n">Prompt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncIterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stream basic text response chunks for a prompt.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prompt: The input prompt</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Response text snapshots as they become available</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">callback</span> <span class="o">=</span> <span class="n">StreamingCallback</span><span class="p">()</span>
+        <span class="n">stream_thread</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">stream_ptr_holder</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>  <span class="c1"># Use list to allow modification in nested function</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_start_stream</span><span class="p">():</span>
+            <span class="n">prompt_bytes</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">stream_ptr</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionStreamResponse</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">,</span> <span class="n">prompt_bytes</span>
+            <span class="p">)</span>
+            <span class="n">stream_ptr_holder</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">stream_ptr</span>  <span class="c1"># Store for cleanup</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">stream_ptr</span><span class="p">:</span>
+                <span class="n">callback</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">FoundationModelsError</span><span class="p">(</span>
+                    <span class="s2">&quot;Failed to create response stream&quot;</span>
+                <span class="p">)</span>
+                <span class="n">callback</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="n">callback</span><span class="o">.</span><span class="n">completed</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+                <span class="k">return</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMLanguageModelSessionResponseStreamIterate</span><span class="p">(</span>
+                    <span class="n">stream_ptr</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">callback</span><span class="o">.</span><span class="n">_callback</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">callback</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">FoundationModelsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stream iteration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">callback</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="n">callback</span><span class="o">.</span><span class="n">completed</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Start streaming in a separate thread</span>
+            <span class="n">stream_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_start_stream</span><span class="p">)</span>
+            <span class="n">stream_thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">stream_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+            <span class="c1"># Yield snapshots as they become available</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Use a timeout to allow checking for completion</span>
+                    <span class="n">snapshot</span> <span class="o">=</span> <span class="n">callback</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">snapshot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># End signal</span>
+                        <span class="k">break</span>
+                    <span class="k">yield</span> <span class="n">snapshot</span>
+                <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+                    <span class="c1"># Check if we&#39;re done or have an error</span>
+                    <span class="k">if</span> <span class="n">callback</span><span class="o">.</span><span class="n">completed</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+                        <span class="c1"># Check for any remaining items in queue</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                                <span class="n">snapshot</span> <span class="o">=</span> <span class="n">callback</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+                                <span class="k">if</span> <span class="n">snapshot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="k">break</span>
+                                <span class="k">yield</span> <span class="n">snapshot</span>
+                        <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+                            <span class="k">pass</span>
+                        <span class="k">break</span>
+                    <span class="c1"># Continue waiting for more data</span>
+                    <span class="k">continue</span>
+
+            <span class="c1"># Check for errors after completion</span>
+            <span class="k">if</span> <span class="n">callback</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">callback</span><span class="o">.</span><span class="n">error</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Ensure the stream thread completes before we exit</span>
+            <span class="c1"># This prevents segfaults when breaking early from the stream</span>
+            <span class="k">if</span> <span class="n">stream_thread</span> <span class="ow">and</span> <span class="n">stream_thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+                <span class="c1"># Wait for thread to finish - the native iteration must complete</span>
+                <span class="c1"># before we can safely release the stream pointer</span>
+                <span class="n">stream_thread</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+
+            <span class="c1"># Now it&#39;s safe to release the stream pointer</span>
+            <span class="c1"># This must happen after the thread completes to prevent segfaults</span>
+            <span class="k">if</span> <span class="n">stream_ptr_holder</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">lib</span><span class="o">.</span><span class="n">FMRelease</span><span class="p">(</span><span class="n">stream_ptr_holder</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apple Inc.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Apple Inc.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

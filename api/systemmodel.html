@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SystemLanguageModel &#8212; Foundation Models SDK for Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=01c0d4c0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/systemmodel';</script>
+    <link rel="icon" href="../_static/foundation-models-framework-logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LanguageModelSession" href="session.html" />
+    <link rel="prev" title="Evaluation workflows" href="../evaluation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/foundation-models-framework-logo.png" class="logo__image only-light" alt="Foundation Models SDK for Python - Home"/>
+    <script>document.write(`<img src="../_static/foundation-models-framework-logo.png" class="logo__image only-dark" alt="Foundation Models SDK for Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_usage.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streaming.html">Streaming Responses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guided_generation.html">Guided Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools and function calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation.html">Evaluation workflows</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SystemLanguageModel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generable.html">Generable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transcript.html">Transcript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/apple/python-apple-fm-sdk" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/systemmodel.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SystemLanguageModel</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">SystemLanguageModel</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModel"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModel</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModel.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModel.is_available"><code class="docutils literal notranslate"><span class="pre">is_available()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemlanguagemodelusecase">SystemLanguageModelUseCase</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUseCase"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModelUseCase</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUseCase.GENERAL"><code class="docutils literal notranslate"><span class="pre">GENERAL</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUseCase.CONTENT_TAGGING"><code class="docutils literal notranslate"><span class="pre">CONTENT_TAGGING</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemlanguagemodelguardrails">SystemLanguageModelGuardrails</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelGuardrails"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModelGuardrails</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelGuardrails.DEFAULT"><code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelGuardrails.PERMISSIVE_CONTENT_TRANSFORMATIONS"><code class="docutils literal notranslate"><span class="pre">PERMISSIVE_CONTENT_TRANSFORMATIONS</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemlanguagemodelunavailablereason">SystemLanguageModelUnavailableReason</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModelUnavailableReason</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.APPLE_INTELLIGENCE_NOT_ENABLED"><code class="docutils literal notranslate"><span class="pre">APPLE_INTELLIGENCE_NOT_ENABLED</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.DEVICE_NOT_ELIGIBLE"><code class="docutils literal notranslate"><span class="pre">DEVICE_NOT_ELIGIBLE</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.MODEL_NOT_READY"><code class="docutils literal notranslate"><span class="pre">MODEL_NOT_READY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.UNKNOWN"><code class="docutils literal notranslate"><span class="pre">UNKNOWN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="systemlanguagemodel">
+<h1>SystemLanguageModel<a class="headerlink" href="#systemlanguagemodel" title="Link to this heading">#</a></h1>
+<p>This page documents the core classes and functions of the Foundation Models SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Swift Equivalent:</strong> This Python API corresponds to the <a class="reference external" href="https://developer.apple.com/documentation/foundationmodels/systemlanguagemodel">SystemLanguageModel</a> class in the Swift Foundation Models Framework.</p>
+</div>
+<section id="id2">
+<h2>SystemLanguageModel<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">SystemLanguageModel</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/core.html#SystemLanguageModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ManagedObject</span></code></p>
+<p>Represents the on-device foundation model used by Apple Intelligence.</p>
+<p>This class provides the main interface for interacting with the system foundation
+model. It manages the lifecycle of the underlying C model object and provides
+methods to check availability and configure model behavior.</p>
+<p>The model can be configured with different use cases and guardrail settings
+to optimize behavior for specific tasks and ensure appropriate content filtering.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Creating and checking availability of a model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="c1"># Create a model with default settings</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">()</span>
+
+<span class="c1"># Create a model with specific settings</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">(</span>
+    <span class="n">use_case</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModelUseCase</span><span class="o">.</span><span class="n">CONTENT_TAGGING</span><span class="p">,</span>
+    <span class="n">guardrails</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModelGuardrails</span><span class="o">.</span><span class="n">PERMISSIVE_CONTENT_TRANSFORMATIONS</span>
+<span class="p">)</span>
+
+<span class="c1"># Check if the model is available</span>
+<span class="n">is_available</span><span class="p">,</span> <span class="n">reason</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_available</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model unavailable: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SystemLanguageModelUseCase.GENERAL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrails</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SystemLanguageModelGuardrails.DEFAULT</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/core.html#SystemLanguageModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModel.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Create a system language model.</p>
+<p>Initializes a new system language model with the specified use case and
+guardrail settings. The model is backed by a C implementation and this
+constructor manages the creation and lifecycle of the underlying C object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_case</strong> (<a class="reference internal" href="#apple_fm_sdk.SystemLanguageModelUseCase" title="apple_fm_sdk.SystemLanguageModelUseCase"><em>SystemLanguageModelUseCase</em></a>) – The use case for the model, which optimizes its behavior
+for specific tasks. Defaults to GENERAL for general-purpose use.</p></li>
+<li><p><strong>guardrails</strong> (<a class="reference internal" href="#apple_fm_sdk.SystemLanguageModelGuardrails" title="apple_fm_sdk.SystemLanguageModelGuardrails"><em>SystemLanguageModelGuardrails</em></a>) – The guardrail settings that control content filtering
+and safety measures. Defaults to DEFAULT for standard filtering.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ImportError" title="(in Python v3.14)"><strong>ImportError</strong></a> – If the Foundation Models C bindings are not available.</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Creating a custom-configured model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="c1"># Create with default settings</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">()</span>
+
+<span class="c1"># Create with custom settings</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">(</span>
+    <span class="n">use_case</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModelUseCase</span><span class="o">.</span><span class="n">CONTENT_TAGGING</span><span class="p">,</span>
+    <span class="n">guardrails</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModelGuardrails</span><span class="o">.</span><span class="n">PERMISSIVE_CONTENT_TRANSFORMATIONS</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModel.is_available">
+<span class="sig-name descname"><span class="pre">is_available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/core.html#SystemLanguageModel.is_available"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModel.is_available" title="Link to this definition">#</a></dt>
+<dd><p>Check if the model is available for use.</p>
+<p>This method queries the system to determine whether the language model
+can be used on the current device and in the current context. It returns
+both an availability status and, if unavailable, a reason code explaining
+why the model cannot be used.</p>
+<p>Common reasons for unavailability include Apple Intelligence not being
+enabled, the device not meeting requirements, or the model still being
+downloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>A tuple containing:</p>
+<ul class="simple">
+<li><p>bool: True if the model is available, False otherwise</p></li>
+<li><p>Optional[SystemLanguageModelUnavailableReason]: The reason for
+unavailability if the model is not available, or None if it is
+available</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a>, Optional[<a class="reference internal" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason" title="apple_fm_sdk.SystemLanguageModelUnavailableReason">SystemLanguageModelUnavailableReason</a>]]</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Checking model availability:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="n">test_model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">()</span>
+<span class="n">is_available</span><span class="p">,</span> <span class="n">reason</span> <span class="o">=</span> <span class="n">test_model</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">is_available</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model is ready to use&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">reason</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model unavailable: </span><span class="si">{</span><span class="n">reason</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">reason</span> <span class="o">==</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModelUnavailableReason</span><span class="o">.</span><span class="n">MODEL_NOT_READY</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please wait for the model to finish downloading&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">reason</span> <span class="o">==</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModelUnavailableReason</span><span class="o">.</span><span class="n">DEVICE_NOT_ELIGIBLE</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This device does not support the model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method should be called before attempting to use the model to
+ensure it is ready for inference.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="systemlanguagemodelusecase">
+<h2>SystemLanguageModelUseCase<a class="headerlink" href="#systemlanguagemodelusecase" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUseCase">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">SystemLanguageModelUseCase</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/core.html#SystemLanguageModelUseCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUseCase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Use cases for system foundation models.</p>
+<p>This enumeration defines the different use cases that can be specified when
+creating a system foundation model. The use case helps optimize the model’s
+behavior for specific tasks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUseCase.GENERAL">
+<span class="sig-name descname"><span class="pre">GENERAL</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUseCase.GENERAL" title="Link to this definition">#</a></dt>
+<dd><p>General-purpose foundation model use case suitable for a wide range
+of natural language processing tasks.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUseCase.CONTENT_TAGGING">
+<span class="sig-name descname"><span class="pre">CONTENT_TAGGING</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUseCase.CONTENT_TAGGING" title="Link to this definition">#</a></dt>
+<dd><p>Specialized use case optimized for content classification
+and tagging tasks.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="systemlanguagemodelguardrails">
+<h2>SystemLanguageModelGuardrails<a class="headerlink" href="#systemlanguagemodelguardrails" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelGuardrails">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">SystemLanguageModelGuardrails</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/core.html#SystemLanguageModelGuardrails"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelGuardrails" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Guardrail settings for system foundation models.</p>
+<p>This enumeration defines the different levels of content filtering and safety
+guardrails that can be applied to system foundation models. Guardrails help
+ensure appropriate and safe model behavior.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelGuardrails.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelGuardrails.DEFAULT" title="Link to this definition">#</a></dt>
+<dd><p>Standard guardrails with balanced content filtering appropriate
+for general use cases.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelGuardrails.PERMISSIVE_CONTENT_TRANSFORMATIONS">
+<span class="sig-name descname"><span class="pre">PERMISSIVE_CONTENT_TRANSFORMATIONS</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelGuardrails.PERMISSIVE_CONTENT_TRANSFORMATIONS" title="Link to this definition">#</a></dt>
+<dd><p>More permissive guardrails that allow
+greater flexibility in content transformation tasks while maintaining
+basic safety measures.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="systemlanguagemodelunavailablereason">
+<h2>SystemLanguageModelUnavailableReason<a class="headerlink" href="#systemlanguagemodelunavailablereason" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUnavailableReason">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">SystemLanguageModelUnavailableReason</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/core.html#SystemLanguageModelUnavailableReason"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Reasons why a system foundation model might be unavailable.</p>
+<p>This enumeration defines the possible reasons why a system foundation model
+cannot be used on the current device or in the current context.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUnavailableReason.APPLE_INTELLIGENCE_NOT_ENABLED">
+<span class="sig-name descname"><span class="pre">APPLE_INTELLIGENCE_NOT_ENABLED</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.APPLE_INTELLIGENCE_NOT_ENABLED" title="Link to this definition">#</a></dt>
+<dd><p>Apple Intelligence features are not enabled
+on this device or for this user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUnavailableReason.DEVICE_NOT_ELIGIBLE">
+<span class="sig-name descname"><span class="pre">DEVICE_NOT_ELIGIBLE</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.DEVICE_NOT_ELIGIBLE" title="Link to this definition">#</a></dt>
+<dd><p>The device does not meet the requirements for running
+the system language model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUnavailableReason.MODEL_NOT_READY">
+<span class="sig-name descname"><span class="pre">MODEL_NOT_READY</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.MODEL_NOT_READY" title="Link to this definition">#</a></dt>
+<dd><p>The model is still being downloaded or prepared and is not
+yet ready for use.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SystemLanguageModelUnavailableReason.UNKNOWN">
+<span class="sig-name descname"><span class="pre">UNKNOWN</span></span><a class="headerlink" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.UNKNOWN" title="Link to this definition">#</a></dt>
+<dd><p>The reason for unavailability is unknown or not specified.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../evaluation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Evaluation workflows</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="session.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LanguageModelSession</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">SystemLanguageModel</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModel"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModel</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModel.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModel.is_available"><code class="docutils literal notranslate"><span class="pre">is_available()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemlanguagemodelusecase">SystemLanguageModelUseCase</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUseCase"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModelUseCase</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUseCase.GENERAL"><code class="docutils literal notranslate"><span class="pre">GENERAL</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUseCase.CONTENT_TAGGING"><code class="docutils literal notranslate"><span class="pre">CONTENT_TAGGING</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemlanguagemodelguardrails">SystemLanguageModelGuardrails</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelGuardrails"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModelGuardrails</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelGuardrails.DEFAULT"><code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelGuardrails.PERMISSIVE_CONTENT_TRANSFORMATIONS"><code class="docutils literal notranslate"><span class="pre">PERMISSIVE_CONTENT_TRANSFORMATIONS</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemlanguagemodelunavailablereason">SystemLanguageModelUnavailableReason</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason"><code class="docutils literal notranslate"><span class="pre">SystemLanguageModelUnavailableReason</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.APPLE_INTELLIGENCE_NOT_ENABLED"><code class="docutils literal notranslate"><span class="pre">APPLE_INTELLIGENCE_NOT_ENABLED</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.DEVICE_NOT_ELIGIBLE"><code class="docutils literal notranslate"><span class="pre">DEVICE_NOT_ELIGIBLE</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.MODEL_NOT_READY"><code class="docutils literal notranslate"><span class="pre">MODEL_NOT_READY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SystemLanguageModelUnavailableReason.UNKNOWN"><code class="docutils literal notranslate"><span class="pre">UNKNOWN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apple Inc.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Apple Inc.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

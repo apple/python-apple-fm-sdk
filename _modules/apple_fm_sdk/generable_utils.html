@@ -1,0 +1,707 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apple_fm_sdk.generable_utils &#8212; Foundation Models SDK for Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=01c0d4c0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/apple_fm_sdk/generable_utils';</script>
+    <link rel="icon" href="../../_static/foundation-models-framework-logo.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/foundation-models-framework-logo.png" class="logo__image only-light" alt="Foundation Models SDK for Python - Home"/>
+    <script>document.write(`<img src="../../_static/foundation-models-framework-logo.png" class="logo__image only-dark" alt="Foundation Models SDK for Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basic_usage.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streaming.html">Streaming Responses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guided_generation.html">Guided Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools and function calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../evaluation.html">Evaluation workflows</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api/systemmodel.html">SystemLanguageModel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/generable.html">Generable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/transcript.html">Transcript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/errors.html">Errors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/apple/python-apple-fm-sdk" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for apple_fm_sdk.generable_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># For licensing see accompanying LICENSE file.</span>
+<span class="c1"># Copyright (C) 2026 Apple Inc. All Rights Reserved.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utilities for making Python classes generable with Foundation Models.</span>
+
+<span class="sd">This module provides the decorator pattern and helper functions for converting</span>
+<span class="sd">regular Python classes (particularly dataclasses) into generable types that can</span>
+<span class="sd">be used with Foundation Models&#39; guided generation features.</span>
+
+<span class="sd">The main component is the :func:`generable` decorator, which transforms a class</span>
+<span class="sd">to support structured generation by adding schema generation, content conversion,</span>
+<span class="sd">and partial generation capabilities.</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    Basic usage:</span>
+<span class="sd">        import apple_fm_sdk as fm</span>
+
+<span class="sd">        @generable(&quot;A cat&#39;s profile&quot;)</span>
+<span class="sd">        class Cat:</span>
+<span class="sd">            name: str = fm.guide(&quot;Cat&#39;s name&quot;)</span>
+<span class="sd">            age: int = fm.guide(&quot;Age in years&quot;, range=(0, 20))</span>
+<span class="sd">            breed: str = fm.guide(&quot;Cat breed&quot;)</span>
+
+<span class="sd">        # The class now has generation_schema() method</span>
+<span class="sd">        schema = Cat.generation_schema()</span>
+
+<span class="sd">        # Can be used with Session.respond() for guided generation</span>
+<span class="sd">        cat = session.respond(Cat, prompt=&quot;Generate a cat named Maomao who is 2 years old&quot;)</span>
+
+<span class="sd">.. note::</span>
+<span class="sd">    This module handles the internal mechanics of the generable decorator.</span>
+<span class="sd">    Most users will only need to use the :func:`generable` decorator itself.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.generable</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Generable</span><span class="p">,</span>
+    <span class="n">GenerationSchema</span><span class="p">,</span>
+    <span class="n">GeneratedContent</span><span class="p">,</span>
+    <span class="n">GenerationID</span><span class="p">,</span>
+    <span class="n">ConvertibleFromGeneratedContent</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.generation_property</span><span class="w"> </span><span class="kn">import</span> <span class="n">Property</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">get_type_hints</span><span class="p">,</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="generable">
+<a class="viewcode-back" href="../../api/generable.html#apple_fm_sdk.generable">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generable</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator that makes a class generable for use with Foundation Models.</span>
+
+<span class="sd">    This decorator transforms a regular Python class (typically a dataclass) into</span>
+<span class="sd">    a generable type that can be used with Foundation Models&#39; guided generation</span>
+<span class="sd">    features. It adds all necessary methods and attributes to support schema</span>
+<span class="sd">    generation, content conversion, and partial generation during streaming.</span>
+
+<span class="sd">    The decorator performs the following transformations:</span>
+
+<span class="sd">    1. Converts the class to a dataclass if it isn&#39;t already</span>
+<span class="sd">    2. Adds a ``generation_schema()`` class method for schema introspection</span>
+<span class="sd">    3. Adds ``ConvertibleFromGeneratedContent`` support for deserialization</span>
+<span class="sd">    4. Adds ``ConvertibleToGeneratedContent`` support for serialization</span>
+<span class="sd">    5. Creates a ``PartiallyGenerated`` inner class for streaming support</span>
+<span class="sd">    6. Adds required methods for structured generation</span>
+
+<span class="sd">    :param description: Optional human-readable description of what this type</span>
+<span class="sd">        represents. This description is included in the generation schema and</span>
+<span class="sd">        can help guide the model&#39;s generation behavior.</span>
+<span class="sd">    :type description: Optional[str]</span>
+<span class="sd">    :return: A decorator function that transforms the class</span>
+<span class="sd">    :rtype: Callable[[Type], Type[Generable]]</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Basic usage with a dataclass::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+
+<span class="sd">            @fm.generable(&quot;A cat&#39;s profile&quot;)</span>
+<span class="sd">            class Cat:</span>
+<span class="sd">                name: str = fm.guide(&quot;Cat&#39;s name&quot;)</span>
+<span class="sd">                age: int = fm.guide(&quot;Age in years&quot;, range=(0, 20))</span>
+<span class="sd">                profile: str = fm.guide(&quot;What makes this cat unique&quot;)</span>
+<span class="sd">        Using with Session for guided generation::</span>
+
+<span class="sd">            session = fm.LanguageModelSession()</span>
+<span class="sd">            cat = await session.respond(</span>
+<span class="sd">                Cat,</span>
+<span class="sd">                prompt=&quot;Generate a cat named Maomao who is 2 years old and has a fluffy tail&quot;</span>
+<span class="sd">            )</span>
+<span class="sd">            print(f&quot;{cat.name} is {cat.age} years old: {cat.profile}&quot;)</span>
+
+<span class="sd">        Nested generable types::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+
+<span class="sd">            @fm.generable(&quot;Pet club&quot;)</span>
+<span class="sd">            class PetClub:</span>
+<span class="sd">                name: str = fm.guide(&quot;Club name&quot;)</span>
+<span class="sd">                cats: [Cat] = fm.guide(&quot;List of cats in the club&quot;)</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        @fm.generable automatically applies the ``@dataclass`` decorator if the</span>
+<span class="sd">        class is not already a dataclass.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        :func:`guide` for adding constraints to individual fields.</span>
+<span class="sd">        :class:`GenerationSchema` for the schema representation.</span>
+<span class="sd">        :class:`Session` for using generable types in generation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">Generable</span><span class="p">]:</span>
+        <span class="c1"># Convert to dataclass if not already</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">&quot;__dataclass_fields__&quot;</span><span class="p">):</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="n">dataclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+        <span class="c1"># Store generable metadata.</span>
+        <span class="c1"># We need _generable as an alternative to protocols for certain dynamic type scenarios.</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_generable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_generable_description</span> <span class="o">=</span> <span class="n">description</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">generation_schema</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span>
+            <span class="n">generation_schema</span>
+        <span class="p">)</span>  <span class="c1"># makes schema generation a class method</span>
+
+        <span class="c1"># Add ConvertibleFromGeneratedContent support</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_from_generated_content</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">_from_generated_content</span><span class="p">)</span>
+
+        <span class="c1"># Add ConvertibleToGeneratedContent support</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">generated_content</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">generated_content</span><span class="p">)</span>
+
+        <span class="c1"># Create PartiallyGenerated inner class</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">PartiallyGenerated</span> <span class="o">=</span> <span class="n">create_partially_generated</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<span class="c1"># MARK: - Schema Helpers</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">resolve_referenced_generables</span><span class="p">(</span>
+    <span class="n">field_type</span><span class="p">,</span> <span class="n">outer_class_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">GenerationSchema</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resolve nested generable types referenced by a field.</span>
+
+<span class="sd">    This helper function recursively examines a field&#39;s type to find any nested</span>
+<span class="sd">    generable types (for example, a field of type ``Cat`` where ``Cat`` is itself</span>
+<span class="sd">    a generable class). It handles collections (List, Optional) and prevents</span>
+<span class="sd">    infinite recursion for self-referential types.</span>
+
+<span class="sd">    :param field_type: The type annotation of the field to examine</span>
+<span class="sd">    :type field_type: Type</span>
+<span class="sd">    :param outer_class_name: Name of the outer class to detect self-references</span>
+<span class="sd">    :type outer_class_name: str</span>
+<span class="sd">    :return: List of GenerationSchema objects for nested generable types, or None</span>
+<span class="sd">        if no nested generables are found or if a self-reference is detected</span>
+<span class="sd">    :rtype: Optional[List[GenerationSchema]]</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function is used internally by the schema generation process to</span>
+<span class="sd">        build the complete schema graph including nested types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if the field_type is a generable class itself</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="s2">&quot;_generable&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field_type</span><span class="o">.</span><span class="n">_generable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">field_type</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="n">outer_class_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Avoid infinite recursion on self-references</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">field_type</span><span class="o">.</span><span class="n">generation_schema</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">schema</span><span class="p">,</span>
+            <span class="o">*</span><span class="n">schema</span><span class="o">.</span><span class="n">dynamic_nested_types</span><span class="p">,</span>
+        <span class="p">]</span>  <span class="c1"># Include nested references</span>
+
+    <span class="c1"># Unpack collections or optional types to find generable inner types</span>
+    <span class="k">for</span> <span class="n">inner_type</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">field_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">resolve_referenced_generables</span><span class="p">(</span><span class="n">inner_type</span><span class="p">,</span> <span class="n">outer_class_name</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generation_schema</span><span class="p">(</span><span class="n">cls_inner</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationSchema</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a GenerationSchema from a generable class.</span>
+
+<span class="sd">    This function introspects a generable class to create a complete schema</span>
+<span class="sd">    representation including all properties, their types, descriptions, guides,</span>
+<span class="sd">    and any nested generable types. The schema can then be used for guided</span>
+<span class="sd">    generation with Foundation Models.</span>
+
+<span class="sd">    :param cls_inner: The generable class to create a schema for</span>
+<span class="sd">    :type cls_inner: Type</span>
+<span class="sd">    :param description: Optional description override. If not provided, uses</span>
+<span class="sd">        the description from the generable decorator</span>
+<span class="sd">    :type description: Optional[str]</span>
+<span class="sd">    :return: A GenerationSchema representing the class structure</span>
+<span class="sd">    :rtype: GenerationSchema</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function is typically called automatically via the class method</span>
+<span class="sd">        added by the generable decorator. Users don&#39;t usually need to call</span>
+<span class="sd">        this directly.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        :func:`generable` decorator which adds this as a class method.</span>
+<span class="sd">        :class:`GenerationSchema` for the schema representation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">properties</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">referenced_schemas</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">GenerationSchema</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">referenced_schema_names</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">type_hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span>
+        <span class="n">cls_inner</span><span class="p">,</span> <span class="n">localns</span><span class="o">=</span><span class="p">{</span><span class="n">cls_inner</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">cls_inner</span><span class="p">},</span> <span class="n">include_extras</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>  <span class="c1"># Namespace annotation needed for self-referential types</span>
+
+    <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_info</span> <span class="ow">in</span> <span class="n">cls_inner</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">field_type</span> <span class="o">=</span> <span class="n">type_hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+        <span class="c1"># Get any referenced generable types</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="n">resolve_referenced_generables</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="n">cls_inner</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reference</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">schema</span> <span class="ow">in</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="c1"># Add only unique schemas to avoid duplicate types</span>
+                <span class="k">if</span> <span class="n">schema</span><span class="o">.</span><span class="n">type_class</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">referenced_schema_names</span><span class="p">:</span>
+                    <span class="n">referenced_schema_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">type_class</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+                    <span class="n">referenced_schemas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+
+        <span class="c1"># Get description and guides from field metadata</span>
+        <span class="n">field_description</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">field_guides</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field_info</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+            <span class="n">field_description</span> <span class="o">=</span> <span class="n">field_info</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+            <span class="n">field_guides</span> <span class="o">=</span> <span class="n">field_info</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;guides&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span>
+            <span class="n">type_class</span><span class="o">=</span><span class="n">field_type</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">field_description</span><span class="p">,</span>
+            <span class="n">guides</span><span class="o">=</span><span class="n">field_guides</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">properties</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">GenerationSchema</span><span class="p">(</span>
+        <span class="n">type_class</span><span class="o">=</span><span class="n">cls_inner</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span>
+        <span class="n">dynamic_nested_types</span><span class="o">=</span><span class="n">referenced_schemas</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># MARK: - GeneratedContent Helpers</span>
+
+
+<span class="c1"># Add ConvertibleFromGeneratedContent support</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_from_generated_content</span><span class="p">(</span><span class="n">cls_inner</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="n">GeneratedContent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create instance from GeneratedContent.&quot;&quot;&quot;</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">type_hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="n">cls_inner</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">cls_inner</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">field_type</span> <span class="o">=</span> <span class="n">type_hints</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="n">for_property</span><span class="o">=</span><span class="n">field_name</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Failed to convert GeneratedContent to </span><span class="si">{</span><span class="n">cls_inner</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;could not set field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39; with error: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cls_inner</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="c1"># Add ConvertibleToGeneratedContent support</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generated_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeneratedContent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert this instance to GeneratedContent.&quot;&quot;&quot;</span>
+    <span class="n">content_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="p">:</span>
+        <span class="n">content_dict</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">GeneratedContent</span><span class="p">(</span><span class="n">content_dict</span><span class="p">)</span>
+
+
+<span class="c1"># MARK: - PartiallyGenerated Helpers</span>
+
+
+<span class="c1"># Add _from_generated_content to PartiallyGenerated</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">partial_from_generated_content</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">partial_cls</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="n">GeneratedContent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create partial instance from GeneratedContent.&quot;&quot;&quot;</span>
+    <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">content</span><span class="o">.</span><span class="n">id</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">field_type</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="bp">cls</span><span class="p">)[</span><span class="n">field_name</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="n">for_property</span><span class="o">=</span><span class="n">field_name</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Field not available - leave as None</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39; not available in partial content: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">partial_cls</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_partially_generated</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">:</span>
+    <span class="c1"># Create PartiallyGenerated inner class</span>
+    <span class="n">partial_fields</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">partial_annotations</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">type_hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">localns</span><span class="o">=</span><span class="p">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="bp">cls</span><span class="p">}</span>
+    <span class="p">)</span>  <span class="c1"># Namespace annotation needed for self-referential types</span>
+
+    <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_info</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">field_type</span> <span class="o">=</span> <span class="n">type_hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+        <span class="c1"># Make all fields optional for partial generation</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="s2">&quot;__origin__&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field_type</span><span class="o">.</span><span class="n">__origin__</span> <span class="ow">is</span> <span class="n">Union</span><span class="p">:</span>
+            <span class="c1"># Already optional</span>
+            <span class="n">partial_annotations</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_type</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Make optional</span>
+            <span class="n">partial_annotations</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">[</span><span class="n">field_type</span><span class="p">]</span>
+
+        <span class="c1"># All fields get default None for partial generation</span>
+        <span class="n">partial_fields</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Add ID field for partial generation</span>
+    <span class="n">partial_annotations</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">GenerationID</span>
+    <span class="n">partial_fields</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">GenerationID</span><span class="p">)</span>
+
+    <span class="c1"># Create the PartiallyGenerated class</span>
+    <span class="n">partial_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">PartiallyGenerated&quot;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">ConvertibleFromGeneratedContent</span><span class="p">,),</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;__annotations__&quot;</span><span class="p">:</span> <span class="n">partial_annotations</span><span class="p">,</span>
+            <span class="s2">&quot;__module__&quot;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+            <span class="s2">&quot;_from_generated_content&quot;</span><span class="p">:</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">partial_from_generated_content</span><span class="p">),</span>
+            <span class="o">**</span><span class="n">partial_fields</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">partial_class</span> <span class="o">=</span> <span class="n">dataclass</span><span class="p">(</span><span class="n">partial_class</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">partial_class</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apple Inc.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Apple Inc.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

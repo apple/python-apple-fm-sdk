@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Foundation Models SDK for Python Documentation &#8212; Foundation Models SDK for Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=01c0d4c0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=30646c52"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="icon" href="_static/foundation-models-framework-logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foundation-models-framework-logo.png" class="logo__image only-light" alt="Foundation Models SDK for Python - Home"/>
+    <script>document.write(`<img src="_static/foundation-models-framework-logo.png" class="logo__image only-dark" alt="Foundation Models SDK for Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming.html">Streaming Responses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guided_generation.html">Guided Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools and function calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation workflows</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/systemmodel.html">SystemLanguageModel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/generable.html">Generable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/transcript.html">Transcript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/errors.html">Errors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/apple/python-apple-fm-sdk" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/index.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Foundation Models SDK for Python Documentation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Foundation Models SDK for Python Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-contents">Documentation Contents</a><ul class="visible nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="foundation-models-sdk-for-python-documentation">
+<h1>Foundation Models SDK for Python Documentation<a class="headerlink" href="#foundation-models-sdk-for-python-documentation" title="Link to this heading">#</a></h1>
+<p><strong>Platform Support:</strong> macOS</p>
+<p><strong>Python Version:</strong> 3.10+</p>
+<p>Python bindings for Apple’s <a class="reference external" href="https://developer.apple.com/documentation/foundationmodels">Foundation Models framework</a>
+give you access to the on-device foundation model at the core of Apple Intelligence on macOS. You can use this Python SDK to evaluate
+your Swift app’s Foundation Models features, using Python’s rich ecosystem of tools and libraries for data and machine learning.
+These Python bindings run the Apple’s Foundation Models framework in Swift under the hood, so you can be confident that your evaluations reflect
+real on-device performance and behavior.</p>
+<p>Keep in mind that it’s your responsibility to design AI experiences with care.
+To learn about practical strategies you can implement in code, <strong>check out:</strong>
+<a class="reference external" href="https://developer.apple.com/documentation/foundationmodels/improving-the-safety-of-generative-model-output">Improving the safety of generative model output</a>
+and Apple’s <a class="reference external" href="https://developer.apple.com/design/human-interface-guidelines/generative-ai">Human Interface Guidelines on Generative AI</a>.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<p>Since this SDK calls the on-device foundation model at the core of Apple Intelligence it requires:</p>
+<ul class="simple">
+<li><p>macOS 26.0+</p></li>
+<li><p>Download <a class="reference external" href="https://developer.apple.com/xcode/">Xcode 26.0+</a> and agree to the <a class="reference external" href="https://www.apple.com/legal/sla/docs/xcode.pdf">Xcode and Apple SDKs agreement</a> in the Xcode app.</p></li>
+<li><p>Python 3.10+</p></li>
+<li><p>Apple Intelligence turned on for a <a class="reference external" href="https://support.apple.com/en-us/121115">compatible device</a></p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<p>Foundation Models SDK for Python is currently in Beta. Use the development installation:</p>
+<ol class="arabic simple">
+<li><p>Ensure you have met the requirements above.</p></li>
+<li><p>Clone the repository and navigate to the project directory:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/apple/python-apple-fm-sdk
+<span class="nb">cd</span><span class="w"> </span>python-apple-fm-sdk
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Create a virtual environment (<a class="reference external" href="https://docs.astral.sh/uv/">uv</a> recommended) and activate it:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Install the package locally in editable mode:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="basic-usage">
+<h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="c1"># Get the default system foundation model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">()</span>
+
+<span class="c1"># Check if the model is available</span>
+<span class="n">is_available</span><span class="p">,</span> <span class="n">reason</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">is_available</span><span class="p">:</span>
+    <span class="c1"># Create a session</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="c1"># Generate a response</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;Hello, how are you?&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model response: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Foundation Models not available: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="documentation-contents">
+<h2>Documentation Contents<a class="headerlink" href="#documentation-contents" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#common-installation-issues">Common Installation Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html#core-concepts">Core Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html#creating-a-model">Creating a Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html#creating-a-session">Creating a Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html#generating-responses">Generating Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html#error-handling">Error Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="streaming.html">Streaming Responses</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="streaming.html#why-use-streaming">Why Use Streaming?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="streaming.html#basic-streaming">Basic Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="streaming.html#streaming-with-context">Streaming with Context</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guided_generation.html">Guided Generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guided_generation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guided_generation.html#the-generable-decorator">The <code class="docutils literal notranslate"><span class="pre">&#64;generable</span></code> Decorator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guided_generation.html#available-constraints">Available Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guided_generation.html#complex-structures">Complex Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guided_generation.html#schema-compatibility-with-swift">Schema Compatibility with Swift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guided_generation.html#error-handling">Error Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools and function calling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#creating-a-tool">Creating a tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#using-tools-with-sessions">Using tools with sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#error-handling">Error handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#exporting-transcripts-from-swift-apps">Exporting transcripts from Swift apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#processing-transcripts-in-python">Processing transcripts in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#batch-evaluation-patterns">Batch evaluation patterns</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/systemmodel.html">SystemLanguageModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/systemmodel.html#id2">SystemLanguageModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/systemmodel.html#systemlanguagemodelusecase">SystemLanguageModelUseCase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/systemmodel.html#systemlanguagemodelguardrails">SystemLanguageModelGuardrails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/systemmodel.html#systemlanguagemodelunavailablereason">SystemLanguageModelUnavailableReason</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/session.html">LanguageModelSession</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/session.html#id2">LanguageModelSession</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/generable.html">Generable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/generable.html#generable-decorator">&#64;generable Decorator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generable.html#guide-function">guide Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generable.html#generable-class">Generable Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generable.html#generatedcontent-class">GeneratedContent Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generable.html#generationschema-class">GenerationSchema Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tools.html#tool-class">Tool Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/transcript.html">Transcript</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/transcript.html#transcript-class">Transcript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/transcript.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/errors.html">Errors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/errors.html#base-exceptions">Base Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/errors.html#generation-errors">Generation Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/errors.html#schema-errors">Schema Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/errors.html#tool-errors">Tool Errors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="getting_started.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Getting Started</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Foundation Models SDK for Python Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-contents">Documentation Contents</a><ul class="visible nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apple Inc.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Apple Inc.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
