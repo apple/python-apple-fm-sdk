@@ -127,6 +127,45 @@ public func FMLanguageModelSessionCreateFromSystemLanguageModel(
   return FMLanguageModelSessionRef(Unmanaged.passRetained(session).toOpaque())
 }
 
+@_cdecl("FMLanguageModelSessionCreateFromTranscript")
+public func FMLanguageModelSessionCreateFromTranscript(
+  transcriptSession: FMLanguageModelSessionRef,
+  model: UnsafePointer<FMSystemLanguageModelRef>?,
+  tools: UnsafeMutablePointer<FMBridgedToolRef>?,
+  toolCount: Int32
+) -> FMLanguageModelSessionRef {
+  // Extract the transcript from the existing session
+  let existingSession = Unmanaged<LanguageModelSession>.fromOpaque(transcriptSession)
+    .takeUnretainedValue()
+  let transcript = existingSession.transcript
+
+  // Get the model to use
+  var modelChoice: SystemLanguageModel
+  if let model = model {
+    modelChoice = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+  } else {
+    modelChoice = SystemLanguageModel.default
+  }
+
+  // Convert the C array of tool refs to Swift array of Tool objects
+  var toolArray: [any Tool] = []
+  if let tools = tools, toolCount > 0 {
+    for i in 0..<Int(toolCount) {
+      let toolRef = tools[i]
+      let bridgedTool = Unmanaged<BridgedTool>.fromOpaque(toolRef).takeUnretainedValue()
+      toolArray.append(bridgedTool)
+    }
+  }
+
+  // Create a new session from the transcript
+  let session = LanguageModelSession(
+    model: modelChoice,
+    tools: toolArray,
+    transcript: transcript,
+  )
+  return FMLanguageModelSessionRef(Unmanaged.passRetained(session).toOpaque())
+}
+
 @_cdecl("FMLanguageModelSessionIsResponding")
 public func FMLanguageModelSessionIsResponding(session: FMLanguageModelSessionRef) -> Bool {
   let session = Unmanaged<LanguageModelSession>.fromOpaque(session).takeUnretainedValue()
@@ -524,6 +563,29 @@ public func FMLanguageModelSessionRespondWithSchemaFromJSON(
 }
 
 // MARK: - Transcript
+
+@_cdecl("FMTranscriptCreateFromJSONString")
+public func FMTranscriptCreateFromJSONString(
+  jsonString: UnsafePointer<CChar>,
+  outErrorCode: UnsafeMutablePointer<Int32>?,
+  outErrorDescription: UnsafeMutablePointer<UnsafePointer<CChar>?>?
+) -> FMLanguageModelSessionRef? {
+  let jsonStr = String(cString: jsonString)
+
+  do {
+    let transcript = try JSONDecoder().decode(Transcript.self, from: Data(jsonStr.utf8))
+    // Create a new session initialized with the transcript
+    let session = LanguageModelSession(transcript: transcript)
+    return FMLanguageModelSessionRef(Unmanaged.passRetained(session).toOpaque())
+  } catch {
+    let debugDescription = formatErrorDescription(error)
+    debugDescription.withCString { cString in
+      outErrorCode?.pointee = StatusCode.decodingFailure.rawValue
+      outErrorDescription?.pointee = UnsafePointer(strdup(cString))
+    }
+    return nil
+  }
+}
 
 /// Returns a JSON string representation of the session transcript.
 ///

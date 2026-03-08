@@ -52,6 +52,7 @@ FMSystemLanguageModelRef _Nonnull FMSystemLanguageModelCreate(FMSystemLanguageMo
 bool FMSystemLanguageModelIsAvailable(FMSystemLanguageModelRef _Nonnull ref, FMSystemLanguageModelUnavailableReason *_Nullable unavailableReason);
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateDefault();
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateFromSystemLanguageModel(FMSystemLanguageModelRef _Nullable model, const char *_Nullable instructions, FMBridgedToolRef _Nullable *_Nullable tools, int toolCount);
+FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateFromTranscript(FMLanguageModelSessionRef _Nonnull transcriptSession, FMSystemLanguageModelRef _Nullable model, FMBridgedToolRef _Nullable *_Nullable tools, int toolCount);
 bool FMLanguageModelSessionIsResponding(FMLanguageModelSessionRef _Nonnull session);
 void FMLanguageModelSessionReset(FMLanguageModelSessionRef _Nonnull session);
 FMTaskRef FMLanguageModelSessionRespond(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, void *_Nullable userInfo, FMLanguageModelSessionResponseCallback callback);
@@ -59,6 +60,7 @@ FMLanguageModelSessionResponseStreamRef _Nonnull FMLanguageModelSessionStreamRes
 void FMLanguageModelSessionResponseStreamIterate(FMLanguageModelSessionResponseStreamRef _Nonnull stream, void *_Nullable userInfo, FMLanguageModelSessionResponseCallback callback);
 
 // Transcript functions
+FMLanguageModelSessionRef _Nullable FMTranscriptCreateFromJSONString(const char *_Nonnull jsonString, int *_Nullable outErrorCode, char *_Nullable *_Nullable outErrorDescription);
 char *_Nullable FMLanguageModelSessionGetTranscriptJSONString(FMLanguageModelSessionRef _Nonnull session, int *_Nullable outErrorCode, char *_Nullable *_Nullable outErrorDescription);
 
 // GenerationSchema functions

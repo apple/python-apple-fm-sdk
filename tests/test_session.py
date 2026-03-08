@@ -5,6 +5,11 @@
 Tests for LanguageModelSession functionality.
 """
 
+import json
+import asyncio
+import apple_fm_sdk as fm
+from tester_tools.tester_tools import SearchBreadDatabaseTool
+
 
 def test_import_session():
     """Test that we can import LanguageModelSession and related classes."""
@@ -145,3 +150,226 @@ def test_session_initialization_options(model):
     print("✓ Created session with None tools")
 
     print("\n✓ All session initialization tests passed!")
+
+
+def test_session_from_transcript_basic(model):
+    """Test creating a session from a basic transcript."""
+    print("\n=== Testing LanguageModelSession.from_transcript (basic) ===")
+
+    # Load the basic test transcript
+    with open("tests/tester_schemas/test_transcript.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    print("\n1. Loading transcript from dictionary...")
+    transcript = asyncio.run(fm.Transcript.from_dict(transcript_dict))
+    assert transcript is not None
+    print("✓ Created Transcript from dictionary")
+
+    print("\n2. Creating session from transcript...")
+    session = fm.LanguageModelSession.from_transcript(transcript, model=model)
+    assert session is not None
+    print("✓ Created LanguageModelSession from transcript")
+
+    print("\n3. Verifying session has the transcript...")
+    assert session.transcript is not None
+    assert session.transcript is transcript
+    print("✓ Session has the correct transcript")
+
+    print("\n4. Verifying transcript contents...")
+    transcript_data = asyncio.run(session.transcript.to_dict())
+    assert "transcript" in transcript_data
+    assert "entries" in transcript_data["transcript"]
+    entries = transcript_data["transcript"]["entries"]
+    assert len(entries) > 0
+    print(f"✓ Transcript has {len(entries)} entries")
+
+    # Verify the transcript contains expected content
+    has_instructions = any(e["role"] == "instructions" for e in entries)
+    has_user = any(e["role"] == "user" for e in entries)
+    has_response = any(e["role"] == "response" for e in entries)
+    assert has_instructions, "Transcript should have instructions entry"
+    assert has_user, "Transcript should have user entries"
+    assert has_response, "Transcript should have response entries"
+    print("✓ Transcript contains expected entry types")
+
+    print("\n✓ Basic from_transcript test passed!")
+
+
+def test_session_from_transcript_full(model):
+    """Test creating a session from a full transcript with tools and structured output."""
+    print("\n=== Testing LanguageModelSession.from_transcript (full) ===")
+
+    # Load the full test transcript
+    with open("tests/tester_schemas/test_transcript_full.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    print("\n1. Loading transcript from dictionary...")
+    transcript = asyncio.run(fm.Transcript.from_dict(transcript_dict))
+    assert transcript is not None
+    print("✓ Created Transcript from dictionary")
+
+    print("\n2. Creating session from transcript...")
+    session = fm.LanguageModelSession.from_transcript(transcript, model=model)
+    assert session is not None
+    print("✓ Created LanguageModelSession from transcript")
+
+    print("\n3. Verifying session has the transcript...")
+    assert session.transcript is not None
+    assert session.transcript is transcript
+    print("✓ Session has the correct transcript")
+
+    print("\n4. Verifying transcript contents...")
+    transcript_data = asyncio.run(session.transcript.to_dict())
+    assert "transcript" in transcript_data
+    assert "entries" in transcript_data["transcript"]
+    entries = transcript_data["transcript"]["entries"]
+    assert len(entries) > 0
+    print(f"✓ Transcript has {len(entries)} entries")
+
+    # Verify the transcript contains expected content for full transcript
+    has_instructions = any(e["role"] == "instructions" for e in entries)
+    has_user = any(e["role"] == "user" for e in entries)
+    has_response = any(e["role"] == "response" for e in entries)
+    has_tool = any(e["role"] == "tool" for e in entries)
+    assert has_instructions, "Transcript should have instructions entry"
+    assert has_user, "Transcript should have user entries"
+    assert has_response, "Transcript should have response entries"
+    assert has_tool, "Full transcript should have tool entries"
+    print("✓ Transcript contains expected entry types including tools")
+
+    # Verify tool calls are present
+    has_tool_calls = any("toolCalls" in e for e in entries if e["role"] == "response")
+    assert has_tool_calls, "Transcript should have tool calls"
+    print("✓ Transcript contains tool calls")
+
+    # Verify structured output is present
+    has_structured = any(
+        "contents" in e and any(c.get("type") == "structure" for c in e["contents"])
+        for e in entries
+        if e["role"] == "response"
+    )
+    assert has_structured, "Transcript should have structured output"
+    print("✓ Transcript contains structured output")
+
+    print("\n✓ Full from_transcript test passed!")
+
+
+def test_session_from_transcript_with_tools(model):
+    """Test creating a session from transcript with custom tools."""
+    print("\n=== Testing LanguageModelSession.from_transcript with tools ===")
+
+    # Load the full test transcript (which has tools)
+    with open("tests/tester_schemas/test_transcript_full.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    print("\n1. Loading transcript from dictionary...")
+    transcript = asyncio.run(fm.Transcript.from_dict(transcript_dict))
+    assert transcript is not None
+    print("✓ Created Transcript from dictionary")
+
+    print("\n2. Creating session from transcript with custom tools...")
+    tools: list[fm.Tool] = [SearchBreadDatabaseTool()]
+    session = fm.LanguageModelSession.from_transcript(
+        transcript, model=model, tools=tools
+    )
+    assert session is not None
+    print("✓ Created LanguageModelSession from transcript with tools")
+
+    print("\n3. Verifying session has the transcript...")
+    assert session.transcript is not None
+    print("✓ Session has the transcript")
+
+    print("\n✓ from_transcript with tools test passed!")
+
+
+def test_session_from_transcript_no_model(model):
+    """Test creating a session from transcript without specifying a model."""
+    print("\n=== Testing LanguageModelSession.from_transcript without model ===")
+
+    # Load the basic test transcript
+    with open("tests/tester_schemas/test_transcript.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    print("\n1. Loading transcript from dictionary...")
+    transcript = asyncio.run(fm.Transcript.from_dict(transcript_dict))
+    assert transcript is not None
+    print("✓ Created Transcript from dictionary")
+
+    print("\n2. Creating session from transcript without model...")
+    session = fm.LanguageModelSession.from_transcript(transcript)
+    assert session is not None
+    print("✓ Created LanguageModelSession from transcript (using default model)")
+
+    print("\n3. Verifying session has the transcript...")
+    assert session.transcript is not None
+    print("✓ Session has the transcript")
+
+    print("\n✓ from_transcript without model test passed!")
+
+
+def test_session_from_transcript_continue_conversation(model):
+    """Test that a session created from transcript can continue the conversation."""
+    print(
+        "\n=== Testing LanguageModelSession.from_transcript can continue conversation ==="
+    )
+
+    # Load the basic test transcript
+    with open("tests/tester_schemas/test_transcript.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    print("\n1. Loading transcript from dictionary...")
+    transcript = asyncio.run(fm.Transcript.from_dict(transcript_dict))
+    assert transcript is not None
+    print("✓ Created Transcript from dictionary")
+
+    print("\n2. Creating session from transcript...")
+    session = fm.LanguageModelSession.from_transcript(transcript, model=model)
+    assert session is not None
+    print("✓ Created LanguageModelSession from transcript")
+
+    print("\n3. Getting initial transcript entry count...")
+    initial_transcript = asyncio.run(session.transcript.to_dict())
+    initial_entry_count = len(initial_transcript["transcript"]["entries"])
+    print(f"✓ Initial transcript has {initial_entry_count} entries")
+
+    print("\n4. Making a new request to continue the conversation...")
+    response = asyncio.run(session.respond("What is 7+8?"))
+    assert response is not None
+    assert isinstance(response, str)
+    assert len(response) > 0
+    print(f"✓ Got response: {response[:50]}...")
+
+    print("\n5. Verifying transcript was updated...")
+    updated_transcript = asyncio.run(session.transcript.to_dict())
+    updated_entry_count = len(updated_transcript["transcript"]["entries"])
+    assert updated_entry_count > initial_entry_count
+    print(
+        f"✓ Transcript updated from {initial_entry_count} to {updated_entry_count} entries"
+    )
+
+    print("\n✓ Continue conversation test passed!")
+
+
+def test_session_from_transcript_empty_tools(model):
+    """Test creating a session from transcript with empty tools list."""
+    print("\n=== Testing LanguageModelSession.from_transcript with empty tools ===")
+
+    # Load the basic test transcript
+    with open("tests/tester_schemas/test_transcript.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    print("\n1. Loading transcript from dictionary...")
+    transcript = asyncio.run(fm.Transcript.from_dict(transcript_dict))
+    assert transcript is not None
+    print("✓ Created Transcript from dictionary")
+
+    print("\n2. Creating session from transcript with empty tools list...")
+    session = fm.LanguageModelSession.from_transcript(transcript, model=model, tools=[])
+    assert session is not None
+    print("✓ Created LanguageModelSession from transcript with empty tools")
+
+    print("\n3. Verifying session has the transcript...")
+    assert session.transcript is not None
+    print("✓ Session has the transcript")
+
+    print("\n✓ from_transcript with empty tools test passed!")

@@ -14,6 +14,8 @@ from .core import (
 
 from .session import LanguageModelSession
 
+from .transcript import Transcript
+
 from .errors import (
     FoundationModelsError,
     GenerationError,
@@ -51,6 +53,7 @@ __version__ = "0.1.0"
 __all__ = [
     "SystemLanguageModel",
     "LanguageModelSession",
+    "Transcript",
     "SystemLanguageModelUseCase",
     "SystemLanguageModelGuardrails",
     "SystemLanguageModelUnavailableReason",

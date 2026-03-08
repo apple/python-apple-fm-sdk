@@ -168,6 +168,106 @@ class LanguageModelSession(_ManagedObject):
             super().__init__(ptr)
         # This opaque pointer already has 1 ref count by `passRetained`
 
+    @classmethod
+    def from_transcript(
+        cls,
+        transcript: Transcript,
+        model: Optional[SystemLanguageModel] = None,
+        tools: Optional[list[Tool]] = None,
+    ) -> "LanguageModelSession":
+        """Create a new session from an existing transcript.
+
+        This method creates a new LanguageModelSession initialized from an existing transcript.
+        The new session will contain all the conversation history from the transcript, including
+        user messages, model responses, and tool interactions.
+
+        :param transcript: The Transcript instance to initialize the session from.
+            This transcript contains the complete conversation history.
+        :type transcript: Transcript
+        :param model: Optional SystemLanguageModel to use for the new session. If not
+            provided, uses the default model. This allows you to continue a conversation
+            with a different model configuration than the original.
+        :type model: Optional[SystemLanguageModel]
+        :param tools: **IMPORTANT**: Tool mentions loaded from a Transcript are historical only.
+            You must **also** pass tool instances here if you want to allow the model to make new
+            tool calls in this session.
+        :type tools: Optional[list[Tool]]
+        :return: A new LanguageModelSession initialized with the transcript's history
+        :rtype: LanguageModelSession
+        :raises FoundationModelsError: If session creation fails
+
+        Examples:
+            Resume a conversation from a saved transcript::
+
+                import apple_fm_sdk as fm
+                import json
+
+                # Load a saved transcript
+                with open("transcript.json", "r") as f:
+                    transcript_dict = json.load(f)
+
+                transcript = await fm.Transcript.from_dict(transcript_dict)
+
+                # Create a new session from the transcript
+                session = fm.LanguageModelSession.from_transcript(transcript)
+
+                # Continue the session
+                response = await session.respond("Summarize the session so far.")
+
+            Resume with tools::
+
+                import apple_fm_sdk as fm
+                from my_tools import CalculatorTool, WeatherTool
+
+                # Load transcript that had tool calls
+                transcript = await fm.Transcript.from_dict(transcript_dict)
+
+                # IMPORTANT: You must pass the tool instances explicitly.
+                # The transcript contains the history of tool calls, but not
+                # the ability to make new tool calls unless you provide them.
+                session = fm.LanguageModelSession.from_transcript(
+                    transcript,
+                    tools=[CalculatorTool(), WeatherTool()]
+                )
+
+                # Now the model can make new tool calls
+                response = await session.respond("Calculate 15 * 24")
+
+        Note:
+            - The transcript contains the session instructions, so you don't need to
+              pass instructions separately
+            - The new session shares the transcript object with the original
+            - Any new interactions will update the transcript
+            - Tool mentions from the transcript are historical only. To allow the model to
+              make new tool calls, you must explicitly pass the tool instances in the ``tools`` parameter.
+        See Also:
+            - :class:`~apple_fm_sdk.transcript.Transcript`: For working with transcripts
+            - :meth:`~apple_fm_sdk.transcript.Transcript.from_dict`: For loading transcripts from JSON
+            - :class:`~apple_fm_sdk.tool.Tool`: For creating custom tools
+        """
+        # Create model pointer
+        model_ptr = model._ptr if model else None
+
+        # Create array of tool pointers
+        tool_count = len(tools) if tools else 0
+        tool_refs = (ctypes.c_void_p * tool_count)()
+        if tools:
+            for i, tool in enumerate(tools):
+                tool_refs[i] = tool._ptr
+
+        # Create the session via C binding - use the new function that takes a transcript session
+        ptr = lib.FMLanguageModelSessionCreateFromTranscript(
+            transcript.session_ptr, model_ptr, tool_refs, tool_count
+        )
+
+        # Update transcript to use the new session pointer
+        transcript._update_session_ptr(ptr)
+
+        # Create session instance
+        session = cls(_ptr=ptr)
+        session.transcript = transcript  # Use the provided transcript
+        return session
+
     @property
     def is_responding(self) -> bool:
         """Check if the session is currently responding to a request.
