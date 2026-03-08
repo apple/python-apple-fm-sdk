@@ -5,6 +5,7 @@
 Tests for LanguageModelSession functionality.
 """
 
+import pytest
 import json
 import asyncio
 import apple_fm_sdk as fm
@@ -150,6 +151,88 @@ def test_session_initialization_options(model):
     print("✓ Created session with None tools")
 
     print("\n✓ All session initialization tests passed!")
+
+
+@pytest.mark.asyncio
+async def test_generation_options_with_respond(model):
+    """Test using GenerationOptions with respond() method."""
+    print("\n=== Testing GenerationOptions with respond() ===")
+
+    import apple_fm_sdk as fm
+
+    # Create a session
+    session = fm.LanguageModelSession(
+        instructions="You are a helpful assistant.", model=model
+    )
+
+    # Test 1: Basic response without options
+    print("\n1. Testing respond without options...")
+    response1 = await session.respond("Say hello")
+    assert response1 is not None
+    assert isinstance(response1, str)
+    print(f"✓ Response without options: {response1[:50]}...")
+
+    # Test 2: Response with temperature only
+    print("\n2. Testing respond with temperature...")
+    options2 = fm.GenerationOptions(temperature=0.7)
+    response2 = await session.respond("Say hello", options=options2)
+    assert response2 is not None
+    assert isinstance(response2, str)
+    print(f"✓ Response with temperature: {response2[:50]}...")
+
+    # Test 3: Response with greedy sampling
+    print("\n3. Testing respond with greedy sampling...")
+    options3 = fm.GenerationOptions(sampling=fm.SamplingMode.greedy())
+    response3 = await session.respond("Say hello", options=options3)
+    assert response3 is not None
+    assert isinstance(response3, str)
+    print(f"✓ Response with greedy sampling: {response3[:50]}...")
+
+    # Test 4: Response with random sampling (top-k)
+    print("\n4. Testing respond with random sampling (top-k)...")
+    options4 = fm.GenerationOptions(sampling=fm.SamplingMode.random(top=50, seed=42))
+    response4 = await session.respond("Say hello", options=options4)
+    assert response4 is not None
+    assert isinstance(response4, str)
+    print(f"✓ Response with random sampling (top-k): {response4[:50]}...")
+
+    # Test 5: Response with random sampling (probability threshold)
+    print("\n5. Testing respond with random sampling (probability threshold)...")
+    options5 = fm.GenerationOptions(
+        sampling=fm.SamplingMode.random(probability_threshold=0.9, seed=42)
+    )
+    response5 = await session.respond("Say hello", options=options5)
+    assert response5 is not None
+    assert isinstance(response5, str)
+    print(
+        f"✓ Response with random sampling (probability threshold): {response5[:50]}..."
+    )
+
+    # Test 6: Response with maximum_response_tokens
+    print("\n6. Testing respond with maximum_response_tokens...")
+    options6 = fm.GenerationOptions(maximum_response_tokens=2)
+    response6 = await session.respond("Tell me a story", options=options6)
+    assert response6 is not None
+    assert (
+        len(response6.split())
+        <= 4  # 4 words max. This is a simple check, actual tokenization may differ
+    )
+    assert isinstance(response6, str)
+    print(f"✓ Response with max tokens: {response6[:50]}")
+
+    # Test 7: Response with all options combined
+    print("\n7. Testing respond with all options combined...")
+    options7 = fm.GenerationOptions(
+        temperature=0.8,
+        sampling=fm.SamplingMode.random(top=50, seed=42),
+        maximum_response_tokens=100,
+    )
+    response7 = await session.respond("Write a short poem", options=options7)
+    assert response7 is not None
+    assert isinstance(response7, str)
+    print(f"✓ Response with all options: {response7[:50]}...")
+
+    print("\n✓ All respond() with options tests passed!")
 
 
 def test_session_from_transcript_basic(model):

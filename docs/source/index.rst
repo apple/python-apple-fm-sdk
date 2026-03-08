@@ -82,6 +82,7 @@ Documentation Contents
 
    api/systemmodel
    api/session
+   api/generation_options
    api/generable
    api/tools
    api/transcript

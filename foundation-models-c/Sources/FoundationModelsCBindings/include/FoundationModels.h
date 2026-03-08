@@ -55,8 +55,8 @@ FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateFromSystemLanguag
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateFromTranscript(FMLanguageModelSessionRef _Nonnull transcriptSession, FMSystemLanguageModelRef _Nullable model, FMBridgedToolRef _Nullable *_Nullable tools, int toolCount);
 bool FMLanguageModelSessionIsResponding(FMLanguageModelSessionRef _Nonnull session);
 void FMLanguageModelSessionReset(FMLanguageModelSessionRef _Nonnull session);
-FMTaskRef FMLanguageModelSessionRespond(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, void *_Nullable userInfo, FMLanguageModelSessionResponseCallback callback);
-FMLanguageModelSessionResponseStreamRef _Nonnull FMLanguageModelSessionStreamResponse(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt);
+FMTaskRef FMLanguageModelSessionRespond(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, const char *_Nullable optionsJSON, void *_Nullable userInfo, FMLanguageModelSessionResponseCallback callback);
+FMLanguageModelSessionResponseStreamRef _Nonnull FMLanguageModelSessionStreamResponse(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, const char *_Nullable optionsJSON);
 void FMLanguageModelSessionResponseStreamIterate(FMLanguageModelSessionResponseStreamRef _Nonnull stream, void *_Nullable userInfo, FMLanguageModelSessionResponseCallback callback);
 
 // Transcript functions
@@ -85,8 +85,8 @@ char *_Nullable FMGeneratedContentGetPropertyValue(FMGeneratedContentRef _Nonnul
 bool FMGeneratedContentIsComplete(FMGeneratedContentRef _Nonnull content);
 
 // Structured generation session functions
-FMTaskRef FMLanguageModelSessionRespondWithSchema(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, FMGenerationSchemaRef _Nonnull schema, void *_Nullable userInfo, FMLanguageModelSessionStructuredResponseCallback callback);
-FMTaskRef FMLanguageModelSessionRespondWithSchemaFromJSON(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, const char *_Nonnull schemaJSONString, void *_Nullable userInfo, FMLanguageModelSessionStructuredResponseCallback callback);
+FMTaskRef FMLanguageModelSessionRespondWithSchema(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, FMGenerationSchemaRef _Nonnull schema, const char *_Nullable optionsJSON, void *_Nullable userInfo, FMLanguageModelSessionStructuredResponseCallback callback);
+FMTaskRef FMLanguageModelSessionRespondWithSchemaFromJSON(FMLanguageModelSessionRef _Nonnull session, const char *_Nonnull prompt, const char *_Nonnull schemaJSONString, const char *_Nullable optionsJSON, void *_Nullable userInfo, FMLanguageModelSessionStructuredResponseCallback callback);
 
 // Tool functions
 FMBridgedToolRef _Nullable FMBridgedToolCreate(const char *_Nonnull name, const char *_Nonnull description, FMGenerationSchemaRef _Nonnull parameters, void (*_Nonnull callable)(FMGeneratedContentRef _Nonnull, unsigned int), int *_Nullable outErrorCode, char *_Nullable *_Nullable outErrorDescription) __attribute__((swift_attr("@Sendable")));

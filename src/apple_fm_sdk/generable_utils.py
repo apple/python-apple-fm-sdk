@@ -1,38 +1,6 @@
 # For licensing see accompanying LICENSE file.
 # Copyright (C) 2026 Apple Inc. All Rights Reserved.
 
-"""
-Utilities for making Python classes generable with Foundation Models.
-
-This module provides the decorator pattern and helper functions for converting
-regular Python classes (particularly dataclasses) into generable types that can
-be used with Foundation Models' guided generation features.
-
-The main component is the :func:`generable` decorator, which transforms a class
-to support structured generation by adding schema generation, content conversion,
-and partial generation capabilities.
-
-Example:
-    Basic usage:
-        import apple_fm_sdk as fm
-
-        @generable("A cat's profile")
-        class Cat:
-            name: str = fm.guide("Cat's name")
-            age: int = fm.guide("Age in years", range=(0, 20))
-            breed: str = fm.guide("Cat breed")
-
-        # The class now has generation_schema() method
-        schema = Cat.generation_schema()
-
-        # Can be used with Session.respond() for guided generation
-        cat = session.respond(Cat, prompt="Generate a cat named Maomao who is 2 years old")
-
-.. note::
-    This module handles the internal mechanics of the generable decorator.
-    Most users will only need to use the :func:`generable` decorator itself.
-"""
-
 from .generable import (
     Generable,
     GenerationSchema,
