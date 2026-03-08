@@ -35,28 +35,41 @@ This project is not yet taking contributions. Stay tuned!
 
 ## Installation
 
-Foundation Models SDK for Python is currently in Beta. Install using the development installation
-instruction below.
+```bash
+pip install apple-fm-sdk
+```
+
+Alternatively, you can use the development install instructions below.
+
+## Documentation
+
+- [Documentation page](https://apple.github.io/python-apple-fm-sdk/)
+- [Code examples](https://github.com/apple/python-apple-fm-sdk/tree/main/examples)
 
 ## Basic usage
 
 ```python
 import apple_fm_sdk as fm
+import asyncio
 
-# Get the default system foundation model
-model = fm.SystemLanguageModel()
+async def main():
+    # Get the default system foundation model
+    model = fm.SystemLanguageModel()
 
-# Check if the model is available
-is_available, reason = model.is_available()
-if is_available:
-    # Create a session
-    session = fm.LanguageModelSession()
+    # Check if the model is available
+    is_available, reason = model.is_available()
+    if is_available:
+        # Create a session
+        session = fm.LanguageModelSession()
 
-    # Generate a response
-    response = await session.respond("Hello, how are you?")
-    print(f"Model response: {response}")
-else:
-    print(f"Foundation Models not available: {reason}")
+        # Generate a response
+        response = await session.respond("Hello, how are you?")
+        print(f"Model response: {response}")
+    else:
+        print(f"Foundation Models not available: {reason}")
+
+# Run async function
+asyncio.run(main())
 ```
 
 ### Development Installation
@@ -81,7 +94,6 @@ source .venv/bin/activate
 
 ```bash
 uv sync
-uv pip install -e .
 ```
 
 4. After making any change, be sure to build the project again and test:

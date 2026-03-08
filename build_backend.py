@@ -130,78 +130,96 @@ def _build_c_bindings(
         raise SwiftToolingError(f"Failed to check Xcode version: {error_msg}")
 
     swiftPackageDir = Path("foundation-models-c").resolve()
-    subprocess.run(
-        ["swift", "build", "-c", swift_build_config],
-        check=True,
-        cwd=str(swiftPackageDir),
-        capture_output=True,
-        text=True,
-    )
-    build_dir_string = subprocess.run(
-        ["swift", "build", "-c", swift_build_config, "--show-bin-path"],
-        check=True,
-        cwd=str(swiftPackageDir),
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
-    libraryDirectory = (Path("src") / "apple_fm_sdk" / "lib").resolve()
 
-    build_dir = Path(build_dir_string)
-    if libraryDirectory.exists():
-        shutil.rmtree(str(libraryDirectory))
-    shutil.copytree(str(build_dir), str(libraryDirectory))
+    try:
+        result = subprocess.run(
+            ["swift", "build", "-c", swift_build_config],
+            check=True,
+            cwd=str(swiftPackageDir),
+            capture_output=True,
+            text=True,
+        )
+        build_dir_string = subprocess.run(
+            ["swift", "build", "-c", swift_build_config, "--show-bin-path"],
+            check=True,
+            cwd=str(swiftPackageDir),
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        libraryDirectory = (Path("src") / "apple_fm_sdk" / "lib").resolve()
 
-    ctypesgen_library_lookup_args = [
-        "-L",
-        "lib",  # Relative to the apple_fm_sdk package directory
-        "-l",
-        "FoundationModels",
-    ]
-    if override_library_search_path:
-        ctypesgen_library_lookup_args.append("-L")
-        ctypesgen_library_lookup_args.append(override_library_search_path)
-    if override_library_name:
-        ctypesgen_library_lookup_args.append("-l")
-        ctypesgen_library_lookup_args.append(override_library_name)
+        build_dir = Path(build_dir_string)
+        if libraryDirectory.exists():
+            shutil.rmtree(str(libraryDirectory))
+        shutil.copytree(str(build_dir), str(libraryDirectory))
 
-    subprocess.run(
-        [
-            "ctypesgen",
-            str(
-                swiftPackageDir
-                / "Sources"
-                / "FoundationModelsCBindings"
-                / "include"
-                / "FoundationModels.h"
-            ),
-            *ctypesgen_library_lookup_args,
-            "-o",
-            "./src/apple_fm_sdk/_ctypes_bindings.py",
-        ],
-        check=True,
-    )
+        ctypesgen_library_lookup_args = [
+            "-L",
+            "lib",  # Relative to the apple_fm_sdk package directory
+            "-l",
+            "FoundationModels",
+        ]
+        if override_library_search_path:
+            ctypesgen_library_lookup_args.append("-L")
+            ctypesgen_library_lookup_args.append(override_library_search_path)
+        if override_library_name:
+            ctypesgen_library_lookup_args.append("-l")
+            ctypesgen_library_lookup_args.append(override_library_name)
 
-    # Post-process the generated file to use runtime-relative paths
-    bindings_file = Path("src/apple_fm_sdk/_ctypes_bindings.py")
-    bindings_content = bindings_file.read_text()
-
-    # Ensure 'os' module is imported
-    if "import os" not in bindings_content:
-        # Add import after the existing imports (after ctypes and sys imports)
-        bindings_content = bindings_content.replace(
-            "import sys\n", "import sys\nimport os\n"
+        subprocess.run(
+            [
+                "ctypesgen",
+                str(
+                    swiftPackageDir
+                    / "Sources"
+                    / "FoundationModelsCBindings"
+                    / "include"
+                    / "FoundationModels.h"
+                ),
+                *ctypesgen_library_lookup_args,
+                "-o",
+                "./src/apple_fm_sdk/_ctypes_bindings.py",
+            ],
+            check=True,
         )
 
-    # Replace the add_library_search_dirs call to use path relative to the package
-    # Find patterns like: add_library_search_dirs(['lib', '/path/to/other'])
-    # Replace 'lib' with os.path.join(os.path.dirname(__file__), 'lib')
-    bindings_content = re.sub(
-        r"add_library_search_dirs\(\[(.*?)\]\)",
-        lambda m: _fix_library_search_dirs(m.group(1)),
-        bindings_content,
-    )
+        # Post-process the generated file to use runtime-relative paths
+        bindings_file = Path("src/apple_fm_sdk/_ctypes_bindings.py")
+        bindings_content = bindings_file.read_text()
 
-    bindings_file.write_text(bindings_content)
+        # Ensure 'os' module is imported
+        if "import os" not in bindings_content:
+            # Add import after the existing imports (after ctypes and sys imports)
+            bindings_content = bindings_content.replace(
+                "import sys\n", "import sys\nimport os\n"
+            )
+
+        # Replace the add_library_search_dirs call to use path relative to the package
+        # Find patterns like: add_library_search_dirs(['lib', '/path/to/other'])
+        # Replace 'lib' with os.path.join(os.path.dirname(__file__), 'lib')
+        bindings_content = re.sub(
+            r"add_library_search_dirs\(\[(.*?)\]\)",
+            lambda m: _fix_library_search_dirs(m.group(1)),
+            bindings_content,
+        )
+
+        bindings_file.write_text(bindings_content)
+    except subprocess.CalledProcessError as e:
+        # Capture both stdout and stderr for comprehensive error reporting
+        error_parts = []
+        if e.stdout:
+            error_parts.append(f"stdout:\n{e.stdout}")
+        if e.stderr:
+            error_parts.append(f"stderr:\n{e.stderr}")
+
+        if error_parts:
+            error_msg = "\n".join(error_parts)
+        else:
+            error_msg = f"Command '{' '.join(e.cmd)}' returned non-zero exit status {e.returncode}"
+
+        raise SwiftToolingError(
+            f"Failed to build Swift-C-Python bindings:\n{error_msg}"
+        )
 
 
 def build_wheel(wheel_directory, config_settings=None, metadata_directory=None):

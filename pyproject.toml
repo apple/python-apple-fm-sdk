@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=77"]
+requires = ["setuptools"]
 build-backend = "build_backend"
 backend-path = ["."]
 
@@ -14,7 +14,7 @@ authors = [
     {name = "Apple Inc."},
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -37,7 +37,7 @@ dev = [
     "ruff>=0.14.5",
     "ctypesgen>=1.1.1",
     "psutil>=7.2.2",
-    "build>=1.4.0",
+    "twine>=6.2.0",
 ]
 docs = [
     "sphinx>=7.0.0",
