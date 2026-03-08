@@ -29,8 +29,10 @@ Installation
 Step 1: Install 
 ~~~~~~~~~~~~~~~
 
-Foundation Models SDK for Python is currently in Beta. Install using the development installation
-instruction below.
+.. code-block:: bash
+
+   pip install apple-fm-sdk
+
 
 Step 2: Verify Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,7 +81,6 @@ Step 3: Install in Editable Mode
 .. code-block:: bash
 
    uv sync
-   uv pip install -e .
 
 This will install the package in editable mode along with all dependencies.
 
