@@ -9,14 +9,51 @@ from .generable import (
     ConvertibleFromGeneratedContent,
 )
 from .generation_property import Property
+from .errors import InvalidGenerationSchemaError
 from dataclasses import dataclass, field
-from typing import Optional, Union, get_type_hints, get_args, Type, List
+from typing import (
+    Optional,
+    Union,
+    get_type_hints,
+    get_args,
+    Type,
+    List,
+    Callable,
+    overload,
+)
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-def generable(description: Optional[str] = None):
+class GenerableDecoratorError(InvalidGenerationSchemaError):
+    """Error raised when the @fm.generable decorator is used incorrectly."""
+
+    pass
+
+
+# Overload signatures for type checkers
+@overload
+def generable(arg: Type[object], /) -> Type[Generable]:
+    """When used without parentheses: @generable"""
+    ...
+
+
+@overload
+def generable(arg: None = ..., /) -> Callable[[Type[object]], Type[Generable]]:
+    """When used with empty parentheses: @generable()"""
+    ...
+
+
+@overload
+def generable(arg: str, /) -> Callable[[Type[object]], Type[Generable]]:
+    """When used with a description: @generable("description")"""
+    ...
+
+
+def generable(
+    arg: Optional[Union[type, str]] = None,
+) -> Union[Type[Generable], Callable[[Type], Type[Generable]]]:
     """
     Decorator that makes a class generable for use with Foundation Models.
 
@@ -34,12 +71,19 @@ def generable(description: Optional[str] = None):
     5. Creates a ``PartiallyGenerated`` inner class for streaming support
     6. Adds required methods for structured generation
 
-    :param description: Optional human-readable description of what this type
-        represents. This description is included in the generation schema and
-        can help guide the model's generation behavior.
-    :type description: Optional[str]
-    :return: A decorator function that transforms the class
-    :rtype: Callable[[Type], Type[Generable]]
+    This decorator can be used with or without parentheses:
+    - ``@fm.generable`` - without parentheses
+    - ``@fm.generable()`` - with empty parentheses
+    - ``@fm.generable("description")`` - with a description
+
+    :param arg: Either a class (when used without parentheses) or an optional
+        human-readable description of what this type represents. This description
+        is included in the generation schema and can help guide the model's
+        generation behavior.
+    :type arg: Optional[Union[type, str]]
+    :return: Either the decorated class (when used without parentheses) or a
+        decorator function (when used with parentheses)
+    :rtype: Union[Type[Generable], Callable[[Type], Type[Generable]]]
 
     Example:
         Basic usage with a dataclass::
@@ -51,6 +95,14 @@ def generable(description: Optional[str] = None):
                 name: str = fm.guide("Cat's name")
                 age: int = fm.guide("Age in years", range=(0, 20))
                 profile: str = fm.guide("What makes this cat unique")
+
+        Usage without parentheses::
+
+            @fm.generable
+            class Dog:
+                name: str
+                breed: str
+
         Using with Session for guided generation::
 
             session = fm.LanguageModelSession()
@@ -79,32 +131,124 @@ def generable(description: Optional[str] = None):
         :class:`Session` for using generable types in generation.
     """
 
-    def decorator(cls) -> type[Generable]:
-        # Convert to dataclass if not already
-        if not hasattr(cls, "__dataclass_fields__"):
-            cls = dataclass(cls)
+    # If arg is a class, we're being used without parentheses: @generable
+    if isinstance(arg, type):
+        return _apply_generable_decorator(arg, description=None)
 
-        # Store generable metadata.
-        # We need _generable as an alternative to protocols for certain dynamic type scenarios.
-        cls._generable = True
-        cls._generable_description = description
+    # Otherwise, we're being used with parentheses: @generable() or @generable("description")
+    description = arg
 
-        cls.generation_schema = classmethod(
-            generation_schema
-        )  # makes schema generation a class method
-
-        # Add ConvertibleFromGeneratedContent support
-        cls._from_generated_content = classmethod(_from_generated_content)
-
-        # Add ConvertibleToGeneratedContent support
-        cls.generated_content = property(generated_content)
-
-        # Create PartiallyGenerated inner class
-        cls.PartiallyGenerated = create_partially_generated(cls)
-
-        return cls
+    def decorator(cls: type) -> type[Generable]:
+        return _apply_generable_decorator(cls, description=description)
 
     return decorator
+
+
+def _apply_generable_decorator(
+    cls: type, description: Optional[str]
+) -> type[Generable]:
+    """
+    Internal function that applies the generable transformation to a class.
+
+    :param cls: The class to transform
+    :param description: Optional description for the generable type
+    :return: The transformed class
+    """
+    # Validate that we're decorating a class
+    if not isinstance(cls, type):
+        raise GenerableDecoratorError(
+            f"@fm.generable can only be applied to classes, not {type(cls).__name__}.\n\n"
+            "Correct usage:\n"
+            "  @fm.generable\n"
+            "  class MyClass:\n"
+            "      field: str\n\n"
+            "Or with a description:\n"
+            "  @fm.generable('A description of MyClass')\n"
+            "  class MyClass:\n"
+            "      field: str"
+        )
+
+    # Validate that the class has type annotations
+    if not hasattr(cls, "__annotations__") or not cls.__annotations__:
+        raise GenerableDecoratorError(
+            f"@fm.generable requires the class '{cls.__name__}' to have type-annotated fields.\n\n"
+            "Correct usage:\n"
+            "  @fm.generable\n"
+            f"  class {cls.__name__}:\n"
+            "      name: str  # Type annotation is required\n"
+            "      age: int   # Type annotation is required\n\n"
+            "Incorrect usage:\n"
+            f"  class {cls.__name__}:\n"
+            "      name = ''  # Missing type annotation\n"
+            "      age = 0    # Missing type annotation"
+        )
+
+    # Convert to dataclass if not already
+    try:
+        if not hasattr(cls, "__dataclass_fields__"):
+            cls = dataclass(cls)
+    except Exception as e:
+        raise GenerableDecoratorError(
+            f"Failed to convert '{cls.__name__}' to a dataclass: {e}\n\n"
+            "The @fm.generable decorator requires classes to be compatible with @dataclass.\n"
+            "Common issues:\n"
+            "  - Fields must have type annotations\n"
+            "  - Mutable default values (like lists or dicts) must use field(default_factory=...)\n"
+            "  - Class must not have conflicting __init__ or other special methods\n\n"
+            "Example of correct usage:\n"
+            "  from dataclasses import field\n"
+            "  import apple_fm_sdk as fm\n\n"
+            "  @fm.generable\n"
+            f"  class {cls.__name__}:\n"
+            "      name: str\n"
+            "      tags: list[str] = field(default_factory=list)  # Use field() for mutable defaults"
+        ) from e
+
+    # Validate field types are supported
+    try:
+        get_type_hints(cls, localns={cls.__name__: cls}, include_extras=True)
+    except Exception as e:
+        raise GenerableDecoratorError(
+            f"Failed to resolve type hints for '{cls.__name__}': {e}\n\n"
+            "This usually happens when:\n"
+            "  - Forward references are not properly quoted\n"
+            "  - Type annotations use undefined types\n"
+            "  - Circular imports prevent type resolution\n\n"
+            "Example of correct usage with forward references:\n"
+            "  @fm.generable\n"
+            f"  class {cls.__name__}:\n"
+            "      name: str\n"
+            "      parent: Optional['MyClass'] = None  # Quote self-references"
+        ) from e
+
+    # Store generable metadata.
+    # We need _generable as an alternative to protocols for certain dynamic type scenarios.
+    cls._generable = True
+    cls._generable_description = description
+
+    cls.generation_schema = classmethod(
+        generation_schema
+    )  # makes schema generation a class method
+
+    # Add ConvertibleFromGeneratedContent support
+    cls._from_generated_content = classmethod(_from_generated_content)
+
+    # Add ConvertibleToGeneratedContent support
+    cls.generated_content = property(generated_content)
+
+    # Create PartiallyGenerated inner class
+    try:
+        cls.PartiallyGenerated = create_partially_generated(cls)
+    except Exception as e:
+        raise GenerableDecoratorError(
+            f"Failed to create PartiallyGenerated class for '{cls.__name__}': {e}\n\n"
+            "This is an internal error. Please ensure:\n"
+            "  - All field types are properly annotated\n"
+            "  - Field types are serializable (str, int, float, bool, list, dict, or other @fm.generable types)\n"
+            "  - No unsupported types like datetime, custom objects without @fm.generable, etc."
+        ) from e
+
+    return cls
 
 
 # MARK: - Schema Helpers
