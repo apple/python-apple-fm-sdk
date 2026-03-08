@@ -265,24 +265,83 @@ private func formatErrorDescription(_ error: Error, function: String = #function
 
 // MARK: - Session response
 
+// Helper function to parse GenerationOptions from JSON
+private func parseGenerationOptions(from jsonString: String?) throws -> GenerationOptions? {
+  guard let jsonString = jsonString, !jsonString.isEmpty else {
+    return nil
+  }
+
+  let data = Data(jsonString.utf8)
+  guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+    throw NSError(
+      domain: "GenerationOptions",
+      code: -1,
+      userInfo: [NSLocalizedDescriptionKey: "Invalid JSON"]
+    )
+  }
+
+  var options = GenerationOptions()
+
+  // Parse sampling mode
+  if let samplingDict = json["sampling"] as? [String: Any],
+    let mode = samplingDict["mode"] as? String
+  {
+    switch mode {
+    case "greedy":
+      options.sampling = .greedy
+    case "random":
+      let seed = samplingDict["seed"] as? UInt64
+      // Swift API supports either topK or probabilityThreshold, not both
+      if let topK = samplingDict["top_k"] as? Int {
+        options.sampling = .random(top: topK, seed: seed)
+      } else if let probabilityThreshold = samplingDict["top_p"] as? Double {
+        options.sampling = .random(probabilityThreshold: probabilityThreshold, seed: seed)
+      }
+    default:
+      break
+    }
+  }
+
+  // Parse temperature
+  if let temperature = json["temperature"] as? Double {
+    options.temperature = temperature
+  }
+
+  // Parse maximum_response_tokens
+  if let maxTokens = json["maximum_response_tokens"] as? Int {
+    options.maximumResponseTokens = maxTokens
+  }
+
+  return options
+}
+
 @_cdecl("FMLanguageModelSessionRespond")
 public func FMLanguageModelSessionRespond(
   session: FMLanguageModelSessionRef,
   prompt: UnsafePointer<CChar>,
+  optionsJSON: UnsafePointer<CChar>?,
   userInfo: UnsafeMutableRawPointer?,
   callback: FMLanguageModelSessionResponseCallback
 ) -> FMTaskRef {
   let session = Unmanaged<LanguageModelSession>.fromOpaque(session).takeUnretainedValue()
   let unsafeSendableUserInfo = UnsafeSendableUserInfo(pointer: userInfo)
 
-  let prompt = String(cString: prompt)
+  let promptString = String(cString: prompt)
+  let optionsJSONString = optionsJSON.map(String.init(cString:))
+
   let task = Task.detached {
     do {
       // Check cancellation at start
       try Task.checkCancellation()
 
-      // Perform the expensive operation
-      let response = try await session.respond(to: prompt)
+      // Parse options if provided
+      let options = try parseGenerationOptions(from: optionsJSONString)
+
+      // Perform the expensive operation with options
+      let response = try await session.respond(
+        to: promptString,
+        options: options ?? GenerationOptions()
+      )
 
       // Check cancellation before callback
       try Task.checkCancellation()
@@ -349,13 +408,22 @@ private final class UnsafeSendableResponseStreamBox<Content: Generable>: @unchec
 @_cdecl("FMLanguageModelSessionStreamResponse")
 public func FMLanguageModelSessionStreamResponse(
   session: FMLanguageModelSessionRef,
-  prompt: UnsafePointer<CChar>
+  prompt: UnsafePointer<CChar>,
+  optionsJSON: UnsafePointer<CChar>?
 ) -> FMLanguageModelSessionResponseStreamRef? {
   let session = Unmanaged<LanguageModelSession>.fromOpaque(session).takeUnretainedValue()
-  let prompt = String(cString: prompt)
-  let stream = session.streamResponse(to: prompt)
-  let box = UnsafeSendableResponseStreamBox<String>(stream: stream, session: session)
-  return FMLanguageModelSessionResponseStreamRef(Unmanaged.passRetained(box).toOpaque())
+  let promptString = String(cString: prompt)
+  let optionsJSONString = optionsJSON.map(String.init(cString:))
+
+  do {
+    let options = try parseGenerationOptions(from: optionsJSONString)
+    let stream = session.streamResponse(to: promptString, options: options ?? GenerationOptions())
+    let box = UnsafeSendableResponseStreamBox<String>(stream: stream, session: session)
+    return FMLanguageModelSessionResponseStreamRef(Unmanaged.passRetained(box).toOpaque())
+  } catch {
+    // If parsing fails, return nil
+    return nil
+  }
 }
 
 @_cdecl("FMLanguageModelSessionResponseStreamIterate")
@@ -439,12 +507,14 @@ public func FMLanguageModelSessionRespondWithSchema(
   session: FMLanguageModelSessionRef,
   prompt: UnsafePointer<CChar>,
   schema: FMGenerationSchemaRef,
+  optionsJSON: UnsafePointer<CChar>?,
   userInfo: UnsafeMutableRawPointer?,
   callback: FMLanguageModelSessionStructuredResponseCallback
 ) -> FMTaskRef {
   let session = Unmanaged<LanguageModelSession>.fromOpaque(session).takeUnretainedValue()
   let promptString = String(cString: prompt)
   let schemaBuilder = Unmanaged<GenerationSchemaBuilder>.fromOpaque(schema).takeUnretainedValue()
+  let optionsJSONString = optionsJSON.map(String.init(cString:))
   let unsafeSendableUserInfo = UnsafeSendableUserInfo(pointer: userInfo)
 
   let task = Task.detached {
@@ -455,9 +525,16 @@ public func FMLanguageModelSessionRespondWithSchema(
       // Build the final schema from the builder
       let finalSchema = try schemaBuilder.buildSchema()
 
+      // Parse options if provided
+      let options = try parseGenerationOptions(from: optionsJSONString)
+
       // Use Foundation Models guided generation API
       try Task.checkCancellation()
-      let response = try await session.respond(to: promptString, schema: finalSchema)
+      let response = try await session.respond(
+        to: promptString,
+        schema: finalSchema,
+        options: options ?? GenerationOptions()
+      )
 
       // Check cancellation before callback
       try Task.checkCancellation()
@@ -502,12 +579,14 @@ public func FMLanguageModelSessionRespondWithSchemaFromJSON(
   session: FMLanguageModelSessionRef,
   prompt: UnsafePointer<CChar>,
   jsonSchema: UnsafePointer<CChar>,
+  optionsJSON: UnsafePointer<CChar>?,
   userInfo: UnsafeMutableRawPointer?,
   callback: FMLanguageModelSessionStructuredResponseCallback
 ) -> FMTaskRef {
   let session = Unmanaged<LanguageModelSession>.fromOpaque(session).takeUnretainedValue()
   let promptString = String(cString: prompt)
   let jsonSchemaString = String(cString: jsonSchema)
+  let optionsJSONString = optionsJSON.map(String.init(cString:))
   let unsafeSendableUserInfo = UnsafeSendableUserInfo(pointer: userInfo)
 
   let task = Task.detached {
@@ -521,8 +600,15 @@ public func FMLanguageModelSessionRespondWithSchemaFromJSON(
         from: Data(jsonSchemaString.utf8)
       )
 
+      // Parse options if provided
+      let options = try parseGenerationOptions(from: optionsJSONString)
+
       try Task.checkCancellation()
-      let response = try await session.respond(to: promptString, schema: schema)
+      let response = try await session.respond(
+        to: promptString,
+        schema: schema,
+        options: options ?? GenerationOptions()
+      )
 
       // Check cancellation before callback
       try Task.checkCancellation()

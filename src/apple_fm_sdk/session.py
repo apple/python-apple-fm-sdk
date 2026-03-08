@@ -17,6 +17,7 @@ from .core import SystemLanguageModel
 from .tool import Tool
 from .generable import Generable, GeneratedContent
 from .generation_schema import GenerationSchema
+from .generation_options import GenerationOptions
 import threading
 import queue
 from typing import Any, Optional, AsyncIterator, Type, Union, overload
@@ -291,23 +292,45 @@ class LanguageModelSession(_ManagedObject):
         lib.FMLanguageModelSessionReset(self._ptr)
 
     @overload  # This overload helps the type checker understand the return type
-    async def respond(self, prompt: Prompt) -> str: ...
+    async def respond(
+        self, prompt: Prompt, *, options: Optional[GenerationOptions] = None
+    ) -> str: ...
 
     @overload  # This overload helps the type checker understand the return type
     async def respond(
-        self, prompt: Prompt, *, generating: type[Generable]
+        self,
+        prompt: Prompt,
+        *,
+        generating: type[Generable],
+        options: Optional[GenerationOptions] = None,
     ) -> Type[Any]: ...
 
     @overload  # This overload helps the type checker understand the return type
-    async def respond(self, prompt: Prompt, *, generating: Generable) -> Type[Any]: ...
+    async def respond(
+        self,
+        prompt: Prompt,
+        *,
+        generating: Generable,
+        options: Optional[GenerationOptions] = None,
+    ) -> Type[Any]: ...
 
     @overload  # This overload helps the type checker understand the return type
     async def respond(
-        self, prompt: Prompt, *, schema: GenerationSchema
+        self,
+        prompt: Prompt,
+        *,
+        schema: GenerationSchema,
+        options: Optional[GenerationOptions] = None,
     ) -> GeneratedContent: ...
 
     @overload  # This overload helps the type checker understand the return type
-    async def respond(self, prompt: str, *, json_schema: dict) -> GeneratedContent: ...
+    async def respond(
+        self,
+        prompt: str,
+        *,
+        json_schema: dict,
+        options: Optional[GenerationOptions] = None,
+    ) -> GeneratedContent: ...
 
     async def respond(
         self,
@@ -316,6 +339,7 @@ class LanguageModelSession(_ManagedObject):
         *,
         schema: Optional[GenerationSchema] = None,
         json_schema: Optional[dict] = None,
+        options: Optional[GenerationOptions] = None,
     ) -> Union[str, Any, GeneratedContent]:
         """Get a response to a prompt with optional guided generation.
 
@@ -341,6 +365,10 @@ class LanguageModelSession(_ManagedObject):
         :param json_schema: Optional JSON schema dictionary for guided generation. The schema
             should follow JSON Schema specification.
         :type json_schema: Optional[dict]
+        :param options: Optional GenerationOptions to control generation behavior such as
+            temperature, sampling mode, and maximum response tokens. These options apply
+            to this specific request and override any session-level defaults.
+        :type options: Optional[GenerationOptions]
         :return: Plain text response if no generation constraints are specified, or
             instance of generating type if ``generating`` parameter is provided, or
             structured content if ``schema`` or ``json_schema`` is provided
@@ -392,6 +420,25 @@ class LanguageModelSession(_ManagedObject):
                 )
                 print(response2)
 
+            Using generation options::
+
+                import apple_fm_sdk as fm
+
+                session = fm.LanguageModelSession()
+
+                # Control generation with custom options
+                options = fm.GenerationOptions(
+                    temperature=0.7,
+                    sampling=fm.SamplingMode.random(top=50, seed=42),
+                    maximum_response_tokens=500
+                )
+
+                response = await session.respond(
+                    "Write a creative story",
+                    options=options
+                )
+                print(response)
+
         Note:
             - Only one of ``generating``, ``schema``, or ``json_schema`` can be specified
             - The session maintains session context across multiple ``respond()`` calls
@@ -425,20 +472,25 @@ class LanguageModelSession(_ManagedObject):
 
         # Handle guided generation with explicit schema
         if schema is not None:
-            return await self._respond_with_schema(prompt, schema)
+            return await self._respond_with_schema(prompt, schema, options)
 
         # Handle guided generation from raw JSON schema string
         if json_schema is not None:
-            return await self._respond_with_schema_from_json(prompt, json_schema)
+            return await self._respond_with_schema_from_json(
+                prompt, json_schema, options
+            )
 
         # Handle basic text response
-        return await self._respond_basic(prompt)
+        return await self._respond_basic(prompt, options)
 
-    async def _respond_basic(self, prompt: str) -> str:
+    async def _respond_basic(
+        self, prompt: str, options: Optional[GenerationOptions] = None
+    ) -> str:
         """Get a complete basic text response to a prompt.
 
         Args:
             prompt: The input prompt
+            options: Optional generation options
 
         Returns:
             The complete response text
@@ -455,10 +507,15 @@ class LanguageModelSession(_ManagedObject):
 
             prompt_bytes = prompt.encode("utf-8")
 
+            # Convert options to JSON if provided
+            options_json = None
+            if options is not None:
+                options_json = json.dumps(options.to_dict()).encode("utf-8")
+
             future_handle = _register_handle(future)
 
             task = lib.FMLanguageModelSessionRespond(
-                self._ptr, prompt_bytes, future_handle, _session_callback
+                self._ptr, prompt_bytes, options_json, future_handle, _session_callback
             )
 
             # Store active task reference
@@ -494,7 +551,10 @@ class LanguageModelSession(_ManagedObject):
             return future.result()
 
     async def _respond_with_schema(
-        self, prompt: str, schema: GenerationSchema
+        self,
+        prompt: str,
+        schema: GenerationSchema,
+        options: Optional[GenerationOptions] = None,
     ) -> GeneratedContent:
         """Internal method for guided generation using a GenerationSchema."""
         # Acquire lock to prevent concurrent requests
@@ -504,6 +564,11 @@ class LanguageModelSession(_ManagedObject):
 
             prompt_bytes = prompt.encode("utf-8")
 
+            # Convert options to JSON if provided
+            options_json = None
+            if options is not None:
+                options_json = json.dumps(options.to_dict()).encode("utf-8")
+
             future_handle = _register_handle(future)
 
             # Always use the proper C binding for guided generation
@@ -511,6 +576,7 @@ class LanguageModelSession(_ManagedObject):
                 self._ptr,
                 prompt_bytes,
                 schema._ptr,
+                options_json,
                 future_handle,
                 _session_structured_callback,
             )
@@ -552,7 +618,10 @@ class LanguageModelSession(_ManagedObject):
             return future.result()
 
     async def _respond_with_schema_from_json(
-        self, prompt: str, json_schema: dict
+        self,
+        prompt: str,
+        json_schema: dict,
+        options: Optional[GenerationOptions] = None,
     ) -> GeneratedContent:
         """Internal method for guided generation using a JSON schema string."""
         # Acquire lock to prevent concurrent requests
@@ -563,6 +632,11 @@ class LanguageModelSession(_ManagedObject):
             prompt_bytes = prompt.encode("utf-8")
             json_schema_bytes = json.dumps(json_schema).encode("utf-8")
 
+            # Convert options to JSON if provided
+            options_json = None
+            if options is not None:
+                options_json = json.dumps(options.to_dict()).encode("utf-8")
+
             future_handle = _register_handle(future)
 
             # Use the C binding for guided generation with JSON schema
@@ -570,6 +644,7 @@ class LanguageModelSession(_ManagedObject):
                 self._ptr,
                 prompt_bytes,
                 json_schema_bytes,
+                options_json,
                 future_handle,
                 _session_structured_callback,
             )
@@ -610,7 +685,9 @@ class LanguageModelSession(_ManagedObject):
 
             return future.result()
 
-    async def stream_response(self, prompt: Prompt) -> AsyncIterator:
+    async def stream_response(
+        self, prompt: Prompt, options: Optional[GenerationOptions] = None
+    ) -> AsyncIterator:
         """Stream response chunks for a prompt (text only).
 
         This function provides real-time streaming of the model's response, yielding text
@@ -627,6 +704,10 @@ class LanguageModelSession(_ManagedObject):
 
         :param prompt: The input prompt string to send to the model
         :type prompt: str
+        :param options: Optional GenerationOptions to control generation behavior such as
+            temperature, sampling mode, and maximum response tokens. These options apply
+            to this specific request and override any session-level defaults.
+        :type options: Optional[GenerationOptions]
         :yields: Progressive snapshots of the response text. Each snapshot contains
             the full text generated so far, rather than only the new tokens.
         :ytype: str
@@ -641,6 +722,21 @@ class LanguageModelSession(_ManagedObject):
                 session = fm.LanguageModelSession()
 
                 async for chunk in session.stream_response("Tell me a story"):
+                    print(chunk, end="", flush=True)
+
+            Streaming with options::
+
+                import apple_fm_sdk as fm
+
+                session = fm.LanguageModelSession()
+
+                options = fm.GenerationOptions(
+                    temperature=0.8,
+                    sampling=fm.SamplingMode.random(top=50),
+                    maximum_response_tokens=1000
+                )
+
+                async for chunk in session.stream_response("Write a creative story", options=options):
                     print(chunk, end="", flush=True)
 
             Cancelling a stream::
@@ -686,14 +782,17 @@ class LanguageModelSession(_ManagedObject):
             - :meth:`respond`: For non-streaming responses with guided generation support
         """
         # Handle basic text streaming only
-        async for chunk in self._stream_response_basic(prompt):
+        async for chunk in self._stream_response_basic(prompt, options):
             yield chunk
 
-    async def _stream_response_basic(self, prompt: Prompt) -> AsyncIterator[str]:
+    async def _stream_response_basic(
+        self, prompt: Prompt, options: Optional[GenerationOptions] = None
+    ) -> AsyncIterator[str]:
         """Stream basic text response chunks for a prompt.
 
         Args:
             prompt: The input prompt
+            options: Optional generation options
 
         Yields:
             Response text snapshots as they become available
@@ -704,8 +803,14 @@ class LanguageModelSession(_ManagedObject):
 
         def _start_stream():
             prompt_bytes = prompt.encode("utf-8")
+
+            # Convert options to JSON if provided
+            options_json = None
+            if options is not None:
+                options_json = json.dumps(options.to_dict()).encode("utf-8")
+
             stream_ptr = lib.FMLanguageModelSessionStreamResponse(
-                self._ptr, prompt_bytes
+                self._ptr, prompt_bytes, options_json
             )
             stream_ptr_holder[0] = stream_ptr  # Store for cleanup
 

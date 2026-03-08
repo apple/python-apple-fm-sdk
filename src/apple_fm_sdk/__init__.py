@@ -47,6 +47,8 @@ from .generable_utils import generable
 
 from .generation_guide import GenerationGuide, GuideType, guide
 
+from .generation_options import GenerationOptions, SamplingMode, SamplingModeType
+
 from .tool import Tool
 
 __version__ = "0.1.0"
@@ -78,6 +80,9 @@ __all__ = [
     "GeneratedContent",
     "GenerationGuide",
     "GuideType",
+    "GenerationOptions",
+    "SamplingMode",
+    "SamplingModeType",
     "GenerationID",
     "ConvertibleFromGeneratedContent",
     "ConvertibleToGeneratedContent",
