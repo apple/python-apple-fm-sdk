@@ -171,6 +171,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="systemmodel.html">SystemLanguageModel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generation_options.html">Generation Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generable.html">Generable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transcript.html">Transcript</a></li>
@@ -339,67 +340,28 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-exceptions">Base Exceptions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foundationmodelserror">FoundationModelsError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.FoundationModelsError"><code class="docutils literal notranslate"><span class="pre">FoundationModelsError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foundationmodelserror">FoundationModelsError</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-errors">Generation Errors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generationerror">GenerationError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationError"><code class="docutils literal notranslate"><span class="pre">GenerationError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceededcontextwindowsizeerror">ExceededContextWindowSizeError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.ExceededContextWindowSizeError"><code class="docutils literal notranslate"><span class="pre">ExceededContextWindowSizeError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assetsunavailableerror">AssetsUnavailableError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.AssetsUnavailableError"><code class="docutils literal notranslate"><span class="pre">AssetsUnavailableError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guardrailviolationerror">GuardrailViolationError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GuardrailViolationError"><code class="docutils literal notranslate"><span class="pre">GuardrailViolationError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedguideerror">UnsupportedGuideError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.UnsupportedGuideError"><code class="docutils literal notranslate"><span class="pre">UnsupportedGuideError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedlanguageorlocaleerror">UnsupportedLanguageOrLocaleError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.UnsupportedLanguageOrLocaleError"><code class="docutils literal notranslate"><span class="pre">UnsupportedLanguageOrLocaleError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decodingfailureerror">DecodingFailureError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.DecodingFailureError"><code class="docutils literal notranslate"><span class="pre">DecodingFailureError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ratelimitederror">RateLimitedError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.RateLimitedError"><code class="docutils literal notranslate"><span class="pre">RateLimitedError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrentrequestserror">ConcurrentRequestsError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.ConcurrentRequestsError"><code class="docutils literal notranslate"><span class="pre">ConcurrentRequestsError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refusalerror">RefusalError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.RefusalError"><code class="docutils literal notranslate"><span class="pre">RefusalError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generationerror">GenerationError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceededcontextwindowsizeerror">ExceededContextWindowSizeError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assetsunavailableerror">AssetsUnavailableError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guardrailviolationerror">GuardrailViolationError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedguideerror">UnsupportedGuideError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedlanguageorlocaleerror">UnsupportedLanguageOrLocaleError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decodingfailureerror">DecodingFailureError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ratelimitederror">RateLimitedError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrentrequestserror">ConcurrentRequestsError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refusalerror">RefusalError</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-errors">Schema Errors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invalidgenerationschemaerror">InvalidGenerationSchemaError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.InvalidGenerationSchemaError"><code class="docutils literal notranslate"><span class="pre">InvalidGenerationSchemaError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invalidgenerationschemaerror">InvalidGenerationSchemaError</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tool-errors">Tool Errors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolcallerror">ToolCallError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.ToolCallError"><code class="docutils literal notranslate"><span class="pre">ToolCallError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolcallerror">ToolCallError</a></li>
 </ul>
 </li>
 </ul>
@@ -428,188 +390,51 @@ and does not have a direct Swift equivalent since it means a schema failed to co
 <h2>Base Exceptions<a class="headerlink" href="#base-exceptions" title="Link to this heading">#</a></h2>
 <section id="foundationmodelserror">
 <h3>FoundationModelsError<a class="headerlink" href="#foundationmodelserror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.FoundationModelsError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">FoundationModelsError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#FoundationModelsError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.FoundationModelsError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
-<p>Base exception for Foundation Models errors.</p>
-<p>Base exception for all Foundation Models SDK errors.</p>
-</dd></dl>
-
 </section>
 </section>
 <section id="generation-errors">
 <h2>Generation Errors<a class="headerlink" href="#generation-errors" title="Link to this heading">#</a></h2>
 <section id="generationerror">
 <h3>GenerationError<a class="headerlink" href="#generationerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">GenerationError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#GenerationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GenerationError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.errors.FoundationModelsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">FoundationModelsError</span></code></a></p>
-<p>Base class for generation-specific errors.</p>
-<p>Base class for errors that occur during text generation.</p>
-</dd></dl>
-
 </section>
 <section id="exceededcontextwindowsizeerror">
 <h3>ExceededContextWindowSizeError<a class="headerlink" href="#exceededcontextwindowsizeerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.ExceededContextWindowSizeError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">ExceededContextWindowSizeError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#ExceededContextWindowSizeError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.ExceededContextWindowSizeError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when the context window size is exceeded.</p>
-<p>Raised when the input exceeds the model’s context window size.</p>
-</dd></dl>
-
 </section>
 <section id="assetsunavailableerror">
 <h3>AssetsUnavailableError<a class="headerlink" href="#assetsunavailableerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.AssetsUnavailableError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">AssetsUnavailableError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#AssetsUnavailableError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.AssetsUnavailableError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when required assets are unavailable.</p>
-<p>Raised when required model assets are not available.</p>
-</dd></dl>
-
 </section>
 <section id="guardrailviolationerror">
 <h3>GuardrailViolationError<a class="headerlink" href="#guardrailviolationerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.GuardrailViolationError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">GuardrailViolationError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#GuardrailViolationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GuardrailViolationError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when a guardrail violation occurs.</p>
-<p>Raised when content violates safety guardrails. For more on the guardrails, see the Swift
-reference article on <code class="docutils literal notranslate"><span class="pre">SystemLanguageModel</span></code> safety meansures: <a class="reference external" href="https://developer.apple.com/documentation/foundationmodels/improving-the-safety-of-generative-model-output">Improving the safety of generative model output</a>.</p>
-</dd></dl>
-
 </section>
 <section id="unsupportedguideerror">
 <h3>UnsupportedGuideError<a class="headerlink" href="#unsupportedguideerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.UnsupportedGuideError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">UnsupportedGuideError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#UnsupportedGuideError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.UnsupportedGuideError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when an unsupported guide is used.</p>
-<p>Raised when an unsupported guide constraint is used.</p>
-</dd></dl>
-
 </section>
 <section id="unsupportedlanguageorlocaleerror">
 <h3>UnsupportedLanguageOrLocaleError<a class="headerlink" href="#unsupportedlanguageorlocaleerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.UnsupportedLanguageOrLocaleError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">UnsupportedLanguageOrLocaleError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#UnsupportedLanguageOrLocaleError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.UnsupportedLanguageOrLocaleError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when an unsupported language or locale is used.</p>
-<p>Raised when the requested language or locale is not supported.</p>
-</dd></dl>
-
 </section>
 <section id="decodingfailureerror">
 <h3>DecodingFailureError<a class="headerlink" href="#decodingfailureerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.DecodingFailureError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">DecodingFailureError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#DecodingFailureError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.DecodingFailureError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when decoding fails.</p>
-<p>Raised when decoding the model’s output fails.</p>
-</dd></dl>
-
 </section>
 <section id="ratelimitederror">
 <h3>RateLimitedError<a class="headerlink" href="#ratelimitederror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.RateLimitedError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">RateLimitedError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#RateLimitedError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.RateLimitedError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when rate limited.</p>
-<p>Raised when rate limits are exceeded. Rate limits do not apply to the
-on-device <code class="docutils literal notranslate"><span class="pre">SystemLanguageModel</span></code> on macOS so you should not encounter this error.</p>
-</dd></dl>
-
 </section>
 <section id="concurrentrequestserror">
 <h3>ConcurrentRequestsError<a class="headerlink" href="#concurrentrequestserror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.ConcurrentRequestsError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">ConcurrentRequestsError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#ConcurrentRequestsError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.ConcurrentRequestsError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when there are too many concurrent requests.</p>
-<p>Raised when too many concurrent requests are made. The python SDK does
-not enforce concurrency limits so you should not encounter this error.</p>
-</dd></dl>
-
 </section>
 <section id="refusalerror">
 <h3>RefusalError<a class="headerlink" href="#refusalerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.RefusalError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">RefusalError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#RefusalError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.RefusalError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.GenerationError" title="apple_fm_sdk.errors.GenerationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationError</span></code></a></p>
-<p>Error thrown when the model refuses to generate content.</p>
-<p>Raised when the model refuses to generate a response _specifically_ for
-safety reasons on a generable output. For more on refusals, see the Swift
-reference article on <code class="docutils literal notranslate"><span class="pre">SystemLanguageModel</span></code> safety meansures: <a class="reference external" href="https://developer.apple.com/documentation/foundationmodels/improving-the-safety-of-generative-model-output">Improving the safety of generative model output</a>.</p>
-<p><strong>Attributes:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">reason</span></code> (str): The reason for refusal</p></li>
-</ul>
-</dd></dl>
-
 </section>
 </section>
 <section id="schema-errors">
 <h2>Schema Errors<a class="headerlink" href="#schema-errors" title="Link to this heading">#</a></h2>
 <section id="invalidgenerationschemaerror">
 <h3>InvalidGenerationSchemaError<a class="headerlink" href="#invalidgenerationschemaerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.InvalidGenerationSchemaError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">InvalidGenerationSchemaError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#InvalidGenerationSchemaError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.InvalidGenerationSchemaError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.errors.FoundationModelsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">FoundationModelsError</span></code></a></p>
-<p>Error thrown when a generation schema is invalid.</p>
-<p>Raised when a generation schema is invalid. This means the schema failed
-to compile in the underlying Swift code and most commonly occurs if you
-give an invalid json schema to the <code class="docutils literal notranslate"><span class="pre">json_schema</span></code> parameter of the <code class="docutils literal notranslate"><span class="pre">respond()</span></code> method.
-This error may also occur if you use the <code class="docutils literal notranslate"><span class="pre">&#64;generable</span></code> decorator on a class with
-properties that cannot be serialized to a json schema.</p>
-<p>To validate if your json schema is valid, run the following code snippet in <strong>Swift</strong>:</p>
-<div class="highlight-swift notranslate"><div class="highlight"><pre><span></span><span class="kd">import</span><span class="w"> </span><span class="nc">FoundationModels</span>
-
-<span class="n">jsonSchemaString</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="w">  </span><span class="c1">// Your JSON schema as a string</span>
-
-<span class="kd">let</span><span class="w"> </span><span class="nv">schema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="n">JSONDecoder</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span>
-<span class="w">  </span><span class="n">GenerationSchema</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span>
-<span class="w">  </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">jsonSchemaString</span><span class="p">.</span><span class="n">utf8</span><span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>The code above is the same validation step used in the Python SDK, so if it runs
-without throwing an error, your schema is valid.</p>
-<p>For examples of what valid json schemas look like, see the tester schemas in the Github repo,
-such as <code class="docutils literal notranslate"><span class="pre">tests/tester_schemas/hedgehog.json</span></code>.</p>
-</dd></dl>
-
 </section>
 </section>
 <section id="tool-errors">
 <h2>Tool Errors<a class="headerlink" href="#tool-errors" title="Link to this heading">#</a></h2>
 <section id="toolcallerror">
 <h3>ToolCallError<a class="headerlink" href="#toolcallerror" title="Link to this heading">#</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.ToolCallError">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">ToolCallError</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/errors.html#ToolCallError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.ToolCallError" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.errors.FoundationModelsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">FoundationModelsError</span></code></a></p>
-<p>Error thrown when a tool call fails.</p>
-<p>Raised when a <code class="docutils literal notranslate"><span class="pre">Tool</span></code> call fails.</p>
-<p><strong>Attributes:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">tool_name</span></code> (str): Name of the tool that failed</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">underlying_error</span></code> (Exception): The original exception</p></li>
-</ul>
-</dd></dl>
-
 </section>
 </section>
 </section>
@@ -651,67 +476,28 @@ such as <code class="docutils literal notranslate"><span class="pre">tests/teste
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-exceptions">Base Exceptions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foundationmodelserror">FoundationModelsError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.FoundationModelsError"><code class="docutils literal notranslate"><span class="pre">FoundationModelsError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foundationmodelserror">FoundationModelsError</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-errors">Generation Errors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generationerror">GenerationError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationError"><code class="docutils literal notranslate"><span class="pre">GenerationError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceededcontextwindowsizeerror">ExceededContextWindowSizeError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.ExceededContextWindowSizeError"><code class="docutils literal notranslate"><span class="pre">ExceededContextWindowSizeError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assetsunavailableerror">AssetsUnavailableError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.AssetsUnavailableError"><code class="docutils literal notranslate"><span class="pre">AssetsUnavailableError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guardrailviolationerror">GuardrailViolationError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GuardrailViolationError"><code class="docutils literal notranslate"><span class="pre">GuardrailViolationError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedguideerror">UnsupportedGuideError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.UnsupportedGuideError"><code class="docutils literal notranslate"><span class="pre">UnsupportedGuideError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedlanguageorlocaleerror">UnsupportedLanguageOrLocaleError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.UnsupportedLanguageOrLocaleError"><code class="docutils literal notranslate"><span class="pre">UnsupportedLanguageOrLocaleError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decodingfailureerror">DecodingFailureError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.DecodingFailureError"><code class="docutils literal notranslate"><span class="pre">DecodingFailureError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ratelimitederror">RateLimitedError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.RateLimitedError"><code class="docutils literal notranslate"><span class="pre">RateLimitedError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrentrequestserror">ConcurrentRequestsError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.ConcurrentRequestsError"><code class="docutils literal notranslate"><span class="pre">ConcurrentRequestsError</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refusalerror">RefusalError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.RefusalError"><code class="docutils literal notranslate"><span class="pre">RefusalError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generationerror">GenerationError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceededcontextwindowsizeerror">ExceededContextWindowSizeError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assetsunavailableerror">AssetsUnavailableError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guardrailviolationerror">GuardrailViolationError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedguideerror">UnsupportedGuideError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupportedlanguageorlocaleerror">UnsupportedLanguageOrLocaleError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decodingfailureerror">DecodingFailureError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ratelimitederror">RateLimitedError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrentrequestserror">ConcurrentRequestsError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refusalerror">RefusalError</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-errors">Schema Errors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invalidgenerationschemaerror">InvalidGenerationSchemaError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.InvalidGenerationSchemaError"><code class="docutils literal notranslate"><span class="pre">InvalidGenerationSchemaError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invalidgenerationschemaerror">InvalidGenerationSchemaError</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tool-errors">Tool Errors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolcallerror">ToolCallError</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.ToolCallError"><code class="docutils literal notranslate"><span class="pre">ToolCallError</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolcallerror">ToolCallError</a></li>
 </ul>
 </li>
 </ul>

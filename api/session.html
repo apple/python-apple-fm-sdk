@@ -48,7 +48,7 @@
     <link rel="icon" href="../_static/foundation-models-framework-logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Generable" href="generable.html" />
+    <link rel="next" title="Generation Options" href="generation_options.html" />
     <link rel="prev" title="SystemLanguageModel" href="systemmodel.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,6 +172,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="systemmodel.html">SystemLanguageModel</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generation_options.html">Generation Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generable.html">Generable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transcript.html">Transcript</a></li>
@@ -339,16 +340,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">LanguageModelSession</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession"><code class="docutils literal notranslate"><span class="pre">LanguageModelSession</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.is_responding"><code class="docutils literal notranslate"><span class="pre">is_responding</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.respond"><code class="docutils literal notranslate"><span class="pre">respond()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.stream_response"><code class="docutils literal notranslate"><span class="pre">stream_response()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">LanguageModelSession</a></li>
 </ul>
             </nav>
         </div>
@@ -369,336 +361,6 @@ document.write(`
 </div>
 <section id="id2">
 <h2>LanguageModelSession<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.LanguageModelSession">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">LanguageModelSession</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/session.html#LanguageModelSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.LanguageModelSession" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ManagedObject</span></code></p>
-<p>Represents a language model session for foundation model interactions.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">LanguageModelSession</span></code> manages the lifecycle of a session with a foundation model,
-maintaining session history (transcript), handling tool calls, and providing both
-synchronous and streaming response capabilities.</p>
-<p>The session is thread-safe for sequential requests but does not support concurrent
-requests. If a request is in progress, attempting another request will wait for the
-first to complete.</p>
-<p><strong>Session Lifecycle:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Creation</strong>: Initialize with optional instructions, model configuration, and tools</p></li>
-<li><p><strong>Active Use</strong>: Make requests via <code class="docutils literal notranslate"><span class="pre">respond()</span></code> or <code class="docutils literal notranslate"><span class="pre">stream_response()</span></code></p></li>
-<li><p><strong>Cleanup</strong>: Automatically handled via context manager or explicit cleanup</p></li>
-</ol>
-<p><strong>Concurrent Request Handling:</strong></p>
-<p>Sessions use an internal lock to prevent concurrent requests. If you need to handle
-multiple requests simultaneously, create multiple session instances.</p>
-<div class="admonition-examples admonition">
-<p class="admonition-title">Examples</p>
-<p>Basic session creation and usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="c1"># Create a simple session</span>
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;Hello, how are you?&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Session with instructions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="c1"># Guide the model&#39;s behavior with instructions</span>
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">(</span>
-    <span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;You are a helpful bird expert. Provide concise, &quot;</span>
-                <span class="s2">&quot;accurate information about birds.&quot;</span>
-<span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;What is a Swift?&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Session with custom model and tools:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">my_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalculatorTool</span><span class="p">,</span> <span class="n">WeatherTool</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">(</span>
-    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-    <span class="n">top_p</span><span class="o">=</span><span class="mf">0.9</span>
-<span class="p">)</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">(</span>
-    <span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant with access to tools.&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">CalculatorTool</span><span class="p">(),</span> <span class="n">WeatherTool</span><span class="p">()]</span>
-<span class="p">)</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;What&#39;s the weather like in Cupertino?&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="systemmodel.html#apple_fm_sdk.SystemLanguageModel" title="apple_fm_sdk.core.SystemLanguageModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemLanguageModel</span></code></a>: For model configuration</p></li>
-<li><p><a class="reference internal" href="tools.html#apple_fm_sdk.Tool" title="apple_fm_sdk.tool.Tool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tool</span></code></a>: For creating custom tools</p></li>
-<li><p><a class="reference internal" href="transcript.html#apple_fm_sdk.transcript.Transcript" title="apple_fm_sdk.transcript.Transcript"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transcript</span></code></a>: For accessing session history</p></li>
-</ul>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.LanguageModelSession.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instructions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tools</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/session.html#LanguageModelSession.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.LanguageModelSession.__init__" title="Link to this definition">#</a></dt>
-<dd><p>Create a language model session.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>instructions</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Optional system instructions to guide the model’s behavior throughout
-the session. These instructions persist across all requests in the session.
-Example: “You are a helpful coding assistant.”</p></li>
-<li><p><strong>model</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="systemmodel.html#apple_fm_sdk.SystemLanguageModel" title="apple_fm_sdk.SystemLanguageModel"><em>SystemLanguageModel</em></a><em>]</em>) – Optional specialized system model configuration. If not provided, uses default
-SystemLanguageModel() with standard settings. Use this to customize temperature,
-top_p, and other generation parameters.</p></li>
-<li><p><strong>tools</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference internal" href="tools.html#apple_fm_sdk.Tool" title="apple_fm_sdk.Tool"><em>Tool</em></a><em>]</em><em>]</em>) – Optional list of Tool instances that the model can invoke during generation.
-Tools enable the model to perform actions like calculations, API calls, or
-database queries. The model will automatically decide when to use tools based
-on the session context.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="errors.html#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.FoundationModelsError"><strong>FoundationModelsError</strong></a> – If session creation fails</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The session maintains a transcript of all interactions, which can be accessed
-via the <code class="docutils literal notranslate"><span class="pre">transcript</span></code> property. This transcript is automatically updated after
-each request.</p>
-</div>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="apple_fm_sdk.LanguageModelSession.is_responding">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_responding</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#apple_fm_sdk.LanguageModelSession.is_responding" title="Link to this definition">#</a></dt>
-<dd><p>Check if the session is currently responding to a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>True if the session is currently processing a request, False otherwise</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.LanguageModelSession.respond">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/apple_fm_sdk/session.html#LanguageModelSession.respond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.LanguageModelSession.respond" title="Link to this definition">#</a></dt>
-<dt class="sig sig-object py">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">generating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.14)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="generable.html#apple_fm_sdk.Generable" title="apple_fm_sdk.generable.Generable"><span class="pre">Generable</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span></dt>
-<dt class="sig sig-object py">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">generating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generable.html#apple_fm_sdk.Generable" title="apple_fm_sdk.generable.Generable"><span class="pre">Generable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span></dt>
-<dt class="sig sig-object py">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generable.html#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.generation_schema.GenerationSchema"><span class="pre">GenerationSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="generable.html#apple_fm_sdk.GeneratedContent" title="apple_fm_sdk.generable.GeneratedContent"><span class="pre">GeneratedContent</span></a></span></span></dt>
-<dt class="sig sig-object py">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">respond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="generable.html#apple_fm_sdk.GeneratedContent" title="apple_fm_sdk.generable.GeneratedContent"><span class="pre">GeneratedContent</span></a></span></span></dt>
-<dd><p>Get a response to a prompt with optional guided generation.</p>
-<p>This function supports multiple response modes:</p>
-<ol class="arabic simple">
-<li><p><strong>Basic text response</strong>: Returns a plain string</p></li>
-<li><p><strong>Guided generation with Generable</strong>: Returns a typed Python object</p></li>
-<li><p><strong>Guided generation with schema</strong>: Returns structured GeneratedContent</p></li>
-<li><p><strong>Guided generation with JSON schema</strong>: Returns structured GeneratedContent</p></li>
-</ol>
-<p>The session automatically updates its transcript after each response, maintaining
-the full session history.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>prompt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The input prompt string to send to the model</p></li>
-<li><p><strong>generating</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="generable.html#apple_fm_sdk.Generable" title="apple_fm_sdk.Generable"><em>Generable</em></a><em>]</em><em>, </em><a class="reference internal" href="generable.html#apple_fm_sdk.Generable" title="apple_fm_sdk.Generable"><em>Generable</em></a><em>]</em><em>]</em>) – Optional Generable type or instance for type-safe guided generation.
-When provided, the response will be constrained to match the structure of
-the Generable type and automatically converted to an instance of that type.</p></li>
-<li><p><strong>schema</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="generable.html#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.GenerationSchema"><em>GenerationSchema</em></a><em>]</em>) – Optional GenerationSchema for explicit schema-based guided generation.
-Use this for custom schemas that don’t map to a Generable type.</p></li>
-<li><p><strong>json_schema</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>]</em>) – Optional JSON schema dictionary for guided generation. The schema
-should follow JSON Schema specification.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Plain text response if no generation constraints are specified, or
-instance of generating type if <code class="docutils literal notranslate"><span class="pre">generating</span></code> parameter is provided, or
-structured content if <code class="docutils literal notranslate"><span class="pre">schema</span></code> or <code class="docutils literal notranslate"><span class="pre">json_schema</span></code> is provided</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, Any, <a class="reference internal" href="generable.html#apple_fm_sdk.GeneratedContent" title="apple_fm_sdk.GeneratedContent">GeneratedContent</a>]</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="errors.html#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.FoundationModelsError"><strong>FoundationModelsError</strong></a> – If the response fails or times out</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If both <code class="docutils literal notranslate"><span class="pre">generating</span></code> and <code class="docutils literal notranslate"><span class="pre">schema</span></code> are provided, or if the
-generating type is not a valid Generable</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/asyncio-exceptions.html#asyncio.CancelledError" title="(in Python v3.14)"><strong>asyncio.CancelledError</strong></a> – If the request is cancelled</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition-examples admonition">
-<p class="admonition-title">Examples</p>
-<dl class="simple">
-<dt>Basic text response::</dt><dd><p>import apple_fm_sdk as fm
-session = fm.LanguageModelSession()
-response = await session.respond(“What is the capital of France?”)
-print(response)  # Plain string response</p>
-</dd>
-</dl>
-<p>Guided generation with Generable type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="nd">@fm</span><span class="o">.</span><span class="n">generable</span><span class="p">()</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">:</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-<span class="n">cat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-    <span class="s2">&quot;Generate a cat named Maomao&quot;</span><span class="p">,</span>
-    <span class="n">generating</span><span class="o">=</span><span class="n">Cat</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cat</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">cat</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Multi-turn session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">(</span>
-    <span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;You are a helpful expert on architecture.&quot;</span>
-<span class="p">)</span>
-
-<span class="c1"># First turn</span>
-<span class="n">response1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;What is the tallest building in the world?&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">response1</span><span class="p">)</span>
-
-<span class="c1"># Second turn - context is maintained</span>
-<span class="n">response2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-    <span class="s2">&quot;What&#39;s the architectural style of that building?&quot;</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">response2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>Only one of <code class="docutils literal notranslate"><span class="pre">generating</span></code>, <code class="docutils literal notranslate"><span class="pre">schema</span></code>, or <code class="docutils literal notranslate"><span class="pre">json_schema</span></code> can be specified</p></li>
-<li><p>The session maintains session context across multiple <code class="docutils literal notranslate"><span class="pre">respond()</span></code> calls</p></li>
-<li><p>Concurrent calls to <code class="docutils literal notranslate"><span class="pre">respond()</span></code> on the same session will be serialized</p></li>
-<li><p>For streaming responses, use <a class="reference internal" href="#apple_fm_sdk.LanguageModelSession.stream_response" title="apple_fm_sdk.LanguageModelSession.stream_response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stream_response()</span></code></a> instead</p></li>
-</ul>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#apple_fm_sdk.LanguageModelSession.stream_response" title="apple_fm_sdk.LanguageModelSession.stream_response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stream_response()</span></code></a>: For streaming text responses</p></li>
-<li><p><a class="reference internal" href="generable.html#apple_fm_sdk.Generable" title="apple_fm_sdk.generable.Generable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generable</span></code></a>: For creating typed response structures</p></li>
-<li><p><a class="reference internal" href="generable.html#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.generation_schema.GenerationSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationSchema</span></code></a>: For custom schemas</p></li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.LanguageModelSession.stream_response">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">stream_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/session.html#LanguageModelSession.stream_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.LanguageModelSession.stream_response" title="Link to this definition">#</a></dt>
-<dd><p>Stream response chunks for a prompt (text only).</p>
-<p>This function provides real-time streaming of the model’s response, yielding text
-snapshots as they become available. Each yielded value represents the complete
-response text generated so far, rather than the delta from the previous chunk.</p>
-<p><strong>Streaming Behavior:</strong></p>
-<ul class="simple">
-<li><p>Yields complete text snapshots (not deltas) as generation progresses</p></li>
-<li><p>The final yield contains the complete response</p></li>
-<li><p>Automatically updates the session transcript after completion</p></li>
-<li><p>Does not support guided generation (text responses only)</p></li>
-<li><p>Can be cancelled mid-stream using asyncio cancellation</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>prompt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The input prompt string to send to the model</p>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p>Progressive snapshots of the response text. Each snapshot contains
-the full text generated so far, rather than only the new tokens.</p>
-</dd>
-<dt class="field-odd">Ytype<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="errors.html#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.FoundationModelsError"><strong>FoundationModelsError</strong></a> – If streaming fails or encounters an error</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/asyncio-exceptions.html#asyncio.CancelledError" title="(in Python v3.14)"><strong>asyncio.CancelledError</strong></a> – If the stream is cancelled</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition-examples admonition">
-<p class="admonition-title">Examples</p>
-<p>Basic streaming:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-
-<span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">stream_response</span><span class="p">(</span><span class="s2">&quot;Tell me a story&quot;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Cancelling a stream:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stream_with_timeout</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">stream_response</span><span class="p">(</span><span class="s2">&quot;Write a long essay&quot;</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-            <span class="c1"># Simulate some processing</span>
-            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stream cancelled&quot;</span><span class="p">)</span>
-        <span class="k">raise</span>
-
-<span class="c1"># Cancel after 5 seconds</span>
-<span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">stream_with_timeout</span><span class="p">())</span>
-<span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">task</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl>
-<dt>Streaming with error handling::</dt><dd><p>import apple_fm_sdk as fm
-session = fm.LanguageModelSession()</p>
-<dl class="simple">
-<dt>try:</dt><dd><dl class="simple">
-<dt>async for chunk in session.stream_response(“Hello”):</dt><dd><p>print(chunk)</p>
-</dd>
-</dl>
-</dd>
-<dt>except fm.FoundationModelsError as e:</dt><dd><p>print(f”Streaming error: {e}”)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>Streaming currently only supports basic text responses</p></li>
-<li><p>For guided generation, use <a class="reference internal" href="#apple_fm_sdk.LanguageModelSession.respond" title="apple_fm_sdk.LanguageModelSession.respond"><code class="xref py py-meth docutils literal notranslate"><span class="pre">respond()</span></code></a> instead</p></li>
-<li><p>Each snapshot contains the full text, rather than only new tokens</p></li>
-<li><p>The session transcript is updated only after streaming completes</p></li>
-<li><p>Breaking out of the async for loop early will properly clean up resources</p></li>
-</ul>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#apple_fm_sdk.LanguageModelSession.respond" title="apple_fm_sdk.LanguageModelSession.respond"><code class="xref py py-meth docutils literal notranslate"><span class="pre">respond()</span></code></a>: For non-streaming responses with guided generation support</p></li>
-</ul>
-</div>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -723,11 +385,11 @@ session = fm.LanguageModelSession()</p>
       </div>
     </a>
     <a class="right-next"
-       href="generable.html"
+       href="generation_options.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Generable</p>
+        <p class="prev-next-title">Generation Options</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -747,16 +409,7 @@ session = fm.LanguageModelSession()</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">LanguageModelSession</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession"><code class="docutils literal notranslate"><span class="pre">LanguageModelSession</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.is_responding"><code class="docutils literal notranslate"><span class="pre">is_responding</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.respond"><code class="docutils literal notranslate"><span class="pre">respond()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.LanguageModelSession.stream_response"><code class="docutils literal notranslate"><span class="pre">stream_response()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">LanguageModelSession</a></li>
 </ul>
   </nav></div>
 

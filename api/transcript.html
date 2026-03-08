@@ -172,6 +172,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="systemmodel.html">SystemLanguageModel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generation_options.html">Generation Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generable.html">Generable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Transcript</a></li>
@@ -339,14 +340,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transcript-class">Transcript Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.transcript.Transcript"><code class="docutils literal notranslate"><span class="pre">Transcript</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.transcript.Transcript.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.transcript.Transcript.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transcript-class">Transcript Class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
             </nav>
@@ -368,252 +362,6 @@ document.write(`
 </div>
 <section id="transcript-class">
 <h2>Transcript Class<a class="headerlink" href="#transcript-class" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.transcript.Transcript">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.transcript.</span></span><span class="sig-name descname"><span class="pre">Transcript</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/transcript.html#Transcript"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.transcript.Transcript" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Represents a foundation model session’s transcript.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">Transcript</span></code> provides access to the complete session history of a
-LanguageModelSession, including all user prompts, model responses, and tool
-invocations. The transcript is automatically updated after each interaction
-with the model.</p>
-<p><strong>Transcript Format:</strong></p>
-<p>The transcript follows the Foundation Models Swift framework structure and is
-organized as a dictionary containing:</p>
-<ul class="simple">
-<li><p><strong>version</strong>: Integer version number (currently 1)</p></li>
-<li><p><strong>type</strong>: String identifier “FoundationModels.Transcript”</p></li>
-<li><dl class="simple">
-<dt><strong>transcript</strong>: Object containing:</dt><dd><ul>
-<li><dl class="simple">
-<dt><strong>entries</strong>: List of session entries, each with:</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: Unique UUID for the entry</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">role</span></code>: One of “instructions”, “user”, “response”, or “tool”</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">contents</span></code>: Array of content objects with <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">id</span></code>, and type-specific fields</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<p><strong>Entry Types by Role:</strong></p>
-<ul class="simple">
-<li><dl class="simple">
-<dt><strong>instructions</strong>: System instructions and tool definitions</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">tools</span></code>: Array of available tool definitions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">contents</span></code>: Array with text instructions</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>user</strong>: User messages and requests</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">contents</span></code>: Array of content objects (text and more)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: Optional configuration for the request</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">responseFormat</span></code>: Optional structured output schema</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>response</strong>: Model-generated responses</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">toolCalls</span></code>: Array of tool invocations (if tools were called)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">contents</span></code>: Array of response content (text or structured data)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">assets</span></code>: Array of model asset identifiers used</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>tool</strong>: Tool execution results</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">toolName</span></code>: Name of the executed tool</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">toolCallID</span></code>: UUID linking to the tool call</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">contents</span></code>: Array with tool execution results</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<p><strong>When Transcripts Are Updated:</strong></p>
-<ul class="simple">
-<li><p>After each <code class="docutils literal notranslate"><span class="pre">respond()</span></code> call completes successfully</p></li>
-<li><p>After each <code class="docutils literal notranslate"><span class="pre">stream_response()</span></code> completes</p></li>
-<li><p>After tool invocations are processed</p></li>
-<li><p>NOT during streaming (only after completion)</p></li>
-<li><p>NOT if a request fails or is cancelled</p></li>
-</ul>
-<div class="admonition-examples admonition">
-<p class="admonition-title">Examples</p>
-<p>Accessing transcript after session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-
-<span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;What is Python?&quot;</span><span class="p">)</span>
-
-<span class="c1"># Get the full session history</span>
-<span class="n">transcript</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">transcript</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-
-<span class="c1"># Access the entries</span>
-<span class="n">entries</span> <span class="o">=</span> <span class="n">transcript</span><span class="p">[</span><span class="s2">&quot;transcript&quot;</span><span class="p">][</span><span class="s2">&quot;entries&quot;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
-    <span class="n">role</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entry role: </span><span class="si">{</span><span class="n">role</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s2">&quot;contents&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;contents&quot;</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Text: </span><span class="si">{</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl>
-<dt>Monitoring session length::</dt><dd><p>import apple_fm_sdk as fm</p>
-<p>session = fm.LanguageModelSession()</p>
-<dl>
-<dt>for i in range(5):</dt><dd><p>await session.respond(f”Question {i}”)</p>
-<p>transcript = await session.transcript.to_dict()
-entry_count = len(transcript[“transcript”][“entries”])
-print(f”Session has {entry_count} entries”)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>Examining tool calls in transcript:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">my_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalculatorTool</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">(</span>
-    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">CalculatorTool</span><span class="p">()]</span>
-<span class="p">)</span>
-
-<span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;What is 15 * 24?&quot;</span><span class="p">)</span>
-
-<span class="n">transcript</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">transcript</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-
-<span class="c1"># Find entries with tool calls</span>
-<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">transcript</span><span class="p">[</span><span class="s2">&quot;transcript&quot;</span><span class="p">][</span><span class="s2">&quot;entries&quot;</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;response&quot;</span> <span class="ow">and</span> <span class="s2">&quot;toolCalls&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool calls: </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;toolCalls&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;tool&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool result for </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;toolName&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Saving session history:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-
-<span class="c1"># Have a session</span>
-<span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;Tell me about Python&quot;</span><span class="p">)</span>
-
-<span class="c1"># Save transcript to file</span>
-<span class="n">transcript</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">transcript</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;session.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">transcript</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>The transcript object shares the session’s internal pointer</p></li>
-<li><p>Transcripts are read-only; you cannot modify session history</p></li>
-<li><p>Large sessions may result in large transcript dictionaries</p></li>
-<li><p>The transcript format follows the Foundation Models Swift framework structure</p></li>
-<li><p>Accessing the transcript does not affect the session state</p></li>
-</ul>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="session.html#apple_fm_sdk.LanguageModelSession" title="apple_fm_sdk.session.LanguageModelSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">LanguageModelSession</span></code></a>: For creating sessions</p></li>
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">respond()</span></code>: For making requests</p></li>
-</ul>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.transcript.Transcript.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/transcript.html#Transcript.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.transcript.Transcript.__init__" title="Link to this definition">#</a></dt>
-<dd><p>Initialize a Transcript instance.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Transcript instances are automatically created by LanguageModelSession.
-Do not create Transcript instances directly.</p>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.transcript.Transcript.to_dict">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/transcript.html#Transcript.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.transcript.Transcript.to_dict" title="Link to this definition">#</a></dt>
-<dd><p>Get the current transcript of the session as a dictionary.</p>
-<p>This function retrieves the complete session history, including all
-user messages, model responses, and tool interactions. The transcript
-is returned as a structured dictionary following the Foundation Models
-Swift framework format.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><p>The transcript data as a dictionary with the following structure:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code> (int): Version number (currently 1)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> (str): Type identifier “FoundationModels.Transcript”</p></li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">transcript</span></code> (dict): Object containing:</dt><dd><ul>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">entries</span></code> (list): List of session entries, each with:</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (str): Unique UUID for the entry</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">role</span></code> (str): One of “instructions”, “user”, “response”, or “tool”</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">contents</span></code> (list): Array of content objects</p></li>
-<li><p>Additional role-specific fields (tools, toolCalls, options, and more)</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="errors.html#apple_fm_sdk.GenerationError" title="apple_fm_sdk.GenerationError"><strong>GenerationError</strong></a> – If fetching the transcript fails due to an internal error</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-<span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
-
-<span class="n">transcript</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">transcript</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-
-<span class="c1"># Access entries</span>
-<span class="n">entries</span> <span class="o">=</span> <span class="n">transcript</span><span class="p">[</span><span class="s2">&quot;transcript&quot;</span><span class="p">][</span><span class="s2">&quot;entries&quot;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>This is an async function and must be awaited</p></li>
-<li><p>The returned dictionary is a snapshot; it won’t update automatically</p></li>
-<li><p>Call this function again to get an updated transcript after new interactions</p></li>
-</ul>
-</div>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
@@ -669,14 +417,7 @@ Swift framework format.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transcript-class">Transcript Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.transcript.Transcript"><code class="docutils literal notranslate"><span class="pre">Transcript</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.transcript.Transcript.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.transcript.Transcript.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transcript-class">Transcript Class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

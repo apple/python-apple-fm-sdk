@@ -35,29 +35,10 @@ Quick Start
 Installation
 ~~~~~~~~~~~~
 
-Foundation Models SDK for Python is currently in Beta. Use the development installation:
-
-1. Ensure you have met the requirements above.
-
-2. Clone the repository and navigate to the project directory:
-
 .. code-block:: bash
 
-      git clone https://github.com/apple/python-apple-fm-sdk
-      cd python-apple-fm-sdk
+   pip install apple-fm-sdk
 
-3. Create a virtual environment (`uv <https://docs.astral.sh/uv/>`_ recommended) and activate it:
-
-.. code-block:: bash
-
-      uv venv
-      source .venv/bin/activate
-      
-4. Install the package locally in editable mode:
-
-.. code-block:: bash
-
-      uv pip install -e .
 
 Basic Usage
 ~~~~~~~~~~~
@@ -101,6 +82,7 @@ Documentation Contents
 
    api/systemmodel
    api/session
+   api/generation_options
    api/generable
    api/tools
    api/transcript

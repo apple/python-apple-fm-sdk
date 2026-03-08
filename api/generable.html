@@ -49,7 +49,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tools" href="tools.html" />
-    <link rel="prev" title="LanguageModelSession" href="session.html" />
+    <link rel="prev" title="Generation Options" href="generation_options.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -172,6 +172,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="systemmodel.html">SystemLanguageModel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generation_options.html">Generation Options</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transcript.html">Transcript</a></li>
@@ -339,45 +340,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-decorator">@generable Decorator</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.generable"><code class="docutils literal notranslate"><span class="pre">generable()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guide-function">guide Function</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.guide"><code class="docutils literal notranslate"><span class="pre">guide()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-class">Generable Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.Generable"><code class="docutils literal notranslate"><span class="pre">Generable</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.Generable.generation_schema"><code class="docutils literal notranslate"><span class="pre">generation_schema()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.Generable.PartiallyGenerated"><code class="docutils literal notranslate"><span class="pre">PartiallyGenerated</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generatedcontent-class">GeneratedContent Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent"><code class="docutils literal notranslate"><span class="pre">GeneratedContent</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.from_json"><code class="docutils literal notranslate"><span class="pre">from_json()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.to_json"><code class="docutils literal notranslate"><span class="pre">to_json()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.value"><code class="docutils literal notranslate"><span class="pre">value()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.is_complete"><code class="docutils literal notranslate"><span class="pre">is_complete</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generationschema-class">GenerationSchema Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema"><code class="docutils literal notranslate"><span class="pre">GenerationSchema</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.nested_schemas"><code class="docutils literal notranslate"><span class="pre">nested_schemas</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.type_class"><code class="docutils literal notranslate"><span class="pre">type_class</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.description"><code class="docutils literal notranslate"><span class="pre">description</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.properties"><code class="docutils literal notranslate"><span class="pre">properties</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-decorator">@generable Decorator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guide-function">guide Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-class">Generable Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generatedcontent-class">GeneratedContent Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generationschema-class">GenerationSchema Class</a></li>
 </ul>
             </nav>
         </div>
@@ -398,409 +365,18 @@ document.write(`
 </div>
 <section id="generable-decorator">
 <h2>&#64;generable Decorator<a class="headerlink" href="#generable-decorator" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="apple_fm_sdk.generable">
-<span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">generable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generable_utils.html#generable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.generable" title="Link to this definition">#</a></dt>
-<dd><p>Decorator that makes a class generable for use with Foundation Models.</p>
-<p>This decorator transforms a regular Python class (typically a dataclass) into
-a generable type that can be used with Foundation Models’ guided generation
-features. It adds all necessary methods and attributes to support schema
-generation, content conversion, and partial generation during streaming.</p>
-<p>The decorator performs the following transformations:</p>
-<ol class="arabic simple">
-<li><p>Converts the class to a dataclass if it isn’t already</p></li>
-<li><p>Adds a <code class="docutils literal notranslate"><span class="pre">generation_schema()</span></code> class method for schema introspection</p></li>
-<li><p>Adds <code class="docutils literal notranslate"><span class="pre">ConvertibleFromGeneratedContent</span></code> support for deserialization</p></li>
-<li><p>Adds <code class="docutils literal notranslate"><span class="pre">ConvertibleToGeneratedContent</span></code> support for serialization</p></li>
-<li><p>Creates a <code class="docutils literal notranslate"><span class="pre">PartiallyGenerated</span></code> inner class for streaming support</p></li>
-<li><p>Adds required methods for structured generation</p></li>
-</ol>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>description</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Optional human-readable description of what this type
-represents. This description is included in the generation schema and
-can help guide the model’s generation behavior.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A decorator function that transforms the class</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Type], Type[<a class="reference internal" href="#apple_fm_sdk.Generable" title="apple_fm_sdk.Generable">Generable</a>]]</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<p>Basic usage with a dataclass:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="nd">@fm</span><span class="o">.</span><span class="n">generable</span><span class="p">(</span><span class="s2">&quot;A cat&#39;s profile&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">:</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Cat&#39;s name&quot;</span><span class="p">)</span>
-    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Age in years&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
-    <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">guide</span><span class="p">(</span><span class="s2">&quot;What makes this cat unique&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Using with Session for guided generation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
-<span class="n">cat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-    <span class="n">Cat</span><span class="p">,</span>
-    <span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;Generate a cat named Maomao who is 2 years old and has a fluffy tail&quot;</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cat</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">cat</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old: </span><span class="si">{</span><span class="n">cat</span><span class="o">.</span><span class="n">profile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Nested generable types:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-
-<span class="nd">@fm</span><span class="o">.</span><span class="n">generable</span><span class="p">(</span><span class="s2">&quot;Pet club&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">PetClub</span><span class="p">:</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Club name&quot;</span><span class="p">)</span>
-    <span class="n">cats</span><span class="p">:</span> <span class="p">[</span><span class="n">Cat</span><span class="p">]</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">guide</span><span class="p">(</span><span class="s2">&quot;List of cats in the club&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>&#64;fm.generable automatically applies the <code class="docutils literal notranslate"><span class="pre">&#64;dataclass</span></code> decorator if the
-class is not already a dataclass.</p>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#apple_fm_sdk.guide" title="apple_fm_sdk.guide"><code class="xref py py-func docutils literal notranslate"><span class="pre">guide()</span></code></a> for adding constraints to individual fields.
-<a class="reference internal" href="#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.GenerationSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationSchema</span></code></a> for the schema representation.
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code> for using generable types in generation.</p>
-</div>
-</dd></dl>
-
 </section>
 <section id="guide-function">
 <h2>guide Function<a class="headerlink" href="#guide-function" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="apple_fm_sdk.guide">
-<span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">guide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">anyOf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_guide.html#guide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.guide" title="Link to this definition">#</a></dt>
-<dd><p>Create a field with a guide, similar to Swift’s &#64;Guide annotation.</p>
-<p>This convenience function creates a dataclass field with generation guide
-metadata that can be used to constrain model output during generation.
-Multiple constraints can be applied to a single field.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Description of the field for documentation purposes</p></li>
-<li><p><strong>anyOf</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of valid string choices that constrain output to specific values</p></li>
-<li><p><strong>constant</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Constrains output to a single constant value</p></li>
-<li><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – Expected exact number of items for collections (must be positive)</p></li>
-<li><p><strong>element</strong> (<em>GenerationGuide</em><em>, </em><em>optional</em>) – Guide to apply to array elements</p></li>
-<li><p><strong>max_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – Maximum number of items for collections (must be non-negative)</p></li>
-<li><p><strong>maximum</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Maximum value for numeric types</p></li>
-<li><p><strong>min_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – Minimum number of items for collections (must be non-negative)</p></li>
-<li><p><strong>minimum</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Minimum value for numeric types</p></li>
-<li><p><strong>range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Tuple of (min, max) for numeric ranges</p></li>
-<li><p><strong>regex</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Regular expression pattern that the output must match</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dataclass field with guide metadata attached</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Any</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If any constraint values are invalid (for example, negative counts,
-malformed ranges, non-string choices)</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<p>Basic field with description only:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;The person&#39;s full name&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Numeric field with range constraint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Age in years&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Collection with exact count:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hobbies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;List of hobbies&quot;</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>String field with choices:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Favorite color&quot;</span><span class="p">,</span> <span class="n">anyOf</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Numeric field with separate min/max:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Test score&quot;</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Collection with size constraints:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Tags list&quot;</span><span class="p">,</span> <span class="n">min_items</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_items</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Constant value constraint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="s2">&quot;active&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Regex pattern constraint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;#/[a-zA-Z]+/#&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Element constraint for arrays:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">guide</span><span class="p">(</span><span class="s2">&quot;Test scores&quot;</span><span class="p">,</span> <span class="n">element</span><span class="o">=</span><span class="n">GenerationGuide</span><span class="o">.</span><span class="n">range</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The guide function validates constraint parameters at creation time
-and stores them as metadata that can be processed by generation
-systems to enforce the specified constraints.</p>
-</div>
-</dd></dl>
-
 </section>
 <section id="generable-class">
 <h2>Generable Class<a class="headerlink" href="#generable-class" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.Generable">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">Generable</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#Generable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.Generable" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ConvertibleFromGeneratedContent</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ConvertibleToGeneratedContent</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Protocol" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></a></p>
-<p>Protocol for types that support structured generation.
-Equivalent to Swift’s Generable protocol.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.Generable.generation_schema">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">generation_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#Generable.generation_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.Generable.generation_schema" title="Link to this definition">#</a></dt>
-<dd><p>Get the generation schema for this type.</p>
-<dl class="field-list simple">
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="apple_fm_sdk.Generable.PartiallyGenerated">
-<span class="sig-name descname"><span class="pre">PartiallyGenerated</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.Generable.PartiallyGenerated" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="generatedcontent-class">
 <h2>GeneratedContent Class<a class="headerlink" href="#generatedcontent-class" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.GeneratedContent">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">GeneratedContent</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#GeneratedContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GeneratedContent" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ManagedObject</span></code></p>
-<p>Represents generated content, similar to Swift’s GeneratedContent.
-This is the actual content generated according to a schema.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.GeneratedContent.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#GeneratedContent.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GeneratedContent.__init__" title="Link to this definition">#</a></dt>
-<dd><p>Create GeneratedContent.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>content_dict</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>]</em>) – Dictionary representation of the content</p></li>
-<li><p><strong>id</strong> (<em>Optional</em><em>[</em><em>GenerationID</em><em>]</em>) – Optional GenerationID</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.GeneratedContent.from_json">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#GeneratedContent.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GeneratedContent.from_json" title="Link to this definition">#</a></dt>
-<dd><p>Create GeneratedContent from JSON string.</p>
-<dl class="field-list simple">
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.GeneratedContent.to_json">
-<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#GeneratedContent.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GeneratedContent.to_json" title="Link to this definition">#</a></dt>
-<dd><p>Convert to JSON string.</p>
-<dl class="field-list simple">
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.GeneratedContent.value">
-<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_property</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generable.html#GeneratedContent.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GeneratedContent.value" title="Link to this definition">#</a></dt>
-<dd><p>Extract a value from the generated content.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>type_class</strong> (<em>Optional</em><em>[</em><em>Type</em><em>]</em>) – The type to convert to</p></li>
-<li><p><strong>for_property</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – The property name to extract (if None, extract the whole content)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The extracted value converted to the specified type</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="apple_fm_sdk.GeneratedContent.is_complete">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_complete</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#apple_fm_sdk.GeneratedContent.is_complete" title="Link to this definition">#</a></dt>
-<dd><p>Check if the generated content is complete.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="generationschema-class">
 <h2>GenerationSchema Class<a class="headerlink" href="#generationschema-class" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">GenerationSchema</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_schema.html#GenerationSchema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GenerationSchema" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ManagedObject</span></code></p>
-<p>Represents a generation schema that defines the structure for guided generation.</p>
-<p>A GenerationSchema describes the expected structure of generated content, including
-the type, properties, and nested schemas. This is used with guided generation to
-ensure the model’s output conforms to a specific format, such as JSON objects with
-defined fields and types.</p>
-<p>The schema is similar to JSON Schema but optimized for use with Foundation Models.
-It supports basic types (str, int, float, bool), optional types, lists, and nested
-object structures.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>type_class</strong> (<em>Type</em>) – The Python class this schema represents.</p></li>
-<li><p><strong>description</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Optional human-readable description of the schema.</p></li>
-<li><p><strong>properties</strong> (<em>List</em><em>[</em><em>Property</em><em>]</em>) – List of Property objects defining the schema’s fields.</p></li>
-<li><p><strong>nested_schemas</strong> (<em>List</em><em>[</em><a class="reference internal" href="#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.GenerationSchema"><em>GenerationSchema</em></a><em>]</em>) – List of nested GenerationSchema objects for complex types.</p></li>
-<li><p><strong>extra_schema_fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – Additional schema fields that pass through to the
-underlying Foundation Models API.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Note: Do not instantiate GenerationSchema directly. Use the <a class="reference internal" href="#apple_fm_sdk.generable" title="apple_fm_sdk.generable"><code class="xref py py-func docutils literal notranslate"><span class="pre">generable()</span></code></a> decorator
-which automatically produces a GenerationSchema, or load in a json schema from your Swift app
-instead.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">Property</span></code> for defining individual schema fields.
-<code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationGuide</span></code> for constraining property values.</p>
-</div>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema.nested_schemas">
-<span class="sig-name descname"><span class="pre">nested_schemas</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.generation_schema.GenerationSchema"><span class="pre">GenerationSchema</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="headerlink" href="#apple_fm_sdk.GenerationSchema.nested_schemas" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_nested_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_schema.html#GenerationSchema.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GenerationSchema.__init__" title="Link to this definition">#</a></dt>
-<dd><p>Initialize a GenerationSchema instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>type_class</strong> (<em>Type</em>) – The Python class this schema represents. This is typically
-a dataclass or similar structured type that defines the shape of the data.</p></li>
-<li><p><strong>description</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Optional human-readable description of what this schema
-represents. This can help provide context for the model during generation.</p></li>
-<li><p><strong>properties</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>Property</em><em>]</em><em>]</em>) – List of Property objects that define the fields/attributes
-of this schema. Each property specifies a field name, type, and optional
-constraints. If None, defaults to an empty list.</p></li>
-<li><p><strong>dynamic_nested_types</strong> (<em>List</em><em>[</em><a class="reference internal" href="#apple_fm_sdk.GenerationSchema" title="apple_fm_sdk.GenerationSchema"><em>GenerationSchema</em></a><em>]</em>) – List of nested GenerationSchema objects for
-complex types that reference other schemas. Used when a property’s type
-is itself a structured object.</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@fm</span><span class="o">.</span><span class="n">generable</span><span class="p">(</span><span class="s2">&quot;A cat&#39;s profile&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="gp">... </span>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">GenerationSchema</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">type_class</span><span class="o">=</span><span class="n">Cat</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A cat&#39;s profile&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">properties</span><span class="o">=</span><span class="p">[</span>
-<span class="gp">... </span>        <span class="n">Property</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">type_class</span><span class="o">=</span><span class="nb">str</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Property</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">type_class</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="p">]</span>
-<span class="gp">... </span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The schema is automatically converted to its C representation for use
-with the underlying Foundation Models runtime.</p>
-</div>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema.type_class">
-<span class="sig-name descname"><span class="pre">type_class</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><span class="pre">Type</span></a></span><a class="headerlink" href="#apple_fm_sdk.GenerationSchema.type_class" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema.description">
-<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.GenerationSchema.description" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema.properties">
-<span class="sig-name descname"><span class="pre">properties</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Property</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#apple_fm_sdk.GenerationSchema.properties" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="apple_fm_sdk.GenerationSchema.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_schema.html#GenerationSchema.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GenerationSchema.to_dict" title="Link to this definition">#</a></dt>
-<dd><p>Convert the GenerationSchema to a dictionary representation.</p>
-<p>This method serializes the schema into a dictionary format compatible with
-the Foundation Models Swift API. The resulting dictionary contains the schema
-definition in a JSON-compatible format that can be used for validation,
-inspection, or transmission.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A dictionary representation of the schema, including type information,
-properties, and any nested schemas.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If the schema cannot be serialized (for example, empty JSON
-string returned from the C layer).</p></li>
-<li><p><a class="reference internal" href="errors.html#apple_fm_sdk.FoundationModelsError" title="apple_fm_sdk.FoundationModelsError"><strong>FoundationModelsError</strong></a> – If an error occurs during serialization in
-the underlying C/Swift implementation.</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">GenerationSchema</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">type_class</span><span class="o">=</span><span class="n">Cat</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A cat&#39;s profile&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="n">Property</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">type_class</span><span class="o">=</span><span class="nb">str</span><span class="p">)]</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">schema_dict</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">schema_dict</span><span class="p">)</span>
-<span class="go">{&#39;name&#39;: &#39;Cat&#39;, &#39;description&#39;: &#39;A cat&#39;s profile&#39;, &#39;properties&#39;: [...]}</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method interacts with the C layer to generate the schema dictionary.
-Memory management is handled automatically.</p>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>The schema dictionary format follows the Foundation Models schema
-specification used by the Swift API.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -816,12 +392,12 @@ specification used by the Swift API.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="session.html"
+       href="generation_options.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">LanguageModelSession</p>
+        <p class="prev-next-title">Generation Options</p>
       </div>
     </a>
     <a class="right-next"
@@ -849,45 +425,11 @@ specification used by the Swift API.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-decorator">@generable Decorator</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.generable"><code class="docutils literal notranslate"><span class="pre">generable()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guide-function">guide Function</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.guide"><code class="docutils literal notranslate"><span class="pre">guide()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-class">Generable Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.Generable"><code class="docutils literal notranslate"><span class="pre">Generable</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.Generable.generation_schema"><code class="docutils literal notranslate"><span class="pre">generation_schema()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.Generable.PartiallyGenerated"><code class="docutils literal notranslate"><span class="pre">PartiallyGenerated</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generatedcontent-class">GeneratedContent Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent"><code class="docutils literal notranslate"><span class="pre">GeneratedContent</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.from_json"><code class="docutils literal notranslate"><span class="pre">from_json()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.to_json"><code class="docutils literal notranslate"><span class="pre">to_json()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.value"><code class="docutils literal notranslate"><span class="pre">value()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GeneratedContent.is_complete"><code class="docutils literal notranslate"><span class="pre">is_complete</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generationschema-class">GenerationSchema Class</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema"><code class="docutils literal notranslate"><span class="pre">GenerationSchema</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.nested_schemas"><code class="docutils literal notranslate"><span class="pre">nested_schemas</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.type_class"><code class="docutils literal notranslate"><span class="pre">type_class</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.description"><code class="docutils literal notranslate"><span class="pre">description</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.properties"><code class="docutils literal notranslate"><span class="pre">properties</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationSchema.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-decorator">@generable Decorator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guide-function">guide Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generable-class">Generable Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generatedcontent-class">GeneratedContent Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generationschema-class">GenerationSchema Class</a></li>
 </ul>
   </nav></div>
 
