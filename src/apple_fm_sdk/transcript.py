@@ -225,3 +225,113 @@ class Transcript:
         json_str = str(jsn_string)
         result = json.loads(json_str)
         return result
+
+    @classmethod
+    async def from_dict(cls, dict: dict) -> "Transcript":
+        """Create a Transcript from a dictionary representation.
+
+        This method deserializes a transcript dictionary (typically loaded from JSON)
+        and creates a Transcript instance. This is useful for loading saved session
+        transcripts and resuming sessions with the full history intact.
+
+        :param dict: Dictionary representation of a transcript, typically loaded from
+            a JSON file. Must match the Foundation Models transcript format.
+        :type dict: dict
+        :return: A new Transcript instance initialized with the provided data
+        :rtype: Transcript
+        :raises GenerationError: If the dictionary format is invalid or cannot be parsed
+
+        .. warning::
+            **Tools in a transcript:**
+
+            The transcript preserves the *history* of tool calls (what was called and
+            what the results were), but not the *capability* to make new tool calls.
+            Tool definitions stored in a transcript JSON will appear in the transcript's
+            content history, but they will **not** be automatically available for the model
+            to call. That's because the transcript doesn't actually contain the tool
+            implementations. To allow the model to invoke tools mentioned in the transcript,
+            implement each tool in Python and then create a session with both the transcript
+            and tools using :meth:`~apple_fm_sdk.session.LanguageModelSession.from_transcript`
+
+        Examples:
+            Load a transcript from a JSON file::
+
+                import apple_fm_sdk as fm
+                import json
+
+                # Load transcript from file
+                with open("transcript.json", "r") as f:
+                    transcript_dict = json.load(f)
+
+                # Create Transcript instance
+                transcript = await fm.Transcript.from_dict(transcript_dict)
+
+                # Now you can create a session starting from this transcript
+                session = fm.LanguageModelSession.from_transcript(transcript)
+
+            Load and resume with tools::
+
+                import apple_fm_sdk as fm
+                import json
+                from my_tools import CalculatorTool, WeatherTool
+
+                # Load transcript that had tool calls
+                with open("transcript_with_tools.json", "r") as f:
+                    transcript_dict = json.load(f)
+
+                transcript = await fm.Transcript.from_dict(transcript_dict)
+
+                # IMPORTANT: Tools in the transcript are historical mentions only.
+                # To allow the model to call a tool, you must explicitly instantiate each
+                # tool in Python and then pass them to the session initializer.
+                session = fm.LanguageModelSession.from_transcript(
+                    transcript,
+                    tools=[CalculatorTool(), WeatherTool()]
+                )
+
+        Note:
+            - The dictionary must follow the Foundation Models transcript format
+            - Tool definitions in the transcript are for historical reference only
+            - To use tools with the transcript, pass them to
+              :meth:`~apple_fm_sdk.session.LanguageModelSession.from_transcript`
+
+        See Also:
+            - :meth:`to_dict`: For converting a Transcript to a dictionary
+            - :meth:`~apple_fm_sdk.session.LanguageModelSession.from_transcript`: For creating sessions from transcripts
+            - :class:`~apple_fm_sdk.tool.Tool`: For creating custom tools
+        """
+        error_code = ctypes.c_int32()  # C error status code
+        error_description = ctypes.POINTER(
+            ctypes.c_char
+        )()  # C error description pointer
+
+        # Create a session pointer initialized with the transcript data from the dictionary
+        # We can't create transcript pointer directly, so we create a new session pointer that
+        # holds the Transcript.
+        session_ptr = lib.FMTranscriptCreateFromJSONString(
+            json.dumps(dict), ctypes.byref(error_code), ctypes.byref(error_description)
+        )
+
+        # Check if we got a valid result or an error
+        if session_ptr is None:
+            # An error occurred, raise appropriate exception
+            err_code, err_desc = _get_error_string(error_code, error_description)
+            error_msg = "Failed to create transcript from dictionary"
+            if err_desc:
+                error_msg = error_msg + ": " + err_desc
+            raise _status_code_to_exception(err_code or error_code.value, error_msg)
+
+        return cls(_ptr=session_ptr)
+
+    def _update_session_ptr(self, new_ptr):
+        """Update the session pointer associated with this transcript.
+
+        This is used internally to keep the transcript's session pointer in sync
+        with the LanguageModelSession's pointer after interactions that may change it.
+
+        Note:
+            - This method is for internal use only and should not be called directly.
+            - The transcript shares the session's pointer, so updating it ensures the
+              transcript reflects the current session state.
+        """
+        self.session_ptr = new_ptr

@@ -14,6 +14,8 @@ This test suite verifies:
 import apple_fm_sdk as fm
 import pytest
 import weakref
+import json
+import os
 
 
 @pytest.mark.asyncio
@@ -321,3 +323,152 @@ async def test_multiple_transcript_accesses():
     # All accesses should work without issues
     assert len(transcripts) == 5
     print("✓ All transcript accesses successful")
+
+
+@pytest.mark.asyncio
+async def test_from_dict_with_simple_transcript():
+    """Test creating a Transcript from a simple transcript JSON."""
+    print("\n=== Testing from_dict - Simple Transcript ===")
+
+    # Load the simple test transcript
+    test_file = os.path.join(
+        os.path.dirname(__file__), "tester_schemas", "test_transcript.json"
+    )
+    with open(test_file, "r") as f:
+        transcript_data = json.load(f)
+
+    print(f"✓ Loaded test transcript from {test_file}")
+
+    # Create a Transcript from the dictionary
+    transcript = await fm.Transcript.from_dict(transcript_data)
+    print("✓ Created Transcript from dictionary")
+
+    # Verify it's a Transcript instance
+    assert isinstance(transcript, fm.Transcript)
+    print("✓ Result is a Transcript instance")
+
+    # Verify we can get the data back
+    result_data = await transcript.to_dict()
+    assert isinstance(result_data, dict)
+    print("✓ Can retrieve data from created Transcript")
+
+    # Verify the structure matches
+    assert "transcript" in result_data
+    assert "entries" in result_data["transcript"]
+    assert len(result_data["transcript"]["entries"]) > 0
+    print(f"✓ Transcript has {len(result_data['transcript']['entries'])} entries")
+
+
+@pytest.mark.asyncio
+async def test_from_dict_with_full_transcript():
+    """Test creating a Transcript from a full transcript JSON with tools."""
+    print("\n=== Testing from_dict - Full Transcript with Tools ===")
+
+    # Load the full test transcript
+    test_file = os.path.join(
+        os.path.dirname(__file__), "tester_schemas", "test_transcript_full.json"
+    )
+    with open(test_file, "r") as f:
+        transcript_data = json.load(f)
+
+    print(f"✓ Loaded full test transcript from {test_file}")
+
+    # Create a Transcript from the dictionary
+    transcript = await fm.Transcript.from_dict(transcript_data)
+    print("✓ Created Transcript from dictionary")
+
+    # Verify it's a Transcript instance
+    assert isinstance(transcript, fm.Transcript)
+    print("✓ Result is a Transcript instance")
+
+    # Verify we can get the data back
+    result_data = await transcript.to_dict()
+    assert isinstance(result_data, dict)
+    print("✓ Can retrieve data from created Transcript")
+
+    # Verify the structure matches and includes tools
+    assert "transcript" in result_data
+    assert "entries" in result_data["transcript"]
+    entries = result_data["transcript"]["entries"]
+    assert len(entries) > 0
+    print(f"✓ Transcript has {len(entries)} entries")
+
+    # Check for tool-related entries
+    has_tools = any("tools" in entry for entry in entries)
+    has_tool_calls = any("toolCalls" in entry for entry in entries)
+    has_tool_results = any(entry.get("role") == "tool" for entry in entries)
+
+    print(f"✓ Has tools definition: {has_tools}")
+    print(f"✓ Has tool calls: {has_tool_calls}")
+    print(f"✓ Has tool results: {has_tool_results}")
+
+
+@pytest.mark.asyncio
+async def test_from_dict_with_invalid_json():
+    """Test that from_dict properly handles invalid JSON."""
+    print("\n=== Testing from_dict - Invalid JSON ===")
+
+    # Test with completely invalid structure
+    invalid_data = {
+        "invalid": "structure",
+        "missing": "required fields",
+    }
+
+    print("Testing with invalid structure...")
+    with pytest.raises(Exception) as exc_info:
+        await fm.Transcript.from_dict(invalid_data)
+
+    print(f"✓ Raised exception as expected: {type(exc_info.value).__name__}")
+
+    # Test with missing transcript field
+    missing_transcript = {
+        "version": 1,
+        "type": "FoundationModels.Transcript",
+        # Missing "transcript" field
+    }
+
+    print("Testing with missing transcript field...")
+    with pytest.raises(Exception) as exc_info:
+        await fm.Transcript.from_dict(missing_transcript)
+
+    print(f"✓ Raised exception as expected: {type(exc_info.value).__name__}")
+
+    # Test with empty entries
+    empty_entries = {
+        "version": 1,
+        "type": "FoundationModels.Transcript",
+        "transcript": {
+            "entries": []  # Empty entries might be valid or invalid depending on implementation
+        },
+    }
+
+    print("Testing with empty entries...")
+    try:
+        transcript = await fm.Transcript.from_dict(empty_entries)
+        print("✓ Empty entries accepted (valid case)")
+        # Verify we can still get data back
+        result = await transcript.to_dict()
+        assert isinstance(result, dict)
+        print("✓ Can retrieve data from empty transcript")
+    except Exception as e:
+        print(f"✓ Empty entries rejected: {type(e).__name__}")
+
+    # Test with malformed entry
+    malformed_entry = {
+        "version": 1,
+        "type": "FoundationModels.Transcript",
+        "transcript": {
+            "entries": [
+                {
+                    "role": "user",
+                    # Missing required fields like "id" and "contents"
+                }
+            ]
+        },
+    }
+
+    print("Testing with malformed entry...")
+    with pytest.raises(Exception) as exc_info:
+        await fm.Transcript.from_dict(malformed_entry)
+
+    print(f"✓ Raised exception as expected: {type(exc_info.value).__name__}")

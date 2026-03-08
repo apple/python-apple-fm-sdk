@@ -242,3 +242,94 @@ async def test_stream_response_error_handling(model):
     ##############################################################################
 
     print("✅ Stream error handling - PASSED")
+
+
+@pytest.mark.asyncio
+async def test_from_transcript_resume_conversation(model):
+    """Test from: src/apple_fm_sdk/session.py - from_transcript() - Resume a conversation from a saved transcript"""
+    print("\n=== Testing from_transcript Resume Conversation ===")
+
+    # First create and save a transcript
+    import apple_fm_sdk as fm
+    import json
+
+    session = fm.LanguageModelSession()
+    await session.respond("Hello")
+    await session.respond("Tell me about Python")
+    transcript_dict = await session.transcript.to_dict()
+    with open("transcript.json", "w") as f:
+        json.dump(transcript_dict, f, indent=2)
+
+    ##############################################################################
+    # From: src/apple_fm_sdk/session.py
+    # class, function, or other entity name: from_transcript - Resume a conversation from a saved transcript
+    import apple_fm_sdk as fm
+    import json
+
+    # Load a saved transcript
+    with open("transcript.json", "r") as f:
+        transcript_dict = json.load(f)
+
+    transcript = await fm.Transcript.from_dict(transcript_dict)
+
+    # Create a new session from the transcript
+    session = fm.LanguageModelSession.from_transcript(transcript)
+
+    # Continue the session
+    response = await session.respond("Summarize the session so far.")
+    ##############################################################################
+
+    assert response is not None
+
+    # Clean up the file
+    import os
+
+    if os.path.exists("transcript.json"):
+        os.remove("transcript.json")
+    print("✅ from_transcript resume conversation - PASSED")
+
+
+@pytest.mark.asyncio
+async def test_from_transcript_resume_with_tools(model):
+    """Test from: src/apple_fm_sdk/session.py - from_transcript() - Resume with tools"""
+    print("\n=== Testing from_transcript Resume with Tools ===")
+
+    # First create and save a transcript with tool calls
+    import apple_fm_sdk as fm
+    import json
+    from tester_tools.tester_tools import SimpleCalculatorTool
+
+    session = fm.LanguageModelSession(tools=[SimpleCalculatorTool()])
+    await session.respond("What is 5 + 3?")
+    transcript_dict = await session.transcript.to_dict()
+    with open("transcript_with_tools.json", "w") as f:
+        json.dump(transcript_dict, f, indent=2)
+
+    ##############################################################################
+    # From: src/apple_fm_sdk/session.py
+    # class, function, or other entity name: from_transcript - Resume with tools
+    import apple_fm_sdk as fm
+    from tester_tools.tester_tools import SimpleCalculatorTool
+
+    # Load transcript that had tool calls
+    transcript = await fm.Transcript.from_dict(transcript_dict)
+
+    # IMPORTANT: You must pass the tool instances explicitly.
+    # The transcript contains the history of tool calls, but not
+    # the ability to make new tool calls unless you provide them.
+    session = fm.LanguageModelSession.from_transcript(
+        transcript, tools=[SimpleCalculatorTool()]
+    )
+
+    # Now the model can make new tool calls
+    response = await session.respond("Calculate 15 * 24")
+    ##############################################################################
+
+    assert response is not None
+
+    # Clean up the file
+    import os
+
+    if os.path.exists("transcript_with_tools.json"):
+        os.remove("transcript_with_tools.json")
+    print("✅ from_transcript resume with tools - PASSED")

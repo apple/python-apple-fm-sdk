@@ -47,6 +47,12 @@ class DelayParams:
     message: str = fm.guide("Message to return after delay")
 
 
+@fm.generable("Search bread database parameters")
+class SearchBreadDatabaseParams:
+    searchTerm: str = fm.guide("The type of bread to search for")
+    limit: int = fm.guide("The number of recipes to get", range=(1, 6))
+
+
 # =============================================================================
 # Test Tool Implementations
 # =============================================================================
@@ -195,3 +201,50 @@ class AsyncDelayTool(fm.Tool):
 
         await asyncio.sleep(delay)
         return f"After {delay}s delay: {message}"
+
+
+class SearchBreadDatabaseTool(fm.Tool):
+    """Tool that searches a local database for bread recipes."""
+
+    name = "searchBreadDatabaseTool"
+    description = "Searches a local database for bread recipes."
+
+    @property
+    def arguments_schema(self) -> fm.GenerationSchema:
+        return SearchBreadDatabaseParams.generation_schema()
+
+    async def call(self, args: fm.GeneratedContent) -> str:
+        search_term = args.value(str, for_property="searchTerm")
+        limit = args.value(int, for_property="limit")
+
+        # Mock bread database
+        bread_recipes = {
+            "sourdough": {
+                "name": "Sourdough Bread",
+                "ingredients": ["flour", "water", "salt", "sourdough starter"],
+                "time": "24 hours",
+            },
+            "baguette": {
+                "name": "French Baguette",
+                "ingredients": ["flour", "water", "salt", "yeast"],
+                "time": "4 hours",
+            },
+            "focaccia": {
+                "name": "Focaccia",
+                "ingredients": ["flour", "water", "olive oil", "salt", "yeast"],
+                "time": "3 hours",
+            },
+        }
+
+        # Search for matching recipes
+        results = []
+        for key, recipe in bread_recipes.items():
+            if (
+                search_term.lower() in key.lower()
+                or search_term.lower() in recipe["name"].lower()
+            ):
+                results.append(recipe)
+                if len(results) >= limit:
+                    break
+
+        return json.dumps(results)
