@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apple_fm_sdk.prompt &#8212; Foundation Models SDK for Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=01c0d4c0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/apple_fm_sdk/prompt';</script>
+    <link rel="icon" href="../../_static/foundation-models-framework-logo.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/foundation-models-framework-logo.png" class="logo__image only-light" alt="Foundation Models SDK for Python - Home"/>
+    <script>document.write(`<img src="../../_static/foundation-models-framework-logo.png" class="logo__image only-dark" alt="Foundation Models SDK for Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basic_usage.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streaming.html">Streaming Responses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guided_generation.html">Guided Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools and function calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../evaluation.html">Evaluation workflows</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api/systemmodel.html">SystemLanguageModel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/attachment.html">Attachment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/generation_options.html">Generation Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/generable.html">Generable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/transcript.html">Transcript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/errors.html">Errors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/apple/python-apple-fm-sdk" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for apple_fm_sdk.prompt</h1><div class="highlight"><pre>
+<span></span><span class="c1"># For licensing see accompanying LICENSE file.</span>
+<span class="c1"># Copyright (C) 2026 Apple Inc. All Rights Reserved.</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.c_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_get_error_string</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ctypes_bindings</span> <span class="k">as</span> <span class="n">lib</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+        <span class="s2">&quot;Foundation Models C bindings not found. Please ensure _foundationmodels_ctypes.py is available.&quot;</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Attachment">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.Attachment">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Attachment</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an attachment passed to a prompt with an optional label.</span>
+
+<span class="sd">    Attachments allow you to include non-text content (such as images) in your</span>
+<span class="sd">    prompts. The model can process these attachments as part of the input context.</span>
+
+<span class="sd">    Use the optional ``label`` parameter to allow the model to reference this</span>
+<span class="sd">    attachment by name, which is particularly useful when the model needs to call</span>
+<span class="sd">    tools that reference specific attachments. When omitted, the attachment is</span>
+<span class="sd">    added without a label.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This is an abstract base class. Use concrete implementations like</span>
+<span class="sd">        :class:`ImageAttachment` to create actual attachments.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        - :class:`ImageAttachment`: For attaching images to prompts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Attachment.add_to_composed_prompt">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.Attachment.add_to_composed_prompt">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_to_composed_prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">composed_prompt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add this attachment to a composed prompt.</span>
+
+<span class="sd">        This internal method is called by the framework to add the attachment</span>
+<span class="sd">        to the native prompt representation.</span>
+
+<span class="sd">        :param composed_prompt: The native composed prompt object to add this attachment to</span>
+<span class="sd">        :type composed_prompt: ctypes pointer</span>
+<span class="sd">        :raises ImagePromptError: If the attachment cannot be added</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ImageAttachment">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.ImageAttachment">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ImageAttachment</span><span class="p">(</span><span class="n">Attachment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an image attachment passed to a prompt with an optional label.</span>
+
+<span class="sd">    Image attachments enable multimodal prompts by allowing you to include images</span>
+<span class="sd">    alongside text in your prompts. The model can analyze and reference these images</span>
+<span class="sd">    when generating responses.</span>
+
+<span class="sd">    When you provide a ``label``, the model can reference the image by name, which is</span>
+<span class="sd">    particularly useful for:</span>
+
+<span class="sd">    - Distinguishing between multiple images in a single prompt</span>
+<span class="sd">    - Allowing tools to reference specific images</span>
+<span class="sd">    - Providing context about what each image represents</span>
+
+<span class="sd">    :ivar _path: Path to the image file on disk</span>
+<span class="sd">    :vartype _path: Path</span>
+<span class="sd">    :ivar _label: Optional label for the image</span>
+<span class="sd">    :vartype _label: Optional[str]</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Basic image attachment::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+<span class="sd">            from pathlib import Path</span>
+
+<span class="sd">            session = fm.LanguageModelSession()</span>
+<span class="sd">            image = fm.ImageAttachment(Path(&quot;photo.jpg&quot;))</span>
+<span class="sd">            response = await session.respond([&quot;What&#39;s in this image?&quot;, image])</span>
+
+<span class="sd">        Labeled image attachment::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+<span class="sd">            from pathlib import Path</span>
+
+<span class="sd">            session = fm.LanguageModelSession()</span>
+<span class="sd">            diagram = fm.ImageAttachment(Path(&quot;diagram.png&quot;), label=&quot;architecture&quot;)</span>
+<span class="sd">            response = await session.respond([</span>
+<span class="sd">                &quot;Explain the architecture shown in the diagram&quot;,</span>
+<span class="sd">                diagram</span>
+<span class="sd">            ])</span>
+
+<span class="sd">        Multiple images with labels::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+<span class="sd">            from pathlib import Path</span>
+
+<span class="sd">            session = fm.LanguageModelSession()</span>
+<span class="sd">            before = fm.ImageAttachment(Path(&quot;before.jpg&quot;), label=&quot;before&quot;)</span>
+<span class="sd">            after = fm.ImageAttachment(Path(&quot;after.jpg&quot;), label=&quot;after&quot;)</span>
+<span class="sd">            response = await session.respond([</span>
+<span class="sd">                &quot;Compare the before and after images&quot;,</span>
+<span class="sd">                before,</span>
+<span class="sd">                after</span>
+<span class="sd">            ])</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        - :class:`Attachment`: Base class for all attachment types</span>
+<span class="sd">        - :class:`~apple_fm_sdk.session.LanguageModelSession`: For using attachments in sessions</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The image file must exist at the specified path when the attachment is created.</span>
+<span class="sd">        Supported image formats depend on the underlying model capabilities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ImageAttachment.__init__">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.ImageAttachment.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an image attachment for use in prompts.</span>
+
+<span class="sd">        :param path: Path on disk to the image file to attach. The file must exist</span>
+<span class="sd">            at this location when the attachment is created.</span>
+<span class="sd">        :type path: Path</span>
+<span class="sd">        :param label: Optional label for the attachment. Use this to allow the model</span>
+<span class="sd">            to reference the image by name, particularly useful when working with</span>
+<span class="sd">            multiple images or when tools need to reference specific images.</span>
+<span class="sd">        :type label: Optional[str]</span>
+<span class="sd">        :raises ImagePromptError: If the file does not exist at the specified path</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+<span class="sd">            from pathlib import Path</span>
+
+<span class="sd">            # Create an unlabeled image attachment</span>
+<span class="sd">            image = fm.ImageAttachment(Path(&quot;photo.jpg&quot;))</span>
+
+<span class="sd">            # Create a labeled image attachment</span>
+<span class="sd">            diagram = fm.ImageAttachment(Path(&quot;diagram.png&quot;), label=&quot;system_diagram&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">ImagePromptError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Failed to add attachment to prompt: file does not exist at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="n">label</span></div>
+
+
+<div class="viewcode-block" id="ImageAttachment.add_to_composed_prompt">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.ImageAttachment.add_to_composed_prompt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_to_composed_prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">composed_prompt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add this image attachment to a composed prompt.</span>
+
+<span class="sd">        This internal method is called by the framework to add the image attachment</span>
+<span class="sd">        to the native prompt representation. It handles encoding the file path and</span>
+<span class="sd">        optional label, then calls the C binding to attach the image.</span>
+
+<span class="sd">        :param composed_prompt: The native composed prompt object to add this attachment to</span>
+<span class="sd">        :type composed_prompt: ctypes pointer</span>
+<span class="sd">        :raises ImagePromptError: If the attachment cannot be added, either because</span>
+<span class="sd">            the image format is not supported or another error occurs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">label_bytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">error_reason</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">lib</span><span class="o">.</span><span class="n">FMComposedPromptAddAttachment</span><span class="p">(</span>
+            <span class="n">composed_prompt</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+            <span class="n">label_bytes</span><span class="p">,</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">error_reason</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">_get_error_string</span><span class="p">(</span><span class="n">error_reason</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;Attachment prompts not supported&quot;</span>
+            <span class="k">raise</span> <span class="n">ImagePromptError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Failed to add attachment to prompt: </span><span class="si">{</span><span class="n">error_message</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span></div>
+</div>
+
+
+
+<span class="n">PromptComponent</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Attachment</span><span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;Type alias for a single component of a prompt.</span>
+
+<span class="sd">A prompt component can be either a text string or an :class:`Attachment` (such as</span>
+<span class="sd">an :class:`ImageAttachment`). Components are the building blocks of prompts.</span>
+
+<span class="sd">See Also:</span>
+<span class="sd">    - :data:`Prompt`: For the complete prompt type definition</span>
+<span class="sd">    - :class:`Attachment`: Base class for non-text prompt components</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">Prompt</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">PromptComponent</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">PromptComponent</span><span class="p">]]</span>
+<span class="sd">&quot;&quot;&quot;Type alias for a complete prompt that can be sent to a model.</span>
+
+<span class="sd">A prompt can be:</span>
+
+<span class="sd">- A single string: ``&quot;What is the capital of France?&quot;``</span>
+<span class="sd">- A single attachment: ``ImageAttachment(Path(&quot;photo.jpg&quot;))``</span>
+<span class="sd">- A list of components: ``[&quot;Describe this image:&quot;, ImageAttachment(Path(&quot;photo.jpg&quot;))]``</span>
+
+<span class="sd">This flexible type allows you to construct simple text prompts or complex multimodal</span>
+<span class="sd">prompts that combine text and attachments.</span>
+
+<span class="sd">Examples:</span>
+<span class="sd">    Simple text prompt::</span>
+
+<span class="sd">        prompt = &quot;Hello, how are you?&quot;</span>
+
+<span class="sd">    Image-only prompt::</span>
+
+<span class="sd">        from pathlib import Path</span>
+<span class="sd">        prompt = ImageAttachment(Path(&quot;diagram.png&quot;))</span>
+
+<span class="sd">    Mixed text and image prompt::</span>
+
+<span class="sd">        from pathlib import Path</span>
+<span class="sd">        prompt = [</span>
+<span class="sd">            &quot;Analyze this diagram and explain the architecture:&quot;,</span>
+<span class="sd">            ImageAttachment(Path(&quot;diagram.png&quot;), label=&quot;system_architecture&quot;)</span>
+<span class="sd">        ]</span>
+
+<span class="sd">    Multiple images with text::</span>
+
+<span class="sd">        from pathlib import Path</span>
+<span class="sd">        prompt = [</span>
+<span class="sd">            &quot;Compare these two images:&quot;,</span>
+<span class="sd">            ImageAttachment(Path(&quot;before.jpg&quot;), label=&quot;before&quot;),</span>
+<span class="sd">            ImageAttachment(Path(&quot;after.jpg&quot;), label=&quot;after&quot;),</span>
+<span class="sd">            &quot;What are the main differences?&quot;</span>
+<span class="sd">        ]</span>
+
+<span class="sd">See Also:</span>
+<span class="sd">    - :class:`~apple_fm_sdk.session.LanguageModelSession`: For using prompts in sessions</span>
+<span class="sd">    - :class:`ImageAttachment`: For adding images to prompts</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="PromptError">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.PromptError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PromptError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception for prompt-related errors.</span>
+
+<span class="sd">    This exception is raised when there are issues with prompt construction or</span>
+<span class="sd">    processing, such as invalid prompt components or failures in adding attachments.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        - :class:`ImagePromptError`: Specific error type for image attachment issues</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ImagePromptError">
+<a class="viewcode-back" href="../../api/attachment.html#apple_fm_sdk.ImagePromptError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ImagePromptError</span><span class="p">(</span><span class="n">PromptError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception raised for errors specific to image prompts.</span>
+
+<span class="sd">    This exception is raised when there are issues with image attachments, such as:</span>
+
+<span class="sd">    - Image file not found at the specified path</span>
+<span class="sd">    - Unsupported image format</span>
+<span class="sd">    - Failure to add the image to the prompt</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Handling image prompt errors::</span>
+
+<span class="sd">            import apple_fm_sdk as fm</span>
+<span class="sd">            from pathlib import Path</span>
+
+<span class="sd">            try:</span>
+<span class="sd">                image = fm.ImageAttachment(Path(&quot;nonexistent.jpg&quot;))</span>
+<span class="sd">            except fm.ImagePromptError as e:</span>
+<span class="sd">                print(f&quot;Failed to create image attachment: {e}&quot;)</span>
+
+<span class="sd">            try:</span>
+<span class="sd">                session = fm.LanguageModelSession()</span>
+<span class="sd">                response = await session.respond([</span>
+<span class="sd">                    &quot;Describe this image:&quot;,</span>
+<span class="sd">                    fm.ImageAttachment(Path(&quot;photo.jpg&quot;))</span>
+<span class="sd">                ])</span>
+<span class="sd">            except fm.ImagePromptError as e:</span>
+<span class="sd">                print(f&quot;Failed to process image prompt: {e}&quot;)</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        - :class:`PromptError`: Base class for all prompt errors</span>
+<span class="sd">        - :class:`ImageAttachment`: For creating image attachments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apple Inc.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Apple Inc.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

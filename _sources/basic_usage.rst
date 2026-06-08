@@ -103,7 +103,7 @@ Generating Responses
 Simple Text Generation
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The most basic usage is generating a text response:
+The most basic usage is generating a text response by passing a text prompt:
 
 .. code-block:: python
 
@@ -117,6 +117,33 @@ The most basic usage is generating a text response:
            session = fm.LanguageModelSession()
            
            response = await session.respond("What is the Swift bird species?")
+           print(response)
+
+   # Run the async function
+   await generate_response()
+
+Image Inputs
+~~~~~~~~~~~~
+
+On supported versions of macOS, include images in your input by passing an array
+with an `ImageAttachment`, instead of a string:
+
+.. code-block:: python
+
+   from pathlib import Path
+   
+   import apple_fm_sdk as fm
+
+   async def generate_response():
+       model = fm.SystemLanguageModel()
+       is_available, _ = model.is_available()
+       
+       if is_available:
+           session = fm.LanguageModelSession()
+           
+           image_path = Path("/tmp/bird.png")
+           image = fm.ImageAttachment(path=image_path)
+           response = await session.respond(["What kind of bird is this:", image])
            print(response)
 
    # Run the async function

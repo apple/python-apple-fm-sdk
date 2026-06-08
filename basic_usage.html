@@ -172,6 +172,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="api/systemmodel.html">SystemLanguageModel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/attachment.html">Attachment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/generation_options.html">Generation Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/generable.html">Generable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/tools.html">Tools</a></li>
@@ -353,6 +354,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-responses">Generating Responses</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-text-generation">Simple Text Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-inputs">Image Inputs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-turn-sessions">Multi-turn Sessions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-session-state">Checking Session State</a></li>
 </ul>
@@ -458,7 +460,7 @@ document.write(`
 <h2>Generating Responses<a class="headerlink" href="#generating-responses" title="Link to this heading">#</a></h2>
 <section id="simple-text-generation">
 <h3>Simple Text Generation<a class="headerlink" href="#simple-text-generation" title="Link to this heading">#</a></h3>
-<p>The most basic usage is generating a text response:</p>
+<p>The most basic usage is generating a text response by passing a text prompt:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">generate_response</span><span class="p">():</span>
@@ -469,6 +471,31 @@ document.write(`
         <span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;What is the Swift bird species?&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Run the async function</span>
+<span class="k">await</span> <span class="n">generate_response</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="image-inputs">
+<h3>Image Inputs<a class="headerlink" href="#image-inputs" title="Link to this heading">#</a></h3>
+<p>On supported versions of macOS, include images in your input by passing an array
+with an <cite>ImageAttachment</cite>, instead of a string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">generate_response</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SystemLanguageModel</span><span class="p">()</span>
+    <span class="n">is_available</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">is_available</span><span class="p">:</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">LanguageModelSession</span><span class="p">()</span>
+
+        <span class="n">image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/tmp/bird.png&quot;</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">ImageAttachment</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">respond</span><span class="p">([</span><span class="s2">&quot;What kind of bird is this:&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">])</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 
 <span class="c1"># Run the async function</span>
@@ -595,6 +622,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-responses">Generating Responses</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-text-generation">Simple Text Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-inputs">Image Inputs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-turn-sessions">Multi-turn Sessions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-session-state">Checking Session State</a></li>
 </ul>

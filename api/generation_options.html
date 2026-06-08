@@ -49,7 +49,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Generable" href="generable.html" />
-    <link rel="prev" title="LanguageModelSession" href="session.html" />
+    <link rel="prev" title="Attachment" href="attachment.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -172,6 +172,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="systemmodel.html">SystemLanguageModel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="session.html">LanguageModelSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attachment.html">Attachment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generation Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generable.html">Generable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
@@ -340,8 +341,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">GenerationOptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samplingmode">SamplingMode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">GenerationOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions"><code class="docutils literal notranslate"><span class="pre">GenerationOptions</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.sampling"><code class="docutils literal notranslate"><span class="pre">sampling</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.temperature"><code class="docutils literal notranslate"><span class="pre">temperature</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.maximum_response_tokens"><code class="docutils literal notranslate"><span class="pre">maximum_response_tokens</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.__post_init__"><code class="docutils literal notranslate"><span class="pre">__post_init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samplingmode">SamplingMode</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingModeType"><code class="docutils literal notranslate"><span class="pre">SamplingModeType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode"><code class="docutils literal notranslate"><span class="pre">SamplingMode</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.mode_type"><code class="docutils literal notranslate"><span class="pre">mode_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.top"><code class="docutils literal notranslate"><span class="pre">top</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.probability_threshold"><code class="docutils literal notranslate"><span class="pre">probability_threshold</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.seed"><code class="docutils literal notranslate"><span class="pre">seed</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.greedy"><code class="docutils literal notranslate"><span class="pre">greedy()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -362,9 +384,272 @@ document.write(`
 </div>
 <section id="id1">
 <h2>GenerationOptions<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.GenerationOptions">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">GenerationOptions</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_options.html#GenerationOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GenerationOptions" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Options that control how the model generates its response to a prompt.</p>
+<p>Generation options determine the decoding strategy the framework uses to adjust
+the way the model chooses output tokens. When you interact with the model, it
+converts your input to a token sequence and uses it to generate the response.</p>
+<p><strong>Important Considerations:</strong></p>
+<ul class="simple">
+<li><p>Only use <code class="docutils literal notranslate"><span class="pre">maximum_response_tokens</span></code> when you need to protect against
+unexpectedly verbose responses. Enforcing a strict token response limit can
+lead to the model producing malformed results or grammatically incorrect
+responses.</p></li>
+<li><p>All input to the model contributes tokens to the context window, including
+the Instructions, Prompt, Tool definitions, and Generable types, as well as
+the model’s responses. If your session exceeds the available context size,
+it throws an ExceededContextWindowSizeError.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sampling</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#apple_fm_sdk.SamplingMode" title="apple_fm_sdk.SamplingMode"><em>SamplingMode</em></a><em>]</em>) – A sampling strategy for how the model picks tokens when
+generating a response. Defaults to None (uses model default).</p></li>
+<li><p><strong>temperature</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Temperature influences the confidence of the model’s response.
+Higher values (e.g., 1.0) make output more random and creative, while lower
+values (e.g., 0.1) make it more focused and deterministic. Valid range is
+typically 0.0 to 1.0. Defaults to None (uses model default).</p></li>
+<li><p><strong>maximum_response_tokens</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em>) – The maximum number of tokens the model is allowed
+to produce in its response. Use this to prevent unexpectedly verbose responses,
+but be aware that strict limits may result in incomplete or malformed output.
+Defaults to None (no explicit limit).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>Default options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Custom temperature and token limit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">maximum_response_tokens</span><span class="o">=</span><span class="mi">500</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Greedy sampling with temperature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span>
+    <span class="n">sampling</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">SamplingMode</span><span class="o">.</span><span class="n">greedy</span><span class="p">(),</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Random sampling with constraints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span>
+    <span class="n">sampling</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">SamplingMode</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">maximum_response_tokens</span><span class="o">=</span><span class="mi">1000</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#apple_fm_sdk.SamplingMode" title="apple_fm_sdk.SamplingMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingMode</span></code></a>: For configuring sampling strategies</p></li>
+<li><p><a class="reference internal" href="session.html#apple_fm_sdk.LanguageModelSession" title="apple_fm_sdk.session.LanguageModelSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">LanguageModelSession</span></code></a>: For using options in sessions</p></li>
+</ul>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.GenerationOptions.sampling">
+<span class="sig-name descname"><span class="pre">sampling</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#apple_fm_sdk.SamplingMode" title="apple_fm_sdk.generation_options.SamplingMode"><span class="pre">SamplingMode</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.GenerationOptions.sampling" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.GenerationOptions.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.GenerationOptions.temperature" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.GenerationOptions.maximum_response_tokens">
+<span class="sig-name descname"><span class="pre">maximum_response_tokens</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.GenerationOptions.maximum_response_tokens" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apple_fm_sdk.GenerationOptions.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_options.html#GenerationOptions.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.GenerationOptions.__post_init__" title="Link to this definition">#</a></dt>
+<dd><p>Validate generation options after initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If any option values are invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="samplingmode">
 <h2>SamplingMode<a class="headerlink" href="#samplingmode" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingModeType">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">SamplingModeType</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_options.html#SamplingModeType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SamplingModeType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<p>Enumeration of available sampling mode types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GREEDY</strong> – Always select the most likely token</p></li>
+<li><p><strong>RANDOM</strong> – Randomly select from high-probability tokens</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apple_fm_sdk.</span></span><span class="sig-name descname"><span class="pre">SamplingMode</span></span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_options.html#SamplingMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SamplingMode" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A type that defines how values are sampled from a probability distribution.</p>
+<p>This class represents different sampling strategies that control how the model
+picks tokens when generating a response. The model builds its response in a loop,
+and at each iteration it produces a probability distribution for all tokens in
+its vocabulary. The sampling mode determines how to select the next token from
+this distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode_type</strong> (<a class="reference internal" href="#apple_fm_sdk.SamplingModeType" title="apple_fm_sdk.SamplingModeType"><em>SamplingModeType</em></a>) – The type of sampling mode</p></li>
+<li><p><strong>top</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em>) – For random sampling with fixed top-k, the number of high-probability
+tokens to consider</p></li>
+<li><p><strong>probability_threshold</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – For random sampling with variable threshold, the
+cumulative probability threshold</p></li>
+<li><p><strong>seed</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em>) – Random seed for reproducible random sampling</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode.mode_type">
+<span class="sig-name descname"><span class="pre">mode_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#apple_fm_sdk.SamplingModeType" title="apple_fm_sdk.generation_options.SamplingModeType"><span class="pre">SamplingModeType</span></a></span><a class="headerlink" href="#apple_fm_sdk.SamplingMode.mode_type" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode.top">
+<span class="sig-name descname"><span class="pre">top</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.SamplingMode.top" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode.probability_threshold">
+<span class="sig-name descname"><span class="pre">probability_threshold</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.SamplingMode.probability_threshold" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#apple_fm_sdk.SamplingMode.seed" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode.greedy">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">greedy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_options.html#SamplingMode.greedy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SamplingMode.greedy" title="Link to this definition">#</a></dt>
+<dd><p>Create a sampling mode that always chooses the most likely token.</p>
+<p>Greedy sampling provides deterministic, focused responses by always
+selecting the token with the highest probability at each step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A SamplingMode configured for greedy sampling</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#apple_fm_sdk.SamplingMode" title="apple_fm_sdk.SamplingMode">SamplingMode</a></p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="n">sampling</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SamplingMode</span><span class="o">.</span><span class="n">greedy</span><span class="p">()</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span><span class="n">sampling</span><span class="o">=</span><span class="n">sampling</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apple_fm_sdk.SamplingMode.random">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apple_fm_sdk/generation_options.html#SamplingMode.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apple_fm_sdk.SamplingMode.random" title="Link to this definition">#</a></dt>
+<dd><p>Create a random sampling mode with optional constraints.</p>
+<p>Random sampling introduces variability in responses by randomly selecting
+from high-probability tokens. You can constrain the selection using either:</p>
+<ul class="simple">
+<li><p><strong>top</strong>: Consider only the top-k most likely tokens (fixed number)</p></li>
+<li><p><strong>probability_threshold</strong>: Consider tokens until cumulative probability
+reaches the threshold (variable number)</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>top</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em>) – Number of high-probability tokens to consider. If specified,
+only the top-k most likely tokens are candidates for selection.</p></li>
+<li><p><strong>probability_threshold</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Cumulative probability threshold (0.0 to 1.0).
+If specified, tokens are considered until their cumulative probability
+reaches this threshold.</p></li>
+<li><p><strong>seed</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em>) – Random seed for reproducible sampling. Using the same seed
+with the same inputs will produce the same outputs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A SamplingMode configured for random sampling</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#apple_fm_sdk.SamplingMode" title="apple_fm_sdk.SamplingMode">SamplingMode</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If both top and probability_threshold are specified,
+or if values are out of valid ranges</p>
+</dd>
+</dl>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>Random sampling with top-k:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="c1"># Consider only top 50 most likely tokens</span>
+<span class="n">sampling</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SamplingMode</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span><span class="n">sampling</span><span class="o">=</span><span class="n">sampling</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Random sampling with probability threshold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="c1"># Consider tokens until 90% cumulative probability</span>
+<span class="n">sampling</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SamplingMode</span><span class="o">.</span><span class="n">random</span><span class="p">(</span>
+    <span class="n">probability_threshold</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span><span class="n">sampling</span><span class="o">=</span><span class="n">sampling</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Random sampling with seed only:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">apple_fm_sdk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+
+<span class="c1"># Reproducible random sampling without constraints</span>
+<span class="n">sampling</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">SamplingMode</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">GenerationOptions</span><span class="p">(</span><span class="n">sampling</span><span class="o">=</span><span class="n">sampling</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Only one of <code class="docutils literal notranslate"><span class="pre">top</span></code> or <code class="docutils literal notranslate"><span class="pre">probability_threshold</span></code> can be specified</p></li>
+<li><p>If neither is specified, all tokens are considered</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">seed</span></code> parameter enables reproducible generation</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -380,12 +665,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="session.html"
+       href="attachment.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">LanguageModelSession</p>
+        <p class="prev-next-title">Attachment</p>
       </div>
     </a>
     <a class="right-next"
@@ -413,8 +698,29 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">GenerationOptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samplingmode">SamplingMode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">GenerationOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions"><code class="docutils literal notranslate"><span class="pre">GenerationOptions</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.sampling"><code class="docutils literal notranslate"><span class="pre">sampling</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.temperature"><code class="docutils literal notranslate"><span class="pre">temperature</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.maximum_response_tokens"><code class="docutils literal notranslate"><span class="pre">maximum_response_tokens</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.GenerationOptions.__post_init__"><code class="docutils literal notranslate"><span class="pre">__post_init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samplingmode">SamplingMode</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingModeType"><code class="docutils literal notranslate"><span class="pre">SamplingModeType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode"><code class="docutils literal notranslate"><span class="pre">SamplingMode</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.mode_type"><code class="docutils literal notranslate"><span class="pre">mode_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.top"><code class="docutils literal notranslate"><span class="pre">top</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.probability_threshold"><code class="docutils literal notranslate"><span class="pre">probability_threshold</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.seed"><code class="docutils literal notranslate"><span class="pre">seed</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.greedy"><code class="docutils literal notranslate"><span class="pre">greedy()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#apple_fm_sdk.SamplingMode.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
