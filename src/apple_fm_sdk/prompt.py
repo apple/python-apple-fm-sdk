@@ -3,9 +3,6 @@
 
 from abc import ABC, abstractmethod
 import logging
-from .c_helpers import (
-    _get_error_string,
-)
 from typing import Optional, Union
 from pathlib import Path
 
@@ -15,6 +12,10 @@ logger = logging.getLogger(__name__)
 
 try:
     from . import _ctypes_bindings as lib
+    from ._ctypes_bindings import (
+        FMComposedPromptAddImageErrorUnsupportedOS,
+        FMComposedPromptAddImageErrorUnsupportedSDK,
+    )
 except ImportError:
     raise ImportError(
         "Foundation Models C bindings not found. Please ensure _foundationmodels_ctypes.py is available."
@@ -158,7 +159,8 @@ class ImageAttachment(Attachment):
         :param composed_prompt: The native composed prompt object to add this attachment to
         :type composed_prompt: ctypes pointer
         :raises ImagePromptError: If the attachment cannot be added, either because
-            the image format is not supported or another error occurs
+            the runtime OS or the build-time SDK doesn't support attachments, or
+            another error occurs.
         """
         label_bytes = self._label.encode("utf-8") if self._label else None
         error_reason = ctypes.c_int()
@@ -168,11 +170,13 @@ class ImageAttachment(Attachment):
             label_bytes,
             ctypes.byref(error_reason),
         ):
-            error = _get_error_string(error_reason, None)
-            error_message = error[1] if error[1] else "Attachment prompts not supported"
-            raise ImagePromptError(
-                f"Failed to add attachment to prompt: {error_message}"
-            )
+            if error_reason.value == FMComposedPromptAddImageErrorUnsupportedOS:
+                detail = "the current OS does not support attachment prompts"
+            elif error_reason.value == FMComposedPromptAddImageErrorUnsupportedSDK:
+                detail = "the Xcode version used to build this package doesn't include macOS 27 SDKs"
+            else:
+                detail = "an unknown error occurred while adding the attachment"
+            raise ImagePromptError(f"Failed to add attachment to prompt: {detail}")
 
 
 PromptComponent = Union[str, Attachment]
@@ -251,8 +255,9 @@ class ImagePromptError(PromptError):
     This exception is raised when there are issues with image attachments, such as:
 
     - Image file not found at the specified path
-    - Unsupported image format
-    - Failure to add the image to the prompt
+    - The current OS does not support attachment prompts
+    - The Xcode version used to build this package doesn't include the right SDKs for
+      image input support
 
     Examples:
         Handling image prompt errors::

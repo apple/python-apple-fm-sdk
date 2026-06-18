@@ -64,7 +64,8 @@ FMComposedPrompt _Nonnull FMComposedPromptInitialize();
 
 typedef enum {
     FMComposedPromptAddImageErrorNone,
-    FMComposedPromptAddImageErrorUnsupported,
+    FMComposedPromptAddImageErrorUnsupportedOS,
+    FMComposedPromptAddImageErrorUnsupportedSDK,
     FMComposedPromptAddImageErrorUnknown
 } FMComposedPromptAddImageError;
 

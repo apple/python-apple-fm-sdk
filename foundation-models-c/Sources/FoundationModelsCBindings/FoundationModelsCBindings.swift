@@ -9,7 +9,10 @@ import FoundationModelsCDeclarations
 import Synchronization
 
 enum ComposedPromptError: Error {
-  case unsupported
+  // Error thrown when the SDK, at build time, does not support attachments
+  case unsupportedSDK
+  // Error thrown when the runtime OS does not support attachments
+  case unsupportedOS
 }
 
 /// Builder class for a `Prompt`.
@@ -36,10 +39,12 @@ public class ComposedPrompt: NSObject, PromptRepresentable {
       }
       self.components.append(attachment)
       return
+    } else {
+      throw ComposedPromptError.unsupportedOS
     }
+    #else
+    throw ComposedPromptError.unsupportedSDK
     #endif
-
-    throw ComposedPromptError.unsupported
   }
 
   public var promptRepresentation: Prompt {
@@ -74,8 +79,11 @@ public func FMComposedPromptAddAttachment(
   do {
     try composedPrompt.add(attachmentFromPath: imageURLToAddToPrompt, label: labelString)
     return true
-  } catch ComposedPromptError.unsupported {
-    error?.pointee = FMComposedPromptAddImageErrorUnsupported
+  } catch ComposedPromptError.unsupportedOS {
+    error?.pointee = FMComposedPromptAddImageErrorUnsupportedOS
+    return false
+  } catch ComposedPromptError.unsupportedSDK {
+    error?.pointee = FMComposedPromptAddImageErrorUnsupportedSDK
     return false
   } catch _ {
     error?.pointee = FMComposedPromptAddImageErrorUnknown
