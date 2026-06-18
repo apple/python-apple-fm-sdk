@@ -109,18 +109,6 @@ If you see "Foundation Models not available", check:
 3. You're running a compatible OS version (macOS 26.0+)
 4. Verify that your Xcode version matches your macOS version exactly.
 
-Newer Features Not Available
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Some newer features of the Foundation Models Framework might only be available when building this package with an up-to-date SDK.
-If you see an "unsupported" error when using those features, check:
-
-- Your device is up-to-date and supports this feature
-- The Xcode version used when installing this package has up-to-date SDKs
-    - You can otherwise switch the default version of Xcode on your system by executing `xcode-select --switch <Xcode.app path>` in a shell
-    - You can also otherwise set the environment variable `DEVELOPER_DIR` to point to a specific Xcode installation on your device
-- Reinstall your package
-
 
 Next Steps
 ----------
