@@ -22,6 +22,7 @@ typedef const void *FMBridgedToolRef;
 // Callbacks
 typedef void (*_Nonnull FMLanguageModelSessionResponseCallback)(int status, const char *_Nullable content, size_t length, void *_Nullable userInfo) __attribute__((swift_attr("@Sendable")));
 typedef void (*_Nonnull FMLanguageModelSessionStructuredResponseCallback)(int status, FMGeneratedContentRef _Nullable content, void *_Nullable userInfo) __attribute__((swift_attr("@Sendable")));
+typedef void (*_Nonnull FMSystemLanguageModelTokenCountCallback)(int status, int tokenCount, const char *_Nullable errorDescription, void *_Nullable userInfo) __attribute__((swift_attr("@Sendable")));
 
 // MARK: - SystemLanguageModel
 
@@ -51,6 +52,10 @@ typedef enum
 FMSystemLanguageModelRef _Nonnull FMSystemLanguageModelGetDefault();
 FMSystemLanguageModelRef _Nonnull FMSystemLanguageModelCreate(FMSystemLanguageModelUseCase useCase, FMSystemLanguageModelGuardrails guardrails);
 bool FMSystemLanguageModelIsAvailable(FMSystemLanguageModelRef _Nonnull ref, FMSystemLanguageModelUnavailableReason *_Nullable unavailableReason);
+
+// Returns the model's maximum context window size, measured in tokens.
+int FMSystemLanguageModelGetContextSize(FMSystemLanguageModelRef _Nonnull model);
+
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateDefault();
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateFromSystemLanguageModel(FMSystemLanguageModelRef _Nullable model, const char *_Nullable instructions, FMBridgedToolRef _Nullable *_Nullable tools, int toolCount);
 
@@ -73,6 +78,17 @@ void FMComposedPromptAddText(FMComposedPrompt _Nonnull composedPrompt, const cha
 bool FMComposedPromptAddImage(FMComposedPrompt _Nonnull composedPrompt, const char *_Nonnull imagePath, FMComposedPromptAddImageError * _Nullable error);
 bool FMComposedPromptAddIdentifiedImage(FMComposedPrompt _Nonnull composedPrompt, const char *_Nonnull imagePath, const char *_Nonnull imageIdentifier, FMComposedPromptAddImageError * _Nullable error);
 bool FMComposedPromptAddAttachment(FMComposedPrompt _Nonnull composedPrompt, const char *_Nonnull imagePath, const char *_Nullable label, FMComposedPromptAddImageError * _Nullable error);
+
+// MARK: - Token counting
+
+// Token counting. Each function dispatches asynchronously and reports the count (or an error)
+// via the callback. The returned FMTaskRef can be cancelled with FMTaskCancel and must be
+// released with FMRelease.
+FMTaskRef FMSystemLanguageModelTokenCountForPrompt(FMSystemLanguageModelRef _Nonnull model, FMComposedPrompt _Nonnull composedPrompt, void *_Nullable userInfo, FMSystemLanguageModelTokenCountCallback callback);
+FMTaskRef FMSystemLanguageModelTokenCountForInstructions(FMSystemLanguageModelRef _Nonnull model, const char *_Nonnull instructions, void *_Nullable userInfo, FMSystemLanguageModelTokenCountCallback callback);
+FMTaskRef FMSystemLanguageModelTokenCountForTools(FMSystemLanguageModelRef _Nonnull model, FMBridgedToolRef _Nullable *_Nullable tools, int toolCount, void *_Nullable userInfo, FMSystemLanguageModelTokenCountCallback callback);
+FMTaskRef FMSystemLanguageModelTokenCountForSchema(FMSystemLanguageModelRef _Nonnull model, FMGenerationSchemaRef _Nonnull schema, void *_Nullable userInfo, FMSystemLanguageModelTokenCountCallback callback);
+FMTaskRef FMSystemLanguageModelTokenCountForTranscript(FMSystemLanguageModelRef _Nonnull model, FMLanguageModelSessionRef _Nonnull transcriptSession, void *_Nullable userInfo, FMSystemLanguageModelTokenCountCallback callback);
 
 // Response functions
 

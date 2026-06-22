@@ -170,6 +170,168 @@ public func FMSystemLanguageModelIsAvailable(
   }
 }
 
+// MARK: - Token counting and context size
+
+/// Error thrown when a token-counting API is invoked on an OS older than the version that
+/// introduced it (26.4).
+private func tokenCountUnsupportedOSError() -> Error {
+  NSError(
+    domain: "TokenCount",
+    code: -1,
+    userInfo: [
+      NSLocalizedDescriptionKey: "Token counting requires macOS 26.4, iOS 26.4, or visionOS 26.4 or later."
+    ]
+  )
+}
+
+/// Returns the model's maximum context window size, measured in tokens.
+@_cdecl("FMSystemLanguageModelGetContextSize")
+public func FMSystemLanguageModelGetContextSize(model: FMSystemLanguageModelRef) -> Int32 {
+  let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+  return Int32(model.contextSize)
+}
+
+/// Shared async machinery for the `tokenCount` family of bindings.
+///
+/// Runs `work`, which produces the token count for some input, and forwards either the
+/// resulting count or a mapped error to `callback`.
+private func performTokenCount(
+  userInfo: UnsafeMutableRawPointer?,
+  callback: FMSystemLanguageModelTokenCountCallback,
+  work: @escaping @Sendable () async throws -> Int
+) -> FMTaskRef {
+  let unsafeSendableUserInfo = UnsafeSendableUserInfo(pointer: userInfo)
+  let task = Task.detached {
+    do {
+      try Task.checkCancellation()
+      let count = try await work()
+      try Task.checkCancellation()
+      callback(StatusCode.success.rawValue, Int32(count), nil, unsafeSendableUserInfo.pointer)
+    } catch is CancellationError {
+      let message = "Operation cancelled"
+      message.withCString { cString in
+        callback(StatusCode.unknownError.rawValue, 0, cString, unsafeSendableUserInfo.pointer)
+      }
+    } catch let error as LanguageModelSession.GenerationError {
+      let statusCode = mapGenerationErrorToStatusCode(error)
+      error.localizedDescription.withCString { cString in
+        callback(statusCode, 0, cString, unsafeSendableUserInfo.pointer)
+      }
+    } catch {
+      let debugDescription = formatErrorDescription(error)
+      debugDescription.withCString { cString in
+        callback(StatusCode.unknownError.rawValue, 0, cString, unsafeSendableUserInfo.pointer)
+      }
+    }
+  }
+  let taskBox = TaskBox(task)
+  return FMTaskRef(Unmanaged.passRetained(taskBox).toOpaque())
+}
+
+/// Counts the tokens in a composed prompt.
+@_cdecl("FMSystemLanguageModelTokenCountForPrompt")
+public func FMSystemLanguageModelTokenCountForPrompt(
+  model: FMSystemLanguageModelRef,
+  composedPrompt: FMComposedPrompt,
+  userInfo: UnsafeMutableRawPointer?,
+  callback: FMSystemLanguageModelTokenCountCallback
+) -> FMTaskRef {
+  let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+  let prompt = Unmanaged<ComposedPrompt>.fromOpaque(composedPrompt).takeUnretainedValue()
+    .promptRepresentation
+  return performTokenCount(userInfo: userInfo, callback: callback) {
+    guard #available(macOS 26.4, iOS 26.4, visionOS 26.4, *) else {
+      throw tokenCountUnsupportedOSError()
+    }
+    return try await model.tokenCount(for: prompt)
+  }
+}
+
+/// Counts the tokens in instructions composed from the given text.
+@_cdecl("FMSystemLanguageModelTokenCountForInstructions")
+public func FMSystemLanguageModelTokenCountForInstructions(
+  model: FMSystemLanguageModelRef,
+  instructions: UnsafePointer<CChar>,
+  userInfo: UnsafeMutableRawPointer?,
+  callback: FMSystemLanguageModelTokenCountCallback
+) -> FMTaskRef {
+  let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+  let instructions = Instructions(String(cString: instructions))
+  return performTokenCount(userInfo: userInfo, callback: callback) {
+    guard #available(macOS 26.4, iOS 26.4, visionOS 26.4, *) else {
+      throw tokenCountUnsupportedOSError()
+    }
+    return try await model.tokenCount(for: instructions)
+  }
+}
+
+/// Counts the tokens contributed by the given tools.
+@_cdecl("FMSystemLanguageModelTokenCountForTools")
+public func FMSystemLanguageModelTokenCountForTools(
+  model: FMSystemLanguageModelRef,
+  tools: UnsafeMutablePointer<FMBridgedToolRef>?,
+  toolCount: Int32,
+  userInfo: UnsafeMutableRawPointer?,
+  callback: FMSystemLanguageModelTokenCountCallback
+) -> FMTaskRef {
+  let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+
+  var collectedTools: [any Tool] = []
+  if let tools = tools, toolCount > 0 {
+    for i in 0..<Int(toolCount) {
+      let bridgedTool = Unmanaged<BridgedTool>.fromOpaque(tools[i]).takeUnretainedValue()
+      collectedTools.append(bridgedTool)
+    }
+  }
+  let toolArray = collectedTools
+
+  return performTokenCount(userInfo: userInfo, callback: callback) {
+    guard #available(macOS 26.4, iOS 26.4, visionOS 26.4, *) else {
+      throw tokenCountUnsupportedOSError()
+    }
+    return try await model.tokenCount(for: toolArray)
+  }
+}
+
+/// Counts the tokens in a generation schema.
+@_cdecl("FMSystemLanguageModelTokenCountForSchema")
+public func FMSystemLanguageModelTokenCountForSchema(
+  model: FMSystemLanguageModelRef,
+  schema: FMGenerationSchemaRef,
+  userInfo: UnsafeMutableRawPointer?,
+  callback: FMSystemLanguageModelTokenCountCallback
+) -> FMTaskRef {
+  let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+  let schemaBuilder = Unmanaged<GenerationSchemaBuilder>.fromOpaque(schema).takeUnretainedValue()
+  return performTokenCount(userInfo: userInfo, callback: callback) {
+    guard #available(macOS 26.4, iOS 26.4, visionOS 26.4, *) else {
+      throw tokenCountUnsupportedOSError()
+    }
+    let schema = try schemaBuilder.buildSchema()
+    return try await model.tokenCount(for: schema)
+  }
+}
+
+/// Counts the tokens in the transcript held by the given session.
+@_cdecl("FMSystemLanguageModelTokenCountForTranscript")
+public func FMSystemLanguageModelTokenCountForTranscript(
+  model: FMSystemLanguageModelRef,
+  transcriptSession: FMLanguageModelSessionRef,
+  userInfo: UnsafeMutableRawPointer?,
+  callback: FMSystemLanguageModelTokenCountCallback
+) -> FMTaskRef {
+  let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+  let session = Unmanaged<LanguageModelSession>.fromOpaque(transcriptSession)
+    .takeUnretainedValue()
+  let transcript = session.transcript
+  return performTokenCount(userInfo: userInfo, callback: callback) {
+    guard #available(macOS 26.4, iOS 26.4, visionOS 26.4, *) else {
+      throw tokenCountUnsupportedOSError()
+    }
+    return try await model.tokenCount(for: transcript)
+  }
+}
+
 // MARK: - Session creation from SystemLanguageModel
 
 @_cdecl("FMLanguageModelSessionCreateDefault")

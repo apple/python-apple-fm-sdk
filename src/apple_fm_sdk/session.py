@@ -5,7 +5,7 @@ import asyncio
 import json
 import logging
 from apple_fm_sdk.transcript import Transcript
-from apple_fm_sdk.prompt import Prompt, Attachment, PromptError
+from apple_fm_sdk.prompt import Prompt, _composed_prompt_from_prompt
 from .c_helpers import (
     _ManagedObject,
     _register_handle,
@@ -22,7 +22,6 @@ from .generation_options import GenerationOptions
 import threading
 import queue
 from typing import Any, Optional, AsyncIterator, Type, overload, Union
-from collections.abc import Iterable
 from .errors import FoundationModelsError
 
 import ctypes
@@ -273,24 +272,7 @@ class LanguageModelSession(_ManagedObject):
         """
         Creates a FMComposedPrompt (i.e. the C type that represents a prompt) based on a Prompt.
         """
-        composed_prompt = lib.FMComposedPromptInitialize()
-
-        def add_component_to_composed_prompt(component):
-            if isinstance(component, str):
-                lib.FMComposedPromptAddText(composed_prompt, component.encode("utf-8"))
-            elif isinstance(component, Attachment):
-                component.add_to_composed_prompt(composed_prompt=composed_prompt)
-            else:
-                raise PromptError(
-                    f"Unsupported prompt component type {type(component)}, only str, Image, IdentifiedImage, and Attachment are supported"
-                )
-
-        if isinstance(prompt, Iterable) and not isinstance(prompt, str):
-            for element in prompt:
-                add_component_to_composed_prompt(element)
-        else:
-            add_component_to_composed_prompt(prompt)
-        return composed_prompt
+        return _composed_prompt_from_prompt(prompt)
 
     @property
     def is_responding(self) -> bool:

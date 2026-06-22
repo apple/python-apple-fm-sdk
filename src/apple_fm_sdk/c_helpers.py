@@ -425,6 +425,57 @@ def _session_structured_callback(status, content_ptr, future_handle):
             )
 
 
+@lib.FMSystemLanguageModelTokenCountCallback
+def _token_count_callback(status, token_count, error_desc, future_handle):
+    """ctypes callback for token counting.
+
+    Resolves the registered future with the integer token count on success, or with
+    an appropriate exception (built from the status code and optional error description)
+    on failure.
+    """
+
+    async def _set_future_result(future: asyncio.Future, result):
+        if not future.cancelled():
+            future.set_result(result)
+
+    async def _set_future_exception(future: asyncio.Future, e):
+        if not future.cancelled():
+            future.set_exception(e)
+
+    try:
+        future = _safe_from_handle(future_handle)
+        if future is None or future.cancelled():
+            return
+
+        if status == GenerationErrorCode.SUCCESS:
+            asyncio.run_coroutine_threadsafe(
+                _set_future_result(future, int(token_count)), future.get_loop()
+            )
+        else:
+            debug_description = None
+            if error_desc:
+                try:
+                    debug_description = ctypes.string_at(error_desc).decode("utf-8")
+                except Exception:
+                    debug_description = None
+            error = _status_code_to_exception(
+                status, debug_description=debug_description
+            )
+            asyncio.run_coroutine_threadsafe(
+                _set_future_exception(future, error), future.get_loop()
+            )
+
+    except Exception as e:
+        try:
+            future = _safe_from_handle(future_handle)
+            if future and not future.cancelled():
+                asyncio.run_coroutine_threadsafe(
+                    _set_future_exception(future, e), future.get_loop()
+                )
+        except Exception as error:
+            logger.error(f"Unhandled Exception in token count callback cleanup: {error}")
+
+
 class StreamingCallback:
     """
     Callback handler for streaming generation responses.
