@@ -44,9 +44,12 @@ import Synchronization
       0
     )
     var isResponding: Bool = true
-    FMLanguageModelSessionRespond(
+    let prompt = FMComposedPromptInitialize()
+    FMComposedPromptAddText(prompt, "What programming language is better, Swift or C?")
+    let task = FMLanguageModelSessionRespond(
       session,
-      "What programming language is better, Swift or C?",
+      prompt,
+      nil,
       &isResponding
     ) { status, content, length, userInfo in
       #expect(status == 0)
@@ -57,6 +60,8 @@ import Synchronization
       userInfo?.bindMemory(to: Bool.self, capacity: 1).pointee = false
     }
     while isResponding {}
+    FMRelease(task)
+    FMRelease(prompt)
     FMRelease(session)
     FMRelease(model)
   }
@@ -206,5 +211,43 @@ import Synchronization
     let uniqueCount = idTracker.withLock { $0.count }
     #expect(uniqueCount == numberOfCalls)
     print("Generated \(uniqueCount) unique IDs out of \(numberOfCalls) calls")
+  }
+
+  @Test func testContextSize() async throws {
+    let model = FMSystemLanguageModelGetDefault()
+    let contextSize = FMSystemLanguageModelGetContextSize(model)
+    #expect(contextSize >= 0)
+    FMRelease(model)
+  }
+
+  @Test(.enabled(if: SystemLanguageModel.default.isAvailable))
+  func testTokenCountForPrompt() async throws {
+    let model = FMSystemLanguageModelGetDefault()
+    let prompt = FMComposedPromptInitialize()
+    FMComposedPromptAddText(prompt, "Hello, how are you?")
+
+    final class TokenCountResult: @unchecked Sendable {
+      let mutex = Mutex<(done: Bool, status: Int, count: Int)>((false, -1, -1))
+    }
+    let result = TokenCountResult()
+
+    let task = FMSystemLanguageModelTokenCountForPrompt(
+      model,
+      prompt,
+      Unmanaged.passUnretained(result).toOpaque()
+    ) { status, count, _, userInfo in
+      let result = Unmanaged<TokenCountResult>.fromOpaque(userInfo!).takeUnretainedValue()
+      result.mutex.withLock { $0 = (true, Int(status), Int(count)) }
+    }
+
+    while result.mutex.withLock({ !$0.done }) {}
+
+    let (_, status, count) = result.mutex.withLock { $0 }
+    #expect(status == 0)
+    #expect(count > 0, "Prompt should produce a positive token count")
+
+    FMRelease(task)
+    FMRelease(prompt)
+    FMRelease(model)
   }
 }

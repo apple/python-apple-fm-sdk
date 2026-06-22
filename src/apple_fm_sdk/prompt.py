@@ -285,3 +285,35 @@ class ImagePromptError(PromptError):
     """
 
     pass
+
+
+def _composed_prompt_from_prompt(prompt: "Prompt"):
+    """Build an ``FMComposedPrompt`` (the native prompt type) from a :data:`Prompt`.
+
+    Accepts a single text string, a single :class:`Attachment`, or a list mixing the
+    two, and appends each component to a freshly initialized composed prompt.
+
+    :param prompt: The prompt to convert.
+    :return: A native ``FMComposedPrompt`` pointer.
+    :raises PromptError: If a component is not a ``str`` or :class:`Attachment`.
+    """
+    composed_prompt = lib.FMComposedPromptInitialize()
+
+    def add_component(component):
+        if isinstance(component, str):
+            lib.FMComposedPromptAddText(composed_prompt, component.encode("utf-8"))
+        elif isinstance(component, Attachment):
+            component.add_to_composed_prompt(composed_prompt=composed_prompt)
+        else:
+            raise PromptError(
+                f"Unsupported prompt component type {type(component)}, only str, Image, IdentifiedImage, and Attachment are supported"
+            )
+
+    from collections.abc import Iterable
+
+    if isinstance(prompt, Iterable) and not isinstance(prompt, str):
+        for element in prompt:
+            add_component(element)
+    else:
+        add_component(prompt)
+    return composed_prompt
