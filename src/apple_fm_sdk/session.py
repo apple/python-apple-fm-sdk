@@ -554,6 +554,13 @@ class LanguageModelSession(_ManagedObject):
                 # Clean up handle to prevent memory leaks
                 _unregister_handle(future_handle)
                 lib.FMRelease(task)
+
+                if composed_prompt:
+                    try:
+                        lib.FMRelease(composed_prompt)
+                    except Exception:
+                        pass
+
                 self._active_task = None
 
             return future.result()
@@ -620,6 +627,13 @@ class LanguageModelSession(_ManagedObject):
                 # Clean up handle to prevent memory leaks
                 _unregister_handle(future_handle)
                 lib.FMRelease(task)
+
+                if composed_prompt:
+                    try:
+                        lib.FMRelease(composed_prompt)
+                    except Exception:
+                        pass
+
                 self._active_task = None
 
             return future.result()
@@ -688,6 +702,13 @@ class LanguageModelSession(_ManagedObject):
                 # Clean up handle to prevent memory leaks
                 _unregister_handle(future_handle)
                 lib.FMRelease(task)
+
+                if composed_prompt:
+                    try:
+                        lib.FMRelease(composed_prompt)
+                    except Exception:
+                        pass
+
                 self._active_task = None
 
             return future.result()
