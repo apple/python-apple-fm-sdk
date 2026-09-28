@@ -191,6 +191,21 @@ public func FMSystemLanguageModelGetContextSize(model: FMSystemLanguageModelRef)
   return Int32(model.contextSize)
 }
 
+/// Returns the user-facing name of the model variant. Free with `FMFreeString`.
+@_cdecl("FMSystemLanguageModelGetVariantDisplayName")
+public func FMSystemLanguageModelGetVariantDisplayName(
+  model: FMSystemLanguageModelRef
+) -> UnsafeMutablePointer<CChar>? {
+  // `SystemLanguageModel.variant` only exists in the macOS 27+ SDK
+  #if FM_HAS_MACOS_27_SDK
+  if #available(macOS 27.0, *) {
+    let model = Unmanaged<SystemLanguageModel>.fromOpaque(model).takeUnretainedValue()
+    return strdup(model.variant.displayName)
+  }
+  #endif
+  return nil
+}
+
 /// Shared async machinery for the `tokenCount` family of bindings.
 ///
 /// Runs `work`, which produces the token count for some input, and forwards either the

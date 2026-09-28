@@ -22,6 +22,7 @@ def test_import_systemlanguagemodel():
         SystemLanguageModelUseCase,  # noqa: F401 expected unused import
         SystemLanguageModelGuardrails,  # noqa: F401 expected unused import
         SystemLanguageModelUnavailableReason,  # noqa: F401 expected unused import
+        SystemLanguageModelVariant,  # noqa: F401 expected unused import
     )
 
     print("✓ Successfully imported SystemLanguageModel classes and enums")
@@ -110,3 +111,13 @@ async def test_invalid_use_case():
     assert custom_model.is_available()[0], (
         "Model should be available despite invalid use case"
     )
+
+
+def test_variant():
+    """Test that the model reports its variant display name."""
+    variant = fm.SystemLanguageModel().variant
+    if variant is None:
+        pytest.skip("Model variant requires macOS 27 and a macOS 27 SDK build")
+    print(f"Model variant: {variant}")
+    assert isinstance(variant, fm.SystemLanguageModelVariant)
+    assert isinstance(variant.display_name, str)

@@ -131,3 +131,20 @@ async def test_system_language_model_is_available(model):
 
     assert isinstance(is_available, bool)
     print("✅ SystemLanguageModel is_available - PASSED")
+
+
+def test_system_language_model_variant():
+    """Test from: src/apple_fm_sdk/core.py - SystemLanguageModel.variant"""
+    print("\n=== Testing SystemLanguageModel variant ===")
+
+    ##############################################################################
+    # From: src/apple_fm_sdk/core.py
+    # class, function, or other entity name: variant
+    import apple_fm_sdk as fm
+
+    model = fm.SystemLanguageModel()
+    if model.variant:
+        print(f"Model variant: {model.variant.display_name}")
+    ##############################################################################
+
+    print("✅ SystemLanguageModel variant - PASSED")

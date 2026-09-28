@@ -56,6 +56,11 @@ bool FMSystemLanguageModelIsAvailable(FMSystemLanguageModelRef _Nonnull ref, FMS
 // Returns the model's maximum context window size, measured in tokens.
 int FMSystemLanguageModelGetContextSize(FMSystemLanguageModelRef _Nonnull model);
 
+// Returns the user-facing name of the model variant, for example "AFM 3 Core", or NULL when
+// the running OS or the SDK used to build the bindings predates macOS 27.
+// Free the returned string with FMFreeString().
+char *_Nullable FMSystemLanguageModelGetVariantDisplayName(FMSystemLanguageModelRef _Nonnull model);
+
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateDefault();
 FMLanguageModelSessionRef _Nonnull FMLanguageModelSessionCreateFromSystemLanguageModel(FMSystemLanguageModelRef _Nullable model, const char *_Nullable instructions, FMBridgedToolRef _Nullable *_Nullable tools, int toolCount);
 

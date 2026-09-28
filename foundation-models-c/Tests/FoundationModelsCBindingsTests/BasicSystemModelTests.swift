@@ -220,6 +220,23 @@ import Synchronization
     FMRelease(model)
   }
 
+  @Test func testVariantDisplayName() throws {
+    let model = FMSystemLanguageModelGetDefault()
+    let displayName = FMSystemLanguageModelGetVariantDisplayName(model)
+    #if FM_HAS_MACOS_27_SDK
+    if #available(macOS 27.0, *) {
+      let displayName = try #require(displayName)
+      #expect(String(cString: displayName) == SystemLanguageModel.default.variant.displayName)
+    } else {
+      #expect(displayName == nil)
+    }
+    #else
+    #expect(displayName == nil)
+    #endif
+    FMFreeString(displayName)
+    FMRelease(model)
+  }
+
   @Test(.enabled(if: SystemLanguageModel.default.isAvailable))
   func testTokenCountForPrompt() async throws {
     let model = FMSystemLanguageModelGetDefault()
