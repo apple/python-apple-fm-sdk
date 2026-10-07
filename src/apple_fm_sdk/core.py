@@ -287,6 +287,12 @@ class SystemLanguageModel(_ManagedObject):
             macOS 27 SDKs.
         :rtype: Optional[SystemLanguageModelVariant]
 
+        .. note::
+            When built with an older SDK on macOS 27 or later, ``variant`` is
+            ``None``. Check that ``xcrun --sdk macosx --show-sdk-version``
+            reports 27 or later (switch Xcode with ``sudo xcode-select --switch <path>``
+            if not), then reinstall the package so the bindings are rebuilt.
+
         Example:
             Printing the model variant::
 
