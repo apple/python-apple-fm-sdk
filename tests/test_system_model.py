@@ -5,6 +5,9 @@
 Tests for SystemLanguageModel functionality.
 """
 
+import platform
+import subprocess
+
 import pytest
 import apple_fm_sdk as fm
 
@@ -22,6 +25,7 @@ def test_import_systemlanguagemodel():
         SystemLanguageModelUseCase,  # noqa: F401 expected unused import
         SystemLanguageModelGuardrails,  # noqa: F401 expected unused import
         SystemLanguageModelUnavailableReason,  # noqa: F401 expected unused import
+        SystemLanguageModelVariant,  # noqa: F401 expected unused import
     )
 
     print("✓ Successfully imported SystemLanguageModel classes and enums")
@@ -110,3 +114,28 @@ async def test_invalid_use_case():
     assert custom_model.is_available()[0], (
         "Model should be available despite invalid use case"
     )
+
+
+def _major_version(version: str) -> int:
+    return int(version.split(".")[0]) if version else 0
+
+
+def test_variant():
+    """Test that the model reports its variant display name."""
+    host_major = _major_version(platform.mac_ver()[0])
+    sdk_major = _major_version(
+        subprocess.run(
+            ["xcrun", "--sdk", "macosx", "--show-sdk-version"],
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+    if host_major < 27 or sdk_major < 27:
+        pytest.skip("Model variant requires macOS 27 and a macOS 27 SDK build")
+    variant = fm.SystemLanguageModel().variant
+    assert variant is not None, (
+        "variant should be available on macOS 27 with a macOS 27 SDK build"
+    )
+    print(f"Model variant: {variant}")
+    assert isinstance(variant, fm.SystemLanguageModelVariant)
+    assert isinstance(variant.display_name, str)

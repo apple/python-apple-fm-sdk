@@ -40,3 +40,10 @@ SystemLanguageModelUnavailableReason
    :members:
    :undoc-members:
    :exclude-members: APPLE_INTELLIGENCE_NOT_ENABLED, DEVICE_NOT_ELIGIBLE, MODEL_NOT_READY, UNKNOWN
+
+SystemLanguageModelVariant
+--------------------------
+
+.. autoclass:: apple_fm_sdk.SystemLanguageModelVariant
+   :members:
+   :undoc-members:

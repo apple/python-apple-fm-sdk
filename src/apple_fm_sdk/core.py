@@ -11,6 +11,7 @@ The main classes provided are:
 * :class:`SystemLanguageModelUseCase` - Enumeration of model use cases
 * :class:`SystemLanguageModelGuardrails` - Enumeration of guardrail settings
 * :class:`SystemLanguageModelUnavailableReason` - Enumeration of unavailability reasons
+* :class:`SystemLanguageModelVariant` - The variant of an on-device model
 
 Example:
     Basic usage of SystemLanguageModel::
@@ -30,6 +31,7 @@ from .c_helpers import (
     _token_count_callback,
     _unregister_handle,
 )
+from dataclasses import dataclass
 from enum import IntEnum
 from typing import Optional, TYPE_CHECKING, Union
 from .errors import FoundationModelsError
@@ -109,6 +111,18 @@ class SystemLanguageModelGuardrails(IntEnum):
 
     DEFAULT = 0
     PERMISSIVE_CONTENT_TRANSFORMATIONS = 1
+
+
+@dataclass(frozen=True)
+class SystemLanguageModelVariant:
+    """The variant of an on-device model.
+
+    :ivar display_name: The user-facing name of the variant, for example
+        ``"AFM 3 Core"`` or ``"AFM 3 Core Advanced"``.
+    :vartype display_name: str
+    """
+
+    display_name: str
 
 
 class SystemLanguageModel(_ManagedObject):
@@ -263,6 +277,38 @@ class SystemLanguageModel(_ManagedObject):
                 print(f"Using {used} of {budget} tokens")
         """
         return int(lib.FMSystemLanguageModelGetContextSize(self._ptr))
+
+    @property
+    def variant(self) -> Optional[SystemLanguageModelVariant]:
+        """The variant of the on-device model backing this instance.
+
+        :return: The model variant, or ``None`` if the current OS doesn't support
+            it or the Xcode version used to build this package doesn't include
+            macOS 27 SDKs.
+        :rtype: Optional[SystemLanguageModelVariant]
+
+        .. note::
+            When built with an older SDK on macOS 27 or later, ``variant`` is
+            ``None``. Check that ``xcrun --sdk macosx --show-sdk-version``
+            reports 27 or later (switch Xcode with ``sudo xcode-select --switch <path>``
+            if not), then reinstall the package so the bindings are rebuilt.
+
+        Example:
+            Printing the model variant::
+
+                import apple_fm_sdk as fm
+
+                model = fm.SystemLanguageModel()
+                if model.variant:
+                    print(f"Model variant: {model.variant.display_name}")
+        """
+        raw = lib.FMSystemLanguageModelGetVariantDisplayName(self._ptr)
+        if not raw:
+            return None
+        try:
+            return SystemLanguageModelVariant(display_name=str(raw))
+        finally:
+            lib.FMFreeString(raw)
 
     async def _token_count(self, start_task) -> int:
         """Run a token-counting C call and await its result.

@@ -10,6 +10,7 @@ from .core import (
     SystemLanguageModelUseCase,
     SystemLanguageModelGuardrails,
     SystemLanguageModelUnavailableReason,
+    SystemLanguageModelVariant,
 )
 
 from .session import LanguageModelSession
@@ -73,6 +74,7 @@ __all__ = [
     "SystemLanguageModelUseCase",
     "SystemLanguageModelGuardrails",
     "SystemLanguageModelUnavailableReason",
+    "SystemLanguageModelVariant",
     "Tool",
     "FoundationModelsError",
     "GenerationError",
