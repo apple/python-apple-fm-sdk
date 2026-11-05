@@ -470,7 +470,7 @@ class LanguageModelSession(_ManagedObject):
             gen_schema = generating.generation_schema()
 
             # Use the schema-based respond method
-            generated_content = await self._respond_with_schema(prompt, gen_schema)
+            generated_content = await self._respond_with_schema(prompt, gen_schema, options)
 
             # Convert GeneratedContent to the target type
             return generating._from_generated_content(generated_content)
